@@ -1,360 +1,349 @@
 /* ------------------------------------------------------------------
- *  build-assets.mjs — the profile card as one animated SVG.
+ *  build-assets.mjs — the profile card, dressed in GitHub's own theme.
  *
- *  Two effects, as requested:
- *    1. every line of text types itself out (character by character)
- *    2. the language icons animate: they draw themselves, fill in with
- *       their own brand colour and then breathe in sync with the theme
+ *  Two variants are built so the card blends into the profile page in
+ *  both colour modes (README uses <picture> to switch automatically):
+ *      assets/card-dark.svg    ·  assets/card-light.svg
+ *
+ *  Backgrounds are transparent, so the card sits on the page like native
+ *  GitHub UI rather than as a separate framed file.
  *
  *  Usage
- *    node build-assets.mjs              → assets/card.svg
- *    node build-assets.mjs --png        → + tools/.preview/card-still.png
- *    node build-assets.mjs --gif        → + tools/.preview/card.gif
- *
- *  The same builder renders any point in time (frame mode), which is what
- *  makes the still PNG and the GIF possible — no SMIL evaluation needed.
+ *    node build-assets.mjs            → both SVGs
+ *    node build-assets.mjs --png      → + assets/card-<variant>.png stills
+ *    node build-assets.mjs --gif      → + tools/.preview/card-<variant>.gif
  * ------------------------------------------------------------------ */
 import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { Resvg } from '@resvg/resvg-js';
 import { brand, slugFor } from './icons.mjs';
 import { validateCard } from './validate-svg.mjs';
-import { T, MONO, esc, text, rect, rectEl, round, lgrad, rgrad, wrapText, svg } from './svg-lib.mjs';
+import { MONO, SANS, esc, text, rect, rectEl, round, wrapText, svg } from './svg-lib.mjs';
 
 const cfg = JSON.parse(readFileSync(new URL('./profile.config.json', import.meta.url), 'utf8'));
 const { identity, skills, quote } = cfg;
 const langs = (skills || []).map((s) => (typeof s === 'string' ? s : s.name));
 
 /* ==================================================================
- *  animation helper — one code path for the animated file and for frames
+ *  GitHub's own palettes
  * ================================================================== */
-let FRAME = null;              // null = emit SMIL, number = render that instant
+const THEMES = {
+  dark: {
+    name: 'dark',
+    bg: 'none',                 /* transparent: the page shows through */
+    canvas: '#161b22',
+    canvasSubtle: '#0d1117',
+    border: '#30363d',
+    borderMuted: '#21262d',
+    fg: '#e6edf3',
+    fgMuted: '#8b949e',
+    fgSubtle: '#6e7681',
+    accent: '#3fb950',
+    link: '#58a6ff',
+    iconTint: 0.3,              /* brand colours are lightened for dark bg */
+    contrib: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+  },
+  light: {
+    name: 'light',
+    bg: 'none',
+    canvas: '#f6f8fa',
+    canvasSubtle: '#ffffff',
+    border: '#d1d9e0',
+    borderMuted: '#d8dee4',
+    fg: '#1f2328',
+    fgMuted: '#59636e',
+    fgSubtle: '#818b98',
+    accent: '#1a7f37',
+    link: '#0969da',
+    iconTint: -0.22,            /* …and darkened for a white background */
+    contrib: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+  },
+};
+
+/* ==================================================================
+ *  animation helpers — one code path emits SMIL or renders any instant
+ * ================================================================== */
+let FRAME = null;
 const isFrame = () => FRAME !== null;
 const ease = (x) => 1 - Math.pow(1 - x, 3);
 const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const prog = (begin, dur) => (isFrame() ? clamp01((FRAME - begin) / dur) : 0);
 const done = (begin) => (isFrame() ? FRAME >= begin : false);
 
-/* fade in (and optionally rise) a block of children */
-const reveal = ({ begin, dur = 0.9, dy = 0, inner }) => {
+const fade = (begin, dur = 0.8) =>
+  `<animate attributeName="opacity" from="0" to="1" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>`;
+
+const rise = (begin, dur, dy = 10) =>
+  `<animateTransform attributeName="transform" type="translate" from="0 ${dy}" to="0 0" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0 ${dy};0 0"/>`;
+
+const reveal = ({ begin, dur = 0.8, dy = 0, inner }) => {
   if (isFrame()) {
     const k = ease(prog(begin, dur));
-    const tr = dy ? ` transform="translate(0 ${round(dy * (1 - k))})"` : '';
-    return `<g opacity="${round(k)}"${tr}>${inner}</g>`;
+    return `<g opacity="${round(k)}"${dy ? ` transform="translate(0 ${round(dy * (1 - k))})"` : ''}>${inner}</g>`;
   }
   return `<g opacity="0">${fade(begin, dur)}${dy ? rise(begin, dur, dy) : ''}${inner}</g>`;
 };
 
-const fade = (begin, dur = 0.9) =>
-  `<animate attributeName="opacity" from="0" to="1" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>`;
-
-const rise = (begin, dur, dy = 12) =>
-  `<animateTransform attributeName="transform" type="translate" from="0 ${dy}" to="0 0" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0 ${dy};0 0"/>`;
-
-/* a hairline that draws itself */
-const rule = ({ x, y, w, begin, dur = 1, fill = 'url(#hairGrad)' }) => {
-  if (isFrame()) {
-    return rect({ x, y, w: round(w * ease(prog(begin, dur))), h: 1, fill });
-  }
+const rule = ({ x, y, w, begin, dur = 0.9, color }) => {
+  if (isFrame()) return rect({ x, y, w: round(w * ease(prog(begin, dur))), h: 1, fill: color });
   return rectEl(
-    { x, y, w: 0, h: 1, fill },
-    `<animate attributeName="width" from="0" to="${round(w)}" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${round(w)}"/>`,
+    { x, y, w: 0, h: 1, fill: color },
+    `<animate attributeName="width" from="0" to="${round(w)}" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${round(w)}"/>`
   );
 };
 
-/* one typewriter glyph, pinned to its own monospace cell */
-const glyph = ({ ch, x, y, size, fill, begin, ls = 0, family = MONO }) => {
-  const cell = size * 0.6 + ls;
-  if (isFrame()) {
-    return text({ x, y, size, fill, family, content: ch, lock: cell, op: done(begin) ? 1 : 0 });
-  }
-  return `<text x="${round(x)}" y="${round(y)}" font-family="${family}" font-size="${round(size)}" fill="${fill}" text-anchor="start" textLength="${round(cell)}" lengthAdjust="spacingAndGlyphs" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${round(begin)}s" dur="0.06s" fill="freeze" calcMode="discrete" values="0;1"/>${esc(ch)}</text>`;
-};
+/* ---- text -----------------------------------------------------------
+ * GitHub profile text is proportional (not monospace), so rather than
+ * pinning each glyph to a cell we let the renderer lay the line out and
+ * reveal one <tspan> per character. Layout is identical in both modes.
+ * ------------------------------------------------------------------ */
+const nbsp = (str) => str.replace(/ /g, '\u00a0');
 
-/* a whole string typed out; returns the markup and when it finishes */
-const type = ({ content, x, y, size, fill = T.text, begin, perChar = 0.03, ls = 0, family = MONO, anchor = 'start' }) => {
-  const cell = size * 0.6 + ls;
+const typedText = ({ content, x, y, size, fill, begin, perChar = 0.03, weight = 400, italic = false }) => {
   const chars = [...content];
-  const width = chars.length * cell;
-  const startX = anchor === 'middle' ? x - width / 2 : anchor === 'end' ? x - width : x;
-  const body = chars
-    .map((ch, i) => glyph({ ch, x: round(startX + i * cell), y, size, fill, ls, family, begin: begin + i * perChar }))
-    .join('');
-  return { svg: body, end: begin + chars.length * perChar, width, x: startX, cell };
-};
-
-/* the blinking caret that walks along while a line is typing */
-const caret = ({ x, y, size, width, begin, perChar, count, ls = 0, color = T.accent }) => {
-  const cell = size * 0.6 + ls;
-  const end = begin + count * perChar;
-  const barY = round(y - size * 0.78);
-  const bar = (px, op, animated) =>
-    rect({ x: round(px), y: barY, w: round(cell * 0.5), h: round(size * 0.92), rx: 1, fill: color, op });
+  const attrs = `x="${round(x)}" y="${round(y)}" font-family="${SANS}" font-size="${round(size)}" fill="${fill}" text-anchor="start" xml:space="preserve"${weight !== 400 ? ` font-weight="${weight}"` : ''}${italic ? ' font-style="italic"' : ''}`;
+  const end = begin + chars.length * perChar;
 
   if (isFrame()) {
-    if (FRAME < begin) return '';
-    /* the still export renders the far future: no caret there */
-    if (FRAME > 1000) return '';
-    const typedCount = Math.min(count, Math.max(0, Math.floor((FRAME - begin) / perChar)));
-    const px = x + typedCount * cell;
-    return bar(px, 0.9, false);
+    const typed = FRAME <= 0 ? 0 : Math.min(chars.length, Math.max(0, Math.round((FRAME - begin) / perChar)));
+    return { svg: `<text ${attrs}>${esc(nbsp(chars.slice(0, typed).join('')))}</text>`, end, length: chars.length };
   }
-  /* while typing it steps cell by cell, then it just blinks */
-  return `<g><animate attributeName="opacity" values="1;1;1;0;1" dur="1.05s" begin="${round(end)}s" repeatCount="indefinite"/>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${round(begin - 0.2)}s" dur="0.2s" fill="freeze"/>
-    <g>
-      <animateTransform attributeName="transform" type="translate" values="${round(x)} 0; ${round(x + count * cell)} 0"
-        dur="${round(count * perChar)}s" begin="${round(begin)}s" fill="freeze" calcMode="discrete"/>
-      ${bar(0, 0.9, true)}
-    </g>
-  </g></g>`;
+
+  const tspans = chars
+    .map((ch, i) => `<tspan opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${round(begin + i * perChar)}s" dur="0.09s" fill="freeze" values="0;1"/>${esc(nbsp(ch))}</tspan>`)
+    .join('');
+  return { svg: `<text ${attrs}>${tspans}</text>`, end, length: chars.length };
+};
+
+/* the caret rides inside the same text element as a trailing glyph, so it
+   always sits right after the last character the renderer drew */
+const caretTail = ({ content, begin, perChar, color }) => {
+  const count = [...content].length;
+  const settle = begin + count * perChar;
+  if (isFrame()) return '';
+  return `<tspan fill="${color}" opacity="0.95">\u258c<animate attributeName="opacity" values="0;0;0.95;0.95;0;0.95;0.95" dur="1.1s" begin="${round(settle)}s" repeatCount="indefinite"/></tspan>`;
 };
 
 /* ==================================================================
- *  ICON TILES — draw in, fill with the brand colour, then breathe
+ *  SECTION HEADER — GitHub's own section pattern: title + hairline
  * ================================================================== */
-function iconTile({ item, x, y, size = 92, begin, index }) {
+const sectionHeader = ({ title, x, y, w, begin, theme, size = 16 }) => {
+  const typed = typedText({ content: title, x, y, size, fill: theme.fg, begin, perChar: 0.04, weight: 600 });
+  const lineBegin = typed.end + 0.15;
+  return {
+    svg: `${typed.svg}<g opacity="0">${isFrame() ? '' : fade(lineBegin - 0.1, 0.4)}${rule({ x, y: y + 12, w, begin: lineBegin, color: theme.border })}</g>`,
+    end: lineBegin + 0.9,
+  };
+};
+
+/* ==================================================================
+ *  LANGUAGE LEGEND — GitHub's dot language style, with the real brand mark
+ * ================================================================== */
+function legendEntry({ item, x, y, begin, theme, index }) {
   const slug = slugFor(item);
-  const icon = slug ? brand(slug, { tint: 0.3 }) : null;
+  const icon = slug ? brand(slug, { tint: theme.iconTint }) : null;
+  const R = 11;                                    /* icon box */
+  const k = R / 24;
+  const dotR = 4;
 
-  /* the outline draws itself … */
-  const gIcon = icon ? 40 : 30;
-  const k = gIcon / 24;
-  const ix = round(x + size / 2 - gIcon / 2);
-  const iy = round(y + size / 2 - gIcon / 2);
+  /* GitHub's own signature: a coloured dot, then the name */
+  const dot = isFrame()
+    ? `<circle cx="${x + dotR}" cy="${y - 4}" r="${dotR}" fill="${icon ? icon.color : theme.fgMuted}" opacity="${round(ease(prog(begin, 0.5)))}"/>`
+    : `<circle cx="${x + dotR}" cy="${y - 4}" r="${dotR}" fill="${icon ? icon.color : theme.fgMuted}" opacity="0">
+        ${fade(begin, 0.5)}
+        <animate attributeName="r" values="0;${dotR + 1.6};${dotR}" begin="${round(begin)}s" dur="0.7s" fill="freeze"/>
+      </circle>`;
 
-  const outline = icon
-    ? `<g transform="translate(${ix} ${iy}) scale(${round(k)})">
-      <path d="${icon.path}" pathLength="1" fill="none" stroke="${icon.color}" stroke-width="1.15"
-        stroke-linejoin="round" stroke-linecap="round"
-        stroke-dasharray="1" stroke-dashoffset="${isFrame() ? round(1 - ease(prog(begin + 0.12, 0.85))) : 1}"
-        opacity="${round(0.55 + 0.35 * ease(prog(begin + 0.12, 0.85)))}">
-        ${isFrame() ? '' : `<animate attributeName="stroke-dashoffset" from="1" to="0" begin="${round(begin + 0.12)}s" dur="0.85s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.6 0.2 1" values="1;0"/>`}
-      </path>
-    </g>`
-    : '';
-
-  /* … then the solid glyph fades in on top */
-  const solid = icon
-    ? `<g transform="translate(${ix} ${iy}) scale(${round(k)})" opacity="${isFrame() ? round(ease(prog(begin + 0.9, 0.6))) : 0}">
-      ${isFrame() ? '' : fade(begin + 0.9, 0.6)}
-      <path d="${icon.path}" fill="${icon.color}"/>
-    </g>`
-    : `<g opacity="${isFrame() ? round(ease(prog(begin + 0.9, 0.6))) : 0}">
-      ${isFrame() ? '' : fade(begin + 0.9, 0.6)}
-      ${text({ x: x + size / 2, y: y + size / 2 + 6, size: 17, weight: 600, fill: T.muted, anchor: 'middle', content: item.slice(0, 3) })}
-    </g>`;
-
-  /* halo behind the glyph: pulses in once, then keeps a slow breath.
-     every tile uses the same period, so the row moves together. */
-  const haloBegin = begin + 0.35;
-  const breathe = isFrame()
-    ? (() => {
-        const local = FRAME - haloBegin;
-        const phase = local <= 0 ? 0 : 0.5 - 0.5 * Math.cos((2 * Math.PI * local) / 4.4);
-        return round(0.1 + 0.16 * phase);
-      })()
-    : 0.1;
-
-  const halo = isFrame()
-    ? `<circle cx="${round(x + size / 2)}" cy="${round(y + size / 2)}" r="${round(size * 0.42)}" fill="url(#halo${index})" opacity="${breathe}"/>`
-    : `<circle cx="${round(x + size / 2)}" cy="${round(y + size / 2)}" r="${round(size * 0.42)}" fill="url(#halo${index})" opacity="0"><animate attributeName="opacity" values="0;0.26;0.1;0.26;0.1" dur="4.4s" begin="${round(haloBegin)}s" repeatCount="indefinite"/></circle>`;
-
-  /* the whole tile floats gently, all tiles share the period */
-  const floatBegin = begin + 0.9;
-  const floatY = (() => {
-    if (!isFrame()) return 0;
-    const local = FRAME - floatBegin;
-    if (local <= 0) return 0;
-    return round(-2.6 * (0.5 - 0.5 * Math.cos((2 * Math.PI * local) / 4.4)));
-  })();
-
-  const inner = `
-  ${halo}
-  ${outline}
-  ${solid}`;
-
-  const tile = reveal({
-    begin, dur: 0.5, dy: 10,
-    inner: `
-    ${rect({ x, y, w: size, h: size, rx: 20, fill: T.track, op: 0.55, stroke: T.hair, sw: 1 })}
-    <g transform="translate(0 ${isFrame() ? floatY : 0})">
-      ${isFrame() ? '' : `<animateTransform attributeName="transform" type="translate" values="0 0; 0 -2.6; 0 0" dur="4.4s" begin="${round(floatBegin)}s" repeatCount="indefinite"/>`}
-      ${inner}
-    </g>`,
-  });
-
-  /* a brand-coloured underline draws under the tile, then settles to hairline */
-  const underY = y + size + 12;
-  const brandLine = isFrame()
-    ? `<g opacity="${round(0.75 * (1 - prog(begin + 1.1, 0.9)))}">
-        ${rect({ x, y: underY, w: round(size * ease(prog(begin + 0.15, 0.9))), h: 1, fill: icon ? icon.color : T.muted })}
+  /* …and the brand glyph, which draws itself and fills in */
+  const glyphBegin = begin + 0.25;
+  const drawK = isFrame() ? ease(prog(glyphBegin, 0.7)) : 0;
+  const fillK = isFrame() ? ease(prog(glyphBegin + 0.55, 0.5)) : 0;
+  const iconGroup = icon
+    ? `<g transform="translate(${round(x + 18)} ${round(y - 4 - R / 2)}) scale(${round(k)})">
+        <path d="${icon.path}" pathLength="1" fill="none" stroke="${icon.color}" stroke-width="1.3" stroke-linejoin="round"
+          stroke-dasharray="1" stroke-dashoffset="${isFrame() ? round(1 - drawK) : 1}">
+          ${isFrame() ? '' : `<animate attributeName="stroke-dashoffset" from="1" to="0" begin="${round(glyphBegin)}s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.6 0.2 1" values="1;0"/>`}
+        </path>
+        <path d="${icon.path}" fill="${icon.color}" opacity="${isFrame() ? round(fillK) : 0}">
+          ${isFrame() ? '' : fade(glyphBegin + 0.55, 0.5)}
+        </path>
       </g>`
-    : `<g opacity="0"><animate attributeName="opacity" values="0.75;0.75;0" dur="1.6s" begin="${round(begin + 0.15)}s" fill="freeze"/>
-        ${rectEl({ x, y: underY, w: 0, h: 1, fill: icon ? icon.color : T.muted }, `<animate attributeName="width" from="0" to="${size}" begin="${round(begin + 0.15)}s" dur="0.9s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${size}"/>`)}
-      </g>`;
-  const hairLine = isFrame()
-    ? rect({ x, y: underY, w: round(size * ease(prog(begin + 0.15, 0.9))), h: 1, fill: T.hair })
     : '';
 
-  return { svg: `${tile}${brandLine}${hairLine}`, halo: `halo${index}` };
+  /* the label types itself, like every other piece of text on the card */
+  const label = typedText({ content: item, x: x + 40, y, size: 14, fill: theme.fg, begin: glyphBegin + 0.5, perChar: 0.03 });
+
+  return `${dot}${iconGroup}${label.svg}`;
+}
+
+/* ==================================================================
+ *  CONTRIBUTION STRIP — the most GitHub thing there is
+ * ================================================================== */
+function contributionStrip({ x, y, cols, rows, size, gap, begin, theme }) {
+  const seed = 20260920;
+  let s = seed;
+  const rnd = () => ((s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
+  const cells = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const v = rnd();
+      const level = v > 0.92 ? 4 : v > 0.78 ? 3 : v > 0.58 ? 2 : v > 0.3 ? 1 : 0;
+      const cx = x + c * (size + gap);
+      const cy = y + r * (size + gap);
+      const b = begin + (c * rows + r) * 0.0035;
+      const color = theme.contrib[level];
+      /* squares pop in one by one — the same little dance GitHub does */
+      cells.push(
+        isFrame()
+          ? `<rect x="${round(cx)}" y="${round(cy)}" width="${size}" height="${size}" rx="2" fill="${color}" opacity="${round(ease(prog(b, 0.35)))}"/>`
+          : `<g opacity="0">${fade(b, 0.35)}
+              <rect x="${round(cx)}" y="${round(cy)}" width="0" height="0" rx="2" fill="${color}">
+                <animate attributeName="width" from="0" to="${size}" begin="${round(b)}s" dur="0.35s" fill="freeze" values="0;${size}"/>
+                <animate attributeName="height" from="0" to="${size}" begin="${round(b)}s" dur="0.35s" fill="freeze" values="0;${size}"/>
+              </rect>
+            </g>`
+      );
+    }
+  }
+
+  /* one light sweeps the grid once it is full — a nod to “updated daily” */
+  const sweepBegin = begin + cols * rows * 0.0035 + 0.5;
+  const gradId = `contribSweep-${theme.name}`;
+  const sweep = isFrame()
+    ? (() => {
+        const local = FRAME - sweepBegin;
+        if (local < 0 || local > 1.6) return '';
+        const k = local / 1.6;
+        const gw = 180;
+        const gx = x + (cols * (size + gap) - gw) * k;
+        return `<rect x="${round(gx)}" y="${y}" width="${gw}" height="${rows * (size + gap) - gap}" fill="url(#${gradId})" opacity="${round(0.5 * Math.sin(Math.PI * k))}"/>`;
+      })()
+    : `<g opacity="0">
+        <animate attributeName="opacity" values="0;0;0.55;0" dur="5.2s" begin="${round(sweepBegin)}s" repeatCount="indefinite" keyTimes="0;0.55;0.72;1"/>
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 0; ${round(cols * (size + gap))} 0" dur="5.2s" begin="${round(sweepBegin)}s" repeatCount="indefinite"/>
+          <rect x="${round(x - 180)}" y="${y}" width="180" height="${rows * (size + gap) - gap}" fill="url(#${gradId})"/>
+        </g>
+      </g>`;
+
+  const def = `<linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0" stop-color="${theme.accent}" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="${theme.accent}" stop-opacity="0.5"/>
+    <stop offset="1" stop-color="${theme.accent}" stop-opacity="0"/>
+  </linearGradient>`;
+
+  return { svg: cells.join(''), sweep, def, height: rows * (size + gap) - gap };
 }
 
 /* ==================================================================
  *  THE CARD
  * ================================================================== */
-function build() {
+function buildCard(theme) {
   const W = 1000;
-  const M = 76;
-  const CW = W - M * 2;
+  const PAD = 28;
+  const CW = W - PAD * 2;
+  const parts = [];
+  const defs = [];
+  let t = 0.35;
 
-  const name = identity.name;
-  const role = identity.role.toUpperCase();
-  const headline = identity.tagline;
-  const aboutLines = wrapText(identity.about, CW, 14, 0.6);
+  /* ── header ───────────────────────────────────────────────────────── */
+  const name = typedText({ content: identity.name, x: PAD, y: 62, size: 30, fill: theme.fg, begin: t, perChar: 0.055, weight: 600 });
+  parts.push(name.svg.replace('</text>', caretTail({ content: identity.name, begin: t, perChar: 0.055, color: theme.accent }) + '</text>'));
+  t = name.end + 0.35;
 
-  /* ---- timeline: each text starts once the previous one is done ---- */
-  const S = [];
-  const P = [];
-  let t = 0.45;
+  const role = typedText({ content: identity.role, x: PAD, y: 92, size: 15, fill: theme.fgMuted, begin: t, perChar: 0.034 });
+  parts.push(role.svg.replace('</text>', caretTail({ content: identity.role, begin: t, perChar: 0.034, color: theme.fgSubtle }) + '</text>'));
+  t = role.end + 0.5;
 
-  /* frame */
-  const perimeter = 2 * (W - 1.5) + 2 * (700 - 1.5);
-  void perimeter;
+  const headline = typedText({ content: identity.tagline, x: PAD, y: 128, size: 16, fill: theme.fg, begin: t, perChar: 0.02 });
+  parts.push(headline.svg.replace('</text>', caretTail({ content: identity.tagline, begin: t, perChar: 0.02, color: theme.accent }) + '</text>'));
+  t = headline.end + 0.6;
 
-  /* name */
-  const n = type({ content: name, x: W / 2, y: 100, size: 40, weight: 400, begin: t, perChar: 0.05, anchor: 'middle' });
-  S.push(n.svg, caret({ x: n.x, y: 100, size: 40, width: n.width, begin: t, perChar: 0.05, count: name.length }));
-  t = n.end + 0.35;
+  /* ── about ────────────────────────────────────────────────────────── */
+  const aboutY = 172;
+  const aboutHead = sectionHeader({ title: 'About', x: PAD, y: aboutY, w: CW, begin: t, theme });
+  parts.push(aboutHead.svg);
+  t = aboutHead.end + 0.25;
 
-  /* role */
-  const r = type({ content: role, x: W / 2, y: 134, size: 13, fill: T.accent, begin: t, perChar: 0.035, ls: 3, anchor: 'middle' });
-  S.push(r.svg, caret({ x: r.x, y: 134, size: 13, width: r.width, begin: t, perChar: 0.035, count: role.length, ls: 3 }));
-  t = r.end + 0.4;
-
-  /* headline */
-  const h = type({ content: headline, x: W / 2, y: 182, size: 18, begin: t, perChar: 0.024, anchor: 'middle' });
-  S.push(h.svg, caret({ x: h.x, y: 182, size: 18, width: h.width, begin: t, perChar: 0.024, count: headline.length }));
-  t = h.end + 0.6;
-
-  /* about */
-  S.push(reveal({ begin: t - 0.2, dur: 0.5, inner: rule({ x: M, y: 214, w: CW, begin: t - 0.2, dur: 0.9 }) }));
-  t += 0.35;
-  const aboutLabel = type({ content: 'ABOUT', x: M, y: 252, size: 11.5, fill: T.accent, begin: t, perChar: 0.045, ls: 3 });
-  S.push(aboutLabel.svg);
-  t = aboutLabel.end + 0.3;
-
+  const aboutLines = wrapText(identity.about, CW - 16, 15, 0.62);
   aboutLines.forEach((line, i) => {
-    const y = 288 + i * 26;
-    const lineBegin = t + i * 0.18;
-    const ln = type({ content: line, x: M, y, size: 14, fill: T.muted, begin: lineBegin, perChar: 0.011 });
-    const cr = caret({ x: ln.x, y, size: 14, width: ln.width, begin: lineBegin, perChar: 0.011, count: line.length, color: T.muted });
-    S.push(reveal({ begin: lineBegin, dur: 0.4, dy: 6, inner: ln.svg + cr }));
+    const y = aboutY + 46 + i * 25;
+    const begin = t + i * 0.14;
+    const ln = typedText({ content: line, x: PAD, y, size: 15, fill: theme.fgMuted, begin, perChar: 0.009 });
+    parts.push(reveal({ begin, dur: 0.4, dy: 6, inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.009, color: theme.fgSubtle }) + '</text>') }));
   });
-  t = t + 0.18 + aboutLines.length * 0.18 + Math.max(...aboutLines.map((l) => l.length)) * 0.011 + 0.35;
+  const aboutEnd = t + (aboutLines.length - 1) * 0.14 + Math.max(...aboutLines.map((l) => l.length)) * 0.009 + 0.4;
 
+  /* ── quote ────────────────────────────────────────────────────────── */
+  let cursor = aboutY + 46 + aboutLines.length * 25;
   if (quote) {
-    const q = type({ content: quote, x: W / 2, y: 288 + aboutLines.length * 26 + 16, size: 13.5, fill: T.dim, begin: t, perChar: 0.018, anchor: 'middle' });
-    S.push(q.svg);
+    const q = typedText({ content: `“${quote}”`, x: PAD, y: cursor + 14, size: 14, fill: theme.fgSubtle, begin: aboutEnd, perChar: 0.016, italic: true });
+    parts.push(q.svg);
+    cursor += 14;
     t = q.end + 0.6;
+  } else {
+    t = aboutEnd;
   }
 
-  /* stack */
-  S.push(reveal({ begin: t, dur: 0.5, inner: rule({ x: M, y: t > 0 ? 0 : 0, w: CW, begin: t, dur: 0.9 }) }));
-  const stackRuleY = 288 + aboutLines.length * 26 + (quote ? 52 : 12);
-  S.length -= 1;                                  /* drop the placeholder above */
-  S.push(reveal({ begin: t - 0.1, dur: 0.5, inner: rule({ x: M, y: stackRuleY, w: CW, begin: t - 0.1, dur: 0.9 }) }));
-  t += 0.4;
+  /* ── languages ────────────────────────────────────────────────────── */
+  const stackY = cursor + 64;
+  const stackHead = sectionHeader({ title: 'Languages', x: PAD, y: stackY, w: CW, begin: t, theme });
+  parts.push(stackHead.svg);
+  t = stackHead.end + 0.3;
 
-  const stackLabel = type({ content: 'STACK', x: M, y: stackRuleY + 40, size: 11.5, fill: T.accent, begin: t, perChar: 0.045, ls: 3 });
-  S.push(stackLabel.svg);
-  t = stackLabel.end + 0.35;
-
-  /* tiles */
-  const tile = 92;
-  const gap = (CW - langs.length * tile) / Math.max(1, langs.length - 1);
-  const tileY = stackRuleY + 66;
-  const tileX = (i) => round(M + i * (tile + gap));
-
+  const legendCols = 3;
+  const legendW = CW / legendCols;
+  const legendTop = stackY + 44;
   langs.forEach((item, i) => {
-    P.push(`<radialGradient id="halo${i}" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="${(slugFor(item) ? brand(slugFor(item)).color : T.accent)}" stop-opacity="0.45"/>
-      <stop offset="0.6" stop-color="${T.accent}" stop-opacity="0.07"/>
-      <stop offset="1" stop-color="${T.accent}" stop-opacity="0"/>
-    </radialGradient>`);
-    const begin = t + i * 0.16;
-    const built = iconTile({ item, x: tileX(i), y: tileY, size: tile, begin, index: i });
-    S.push(built.svg);
-
-    const label = type({ content: item, x: tileX(i) + tile / 2, y: tileY + tile + 34, size: 12.5, fill: T.muted, begin: begin + 1.05, perChar: 0.03, anchor: 'middle' });
-    S.push(label.svg);
+    const col = i % legendCols, row = Math.floor(i / legendCols);
+    parts.push(legendEntry({
+      item, x: PAD + col * legendW, y: legendTop + row * 40, begin: t + i * 0.14, theme, index: i,
+    }));
   });
-  t = t + (langs.length - 1) * 0.16 + 1.05 + Math.max(...langs.map((l) => l.length)) * 0.03 + 0.5;
+  t = t + (langs.length - 1) * 0.14 + 1;
+  const legendBottom = legendTop + Math.ceil(langs.length / legendCols) * 40 - 40;
 
-  /* closing */
-  const closeRuleY = tileY + tile + 64;
-  S.push(reveal({ begin: t, dur: 0.5, inner: rule({ x: M, y: closeRuleY, w: CW, begin: t, dur: 0.9 }) }));
-  t += 0.45;
+  /* ── contribution strip ───────────────────────────────────────────── */
+  const contribY = legendBottom + 64;
+  const contribHead = sectionHeader({ title: 'Contribution activity', x: PAD, y: contribY, w: CW, begin: t, theme });
+  parts.push(contribHead.svg);
+  t = contribHead.end + 0.3;
 
-  const head = cfg.footer?.headline || 'Let’s build something.';
-  const hp = type({ content: head, x: W / 2, y: closeRuleY + 52, size: 20, begin: t, perChar: 0.035, anchor: 'middle' });
-  S.push(hp.svg, caret({ x: hp.x, y: closeRuleY + 52, size: 20, width: hp.width, begin: t, perChar: 0.035, count: head.length }));
-  t = hp.end + 0.3;
+  const cellSize = 11, cellGap = 3;
+  const cols = Math.floor((CW + cellGap) / (cellSize + cellGap));
+  const strip = contributionStrip({ x: PAD, y: contribY + 36, cols, rows: 7, size: cellSize, gap: cellGap, begin: t, theme });
+  parts.push(strip.svg, strip.sweep);
+  defs.push(strip.def);
+  const contribBottom = contribY + 36 + strip.height;
+
+  /* ── footer ───────────────────────────────────────────────────────── */
+  const footY = contribBottom + 56;
+  parts.push(`<g opacity="0">${isFrame() ? '' : fade(t + 0.6, 0.6)}${rule({ x: PAD, y: footY - 26, w: CW, begin: t + 0.5, color: theme.borderMuted })}</g>`);
 
   const handleLine = `@${identity.handle} · ${identity.location}`;
-  const hl = type({ content: handleLine, x: W / 2, y: closeRuleY + 84, size: 13, fill: T.dim, begin: t, perChar: 0.03, anchor: 'middle' });
-  S.push(hl.svg);
-  /* the live dot appears once the handle is typed */
-  const dotX = hl.x - 18;
-  const dotBegin = hl.end + 0.1;
-  S.push(
+  const handleBegin = t + 0.95;
+  const handleTyped = typedText({ content: handleLine, x: PAD + 16, y: footY, size: 13.5, fill: theme.fgMuted, begin: handleBegin, perChar: 0.028 });
+  parts.push(handleTyped.svg);
+  const dotBegin = handleBegin + handleLine.length * 0.028 + 0.15;
+  parts.push(
     isFrame()
-      ? `<circle cx="${round(dotX)}" cy="${closeRuleY + 79.5}" r="3.6" fill="${T.accent}" opacity="${done(dotBegin) ? 1 : 0}"/>`
-      : `<circle cx="${round(dotX)}" cy="${closeRuleY + 79.5}" r="3.6" fill="${T.accent}" opacity="0">
-          ${fade(dotBegin, 0.4)}
+      ? `<circle cx="${PAD + 4}" cy="${footY - 4.5}" r="4" fill="${theme.accent}" opacity="${done(dotBegin) ? 1 : 0}"/>`
+      : `<circle cx="${PAD + 4}" cy="${footY - 4.5}" r="4" fill="${theme.accent}" opacity="0">${fade(dotBegin, 0.4)}
           <animate attributeName="opacity" values="1;0.25;1" dur="2.4s" begin="${round(dotBegin + 0.4)}s" repeatCount="indefinite"/>
         </circle>`
   );
-  t = t + handleLine.length * 0.03 + 0.6;
 
-  /* height follows the content */
-  const H = round(closeRuleY + 84 + 52);
+  const total = dotBegin + 0.6;
+  const H = round(footY + 32);
 
-  /* card shell */
-  const shell = [
-    rect({ x: 0, y: 0, w: W, h: H, fill: T.bg }),
-    (() => {
-      const per = round(2 * (W - 1.5) + 2 * (H - 1.5) - 8 * 22 + 2 * Math.PI * 22);
-      const drawn = isFrame() ? ease(prog(0.05, 1.3)) : 0;
-      const border = rectEl(
-        {
-          x: 0.75, y: 0.75, w: W - 1.5, h: H - 1.5, rx: 22, fill: T.card, stroke: T.hair, sw: 1.5,
-          extra: `stroke-dasharray="${per}" stroke-dashoffset="${isFrame() ? round(per * (1 - drawn)) : per}"`,
-        },
-        isFrame() ? '' : `<animate attributeName="stroke-dashoffset" from="${per}" to="0" begin="0.05s" dur="1.3s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="${per};0"/>`,
-      );
-      return `<g opacity="${isFrame() ? drawn : 0}">
-        ${isFrame() ? '' : fade(0.05, 0.6)}
-        ${border}
-      </g>`;
-    })(),
-    `<ellipse cx="${W / 2}" cy="4" rx="540" ry="250" fill="url(#cardGlow)" opacity="${isFrame() ? round(0.85 + 0.1 * Math.sin(FRAME)) : 0.9}">
-      ${isFrame() ? '' : '<animate attributeName="opacity" values="0.8;1;0.8" dur="12s" repeatCount="indefinite"/>'}
-    </ellipse>`,
-  ].join('\n');
-
-  P.push(lgrad('hairGrad', [[0, T.accent, 0], [0.5, T.hair, 1], [1, T.accent, 0]]));
-  P.push(rgrad('cardGlow', [[0, T.accent, 0.07], [0.6, T.accent, 0.02], [1, T.accent, 0]]));
-  P.push(`<clipPath id="cardClip"><rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="21"/></clipPath>`);
-
-  const card = svg({
+  const canvas = svg({
     w: W, h: H,
-    title: `${name} — ${identity.role}`,
-    defs: P.join('\n'),
-    body: `<g clip-path="url(#cardClip)">${shell}\n${S.join('\n')}</g>`,
+    title: `${identity.name} — ${identity.role}`,
+    defs: defs.join('\n'),
+    body: parts.join('\n'),
   });
 
-  return { card, total: t, W, H };
+  return { canvas, total, W, H };
 }
 
 /* ==================================================================
@@ -364,46 +353,59 @@ const OUT = (rel) => new URL(`../${rel}`, import.meta.url);
 mkdirSync(OUT('assets'), { recursive: true });
 mkdirSync(new URL('./.preview', import.meta.url), { recursive: true });
 
-const render = (t, zoom = 1) => {
-  FRAME = t;
-  const { card } = build();
-  FRAME = null;
-  const png = new Resvg(card, {
-    fitTo: { mode: 'zoom', value: zoom },
-    font: { loadSystemFonts: true, defaultFontFamily: 'monospace' },
-  }).render().asPng();
-  return { png, card };
-};
+const only = (process.argv.find((a) => a.startsWith('--only=')) || '').split('=')[1];
+const wanted = only ? [only] : ['dark', 'light'];
 
-/* the animated file */
-FRAME = null;
-const { card, total, W, H } = build();
-const clean = card.replace(/\n{3,}/g, '\n\n');
-/* refuse to write a file GitHub would reject — this is what bit us before */
-const info = validateCard(clean);
-writeFileSync(OUT('assets/card.svg'), clean);
-console.log(`  ✓ assets/card.svg  ${W}×${H}, ${(info.bytes / 1024).toFixed(1)} KB, animation runs ${round(total)}s — XML valid (${info.groups} groups, ${info.defined} ids)`);
+const rendered = {};
+for (const variant of wanted) {
+  const theme = THEMES[variant];
+  FRAME = null;
+  const { canvas, total, W, H } = buildCard(theme);
+  const clean = canvas.replace(/>\s+</g, '><').replace(/\n{2,}/g, '\n');
+  const info = validateCard(clean, `card-${variant}.svg`);
+  writeFileSync(OUT(`assets/card-${variant}.svg`), clean);
+  console.log(`  ✓ assets/card-${variant}.svg  ${W}×${H}, ${(info.bytes / 1024).toFixed(1)} KB, ${round(total)}s — XML valid (${info.groups} groups)`);
+
+  const render = (time, zoom) => {
+    FRAME = time;
+    const { canvas: frame } = buildCard(theme);
+    FRAME = null;
+    return new Resvg(frame, {
+      fitTo: { mode: 'zoom', value: zoom },
+      font: { loadSystemFonts: true, defaultFontFamily: 'sans-serif' },
+    }).render().asPng();
+  };
+  rendered[variant] = { render, total, W, H };
+}
 
 if (process.argv.includes('--png')) {
-  const { png } = render(1e6, 2);
-  writeFileSync(OUT('assets/card.png'), png);
-  console.log(`  ✓ assets/card.png  (settled frame @2×, ${(png.length / 1024).toFixed(0)} KB)`);
+  for (const variant of wanted) {
+    const png = rendered[variant].render(1e6, 2);
+    writeFileSync(OUT(`assets/card-${variant}.png`), png);
+    console.log(`  ✓ assets/card-${variant}.png  (settled frame @2×, ${(png.length / 1024).toFixed(0)} KB)`);
+  }
 }
 
 if (process.argv.includes('--gif')) {
-  const step = 0.3;
-  const frames = [];
-  for (let i = 0, t = 0; t <= total + 2.6; i++, t += step) {
-    const { png } = render(t, 1);
-    const file = new URL(`./.preview/frames/f${String(i).padStart(3, '0')}.png`, import.meta.url);
-    mkdirSync(new URL('./.preview/frames/', import.meta.url), { recursive: true });
-    writeFileSync(file, png);
-    frames.push(file.pathname);
+  const bg = { dark: '#0d1117', light: '#ffffff' };
+  for (const variant of wanted) {
+    const { render, total } = rendered[variant];
+    const dir = new URL(`./.preview/frames-${variant}/`, import.meta.url);
+    mkdirSync(dir, { recursive: true });
+    const step = 0.3;
+    const frames = [];
+    for (let i = 0, time = 0; time <= total + 2.4; i++, time += step) {
+      const file = new URL(`f${String(i).padStart(3, '0')}.png`, dir);
+      writeFileSync(file, render(time, 1));
+      frames.push(file.pathname);
+    }
+    const gif = new URL(`./.preview/card-${variant}.gif`, import.meta.url);
+    execFileSync('convert', [
+      '-size', `${rendered[variant].W}x${rendered[variant].H}`, `xc:${bg[variant]}`,
+      ...frames.map((f) => ['(', f, '-background', bg[variant], '-alpha', 'remove', ')']).flat(),
+      '-delay', String(Math.round(step * 100)), '-loop', '0',
+      '-resize', '760x', '-colors', '96', '-layers', 'OptimizePlus', gif.pathname,
+    ]);
+    console.log(`  ✓ tools/.preview/card-${variant}.gif  (${frames.length} frames)`);
   }
-  const gif = new URL('./.preview/card.gif', import.meta.url);
-  execFileSync('convert', [
-    '-delay', String(Math.round(step * 100)), '-loop', '0',
-    ...frames, '-resize', '760x', '-colors', '96', '-layers', 'OptimizePlus', gif.pathname,
-  ]);
-  console.log(`  ✓ tools/.preview/card.gif  (${frames.length} frames)`);
 }

@@ -144,7 +144,7 @@ export const rgrad = (id, stops, cx = '50%', cy = '50%', r = '70%') => `
 ${stops.map(([o, c, a = 1]) => `<stop offset="${o}" stop-color="${c}" stop-opacity="${a}"/>`).join('')}
 </radialGradient>`;
 
-export const wrapText = (str, maxWidth, size, factor = 0.512) => {
+export const wrapText = (str, maxWidth, size, factor = 0.62) => {
   const perChar = size * factor;
   const words = String(str).split(/\s+/);
   const lines = [];
