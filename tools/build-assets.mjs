@@ -105,9 +105,9 @@ const rule = ({ x, y, w, begin, dur = 0.9, color }) => {
  * ================================================================== */
 const nbsp = (str) => str.replace(/ /g, '\u00a0');
 
-const typedText = ({ content, x, y, size, fill, begin, perChar = 0.03, weight = 400, italic = false }) => {
+const typedText = ({ content, x, y, size, fill, begin, perChar = 0.03, weight = 400, italic = false, anchor = 'start' }) => {
   const chars = [...content];
-  const attrs = `x="${round(x)}" y="${round(y)}" font-family="${SANS}" font-size="${round(size)}" fill="${fill}" text-anchor="start" xml:space="preserve"${weight !== 400 ? ` font-weight="${weight}"` : ''}${italic ? ' font-style="italic"' : ''}`;
+  const attrs = `x="${round(x)}" y="${round(y)}" font-family="${SANS}" font-size="${round(size)}" fill="${fill}" text-anchor="${anchor}" xml:space="preserve"${weight !== 400 ? ` font-weight="${weight}"` : ''}${italic ? ' font-style="italic"' : ''}`;
   const end = begin + chars.length * perChar;
 
   if (isFrame()) {
@@ -144,7 +144,8 @@ function textShine({ id, content, x, y, size, weight = 600, width, begin, theme,
 
   const bandW = Math.max(120, width * 0.5);
   const from = round(x - bandW);
-  const to = round(x + width + 20);
+  /* generous over-travel: proportional metrics vary between renderers */
+  const to = round(x + width * 1.35 + 60);
 
   /* the band travels during the first third of every period */
   const smil = `<g mask="url(#${maskId})">
@@ -257,8 +258,8 @@ function languageTile({ item, x, y, w, h, begin, theme, index }) {
   })();
 
   const label = typedText({
-    content: item, x: cx - item.length * 3.6, y: y + h - 20, size: 13.5,
-    fill: theme.fgMuted, begin: begin + 1.05, perChar: 0.03,
+    content: item, x: cx, y: y + h - 20, size: 13.5,
+    fill: theme.fgMuted, begin: begin + 1.05, perChar: 0.03, anchor: 'middle',
   });
 
   const body = `
