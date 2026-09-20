@@ -3,7 +3,7 @@
     "handle": "vaezhadi",
     "name": "Hadi Vaez",
     "role": "Full-Stack Developer",
-    "tagline": "I build apps that feel alive.",
+    "tagline": "Student by day, full-stack developer by night, noob gamer at heart",
     "location": "Raccoon City",
     "timezone": "UTC+03:30",
     "availableFor": "Freelance · Full-time",
@@ -46,7 +46,6 @@
   "projects": [],
   "quote": "Talk is cheap. Show me the code.",
   "footer": {
-    "headline": "Let’s build something.",
-    "sub": ""
+    "headline": "Let’s build something."
   }
 }
