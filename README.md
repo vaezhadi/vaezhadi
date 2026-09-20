@@ -28,7 +28,7 @@
 </td>
 <td valign="top">
 
-| | |
+|  |  |
 |:--|:--|
 | 🖥️ &nbsp;Role | Flutter Developer · Mobile Engineer |
 | 📍 &nbsp;Based in | Tehran, Iran · UTC+03:30 |
@@ -71,6 +71,9 @@
 |:--|:--|:--|:--|
 | **[Eflutter](https://github.com/vaezhadi/Eflutter)** | Flutter playground — experiments, widgets and app skeletons. | `Flutter · Dart` | `ACTIVE` |
 
+
+<img src="./assets/divider.svg" alt="" width="100%" />
+
 ## 📈 GitHub telemetry
 
 <div align="center">
@@ -84,6 +87,9 @@
 <img src="https://github-readme-activity-graph.vercel.app/graph?username=vaezhadi&bg_color=00000000&color=7dffb0&line=00ff41&point=ffffff&area=true&area_color=1d6b41&hide_border=true&title_color=00ff41&custom_title=Contribution%20activity" alt="activity graph" width="100%" />
 
 </div>
+
+
+<img src="./assets/divider.svg" alt="" width="100%" />
 
 ## 🌐 Contribution skyline
 
@@ -101,11 +107,14 @@
 
 </div>
 
+
+<img src="./assets/divider.svg" alt="" width="100%" />
+
 ## 💬 One line I live by
 
 <div align="center">
 
-> **Talk is cheap. Show me the code.**
+<code>{ Talk is cheap. Show me the code. }</code>
 
 </div>
 

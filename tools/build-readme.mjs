@@ -19,6 +19,10 @@ const T = {
 
 const img = (src, alt, extra = '') => `<img src="${src}" alt="${alt}"${extra ? ' ' + extra : ''} />`;
 
+const rule = `
+<img src="./assets/divider.svg" alt="" width="100%" />
+`;
+
 const badge = (label, message, color, logo, url) => {
   const b = img(
     `https://img.shields.io/badge/${encodeURIComponent(label)}-${encodeURIComponent(message)}-${color}?style=for-the-badge&labelColor=0d1117&logo=${logo}&logoColor=${color}`,
@@ -72,7 +76,7 @@ ${img('./assets/id-plate.svg', 'vaezhadi', 'width="210"')}
 </td>
 <td valign="top">
 
-| | |
+|  |  |
 |:--|:--|
 ${table}
 
@@ -122,7 +126,8 @@ ${cards}
 ${rows}`;
 })();
 
-const statsSection = `## 📈 GitHub telemetry
+const statsSection = `${rule}
+## 📈 GitHub telemetry
 
 <div align="center">
 
@@ -136,7 +141,8 @@ ${img(`https://github-readme-activity-graph.vercel.app/graph?username=${U}&${T.a
 
 </div>`;
 
-const snakeSection = `## 🌐 Contribution skyline
+const snakeSection = `${rule}
+## 🌐 Contribution skyline
 
 <div align="center">
 
@@ -156,11 +162,12 @@ const quoteSection = (() => {
   const facts = funFacts && funFacts.length
     ? `\n<details>\n<summary>⚡ &nbsp;Random facts</summary>\n\n${funFacts.map((f) => `- ${f}`).join('\n')}\n\n</details>\n`
     : '';
-  return `## 💬 One line I live by
+  return `${rule}
+## 💬 One line I live by
 
 <div align="center">
 
-> **${cfg.quote}**
+<code>{ ${cfg.quote} }</code>
 
 </div>
 ${facts}`;
