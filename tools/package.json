@@ -3,11 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node build-assets.mjs && node build-readme.mjs",
+    "build": "node build-assets.mjs --png && node build-readme.mjs",
     "assets": "node build-assets.mjs",
     "readme": "node build-readme.mjs",
     "preview": "node preview.mjs",
-    "preview:assets": "node build-assets.mjs --preview"
+    "preview:assets": "node build-assets.mjs --preview",
+    "card:png": "node build-assets.mjs --png"
   },
   "dependencies": {
     "marked": "^18.0.0"
