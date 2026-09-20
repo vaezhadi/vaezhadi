@@ -1,85 +1,15 @@
 {
-  "$comment": "PLACEHOLDER DATA — replace every value below with real info from the questionnaire, then run: npm run build",
   "identity": {
     "handle": "vaezhadi",
     "name": "Hadi Vaez",
-    "nameUpper": "HADI VAEZ",
     "role": "Flutter Developer",
     "tagline": "I build apps that feel alive.",
     "location": "Tehran, Iran",
     "timezone": "UTC+03:30",
-    "handleHost": "hadi@vaezhadi",
-    "openToWork": true,
-    "availableFor": "Freelance · Full-time"
+    "availableFor": "Freelance · Full-time",
+    "email": "hello@example.com",
+    "about": "Flutter developer based in Tehran, Iran (UTC+03:30). I care about clean architecture, fast interfaces and shipping things that actually get used."
   },
-  "typing": [
-    "Flutter & Dart mobile engineering",
-    "Pixel-perfect UI that feels fast",
-    "Clean architecture, zero spaghetti",
-    "Turning coffee into commits"
-  ],
-  "status": {
-    "label": "ONLINE",
-    "text": "shipping Flutter apps & leveling up my stack",
-    "learning": "Kotlin, Swift, Clean Architecture",
-    "building": "cross-platform apps with Flutter"
-  },
-  "stack": {
-    "primary": [
-      "Flutter",
-      "Dart",
-      "Firebase",
-      "REST API",
-      "Git"
-    ],
-    "learning": [
-      "Kotlin",
-      "Swift",
-      "Clean Architecture",
-      "CI/CD"
-    ],
-    "tools": [
-      "VS Code",
-      "Android Studio",
-      "Figma",
-      "Postman",
-      "GitHub Actions"
-    ]
-  },
-  "skills": [
-    {
-      "name": "Flutter",
-      "level": 90
-    },
-    {
-      "name": "Dart",
-      "level": 88
-    },
-    {
-      "name": "Firebase",
-      "level": 78
-    },
-    {
-      "name": "REST / API Design",
-      "level": 74
-    },
-    {
-      "name": "UI / UX Implementation",
-      "level": 82
-    },
-    {
-      "name": "Git & Collaboration",
-      "level": 80
-    },
-    {
-      "name": "Kotlin (native)",
-      "level": 55
-    },
-    {
-      "name": "CI / CD",
-      "level": 50
-    }
-  ],
   "socials": [
     {
       "label": "Email",
@@ -124,6 +54,62 @@
       "show": false
     }
   ],
+  "skills": [
+    {
+      "name": "Flutter",
+      "level": 90
+    },
+    {
+      "name": "Dart",
+      "level": 88
+    },
+    {
+      "name": "Firebase",
+      "level": 78
+    },
+    {
+      "name": "REST / API Design",
+      "level": 74
+    },
+    {
+      "name": "UI / UX Implementation",
+      "level": 82
+    },
+    {
+      "name": "Git & Collaboration",
+      "level": 80
+    },
+    {
+      "name": "Kotlin (native)",
+      "level": 55
+    },
+    {
+      "name": "CI / CD",
+      "level": 50
+    }
+  ],
+  "stack": {
+    "primary": [
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "REST API",
+      "Git"
+    ],
+    "learning": [
+      "Kotlin",
+      "Swift",
+      "Clean Architecture",
+      "CI/CD"
+    ],
+    "tools": [
+      "VS Code",
+      "Android Studio",
+      "Figma",
+      "Postman",
+      "GitHub Actions"
+    ]
+  },
   "projects": [
     {
       "name": "Eflutter",
@@ -133,7 +119,9 @@
       "status": "ACTIVE"
     }
   ],
-  "funFacts": [],
   "quote": "Talk is cheap. Show me the code.",
-  "footerCta": "Got an idea? Let's build it."
+  "footer": {
+    "headline": "Let’s build something.",
+    "sub": "hello@example.com"
+  }
 }
