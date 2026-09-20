@@ -1,0 +1,139 @@
+{
+  "$comment": "PLACEHOLDER DATA — replace every value below with real info from the questionnaire, then run: npm run build",
+  "identity": {
+    "handle": "vaezhadi",
+    "name": "Hadi Vaez",
+    "nameUpper": "HADI VAEZ",
+    "role": "Flutter Developer",
+    "tagline": "I build apps that feel alive.",
+    "location": "Tehran, Iran",
+    "timezone": "UTC+03:30",
+    "handleHost": "hadi@vaezhadi",
+    "openToWork": true,
+    "availableFor": "Freelance · Full-time"
+  },
+  "typing": [
+    "Flutter & Dart mobile engineering",
+    "Pixel-perfect UI that feels fast",
+    "Clean architecture, zero spaghetti",
+    "Turning coffee into commits"
+  ],
+  "status": {
+    "label": "ONLINE",
+    "text": "shipping Flutter apps & leveling up my stack",
+    "learning": "Kotlin, Swift, Clean Architecture",
+    "building": "cross-platform apps with Flutter"
+  },
+  "stack": {
+    "primary": [
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "REST API",
+      "Git"
+    ],
+    "learning": [
+      "Kotlin",
+      "Swift",
+      "Clean Architecture",
+      "CI/CD"
+    ],
+    "tools": [
+      "VS Code",
+      "Android Studio",
+      "Figma",
+      "Postman",
+      "GitHub Actions"
+    ]
+  },
+  "skills": [
+    {
+      "name": "Flutter",
+      "level": 90
+    },
+    {
+      "name": "Dart",
+      "level": 88
+    },
+    {
+      "name": "Firebase",
+      "level": 78
+    },
+    {
+      "name": "REST / API Design",
+      "level": 74
+    },
+    {
+      "name": "UI / UX Implementation",
+      "level": 82
+    },
+    {
+      "name": "Git & Collaboration",
+      "level": 80
+    },
+    {
+      "name": "Kotlin (native)",
+      "level": 55
+    },
+    {
+      "name": "CI / CD",
+      "level": 50
+    }
+  ],
+  "socials": [
+    {
+      "label": "Email",
+      "icon": "gmail",
+      "color": "EA4335",
+      "url": "mailto:example@example.com",
+      "show": true
+    },
+    {
+      "label": "LinkedIn",
+      "icon": "linkedin",
+      "color": "0A66C2",
+      "url": "https://linkedin.com/in/USERNAME",
+      "show": false
+    },
+    {
+      "label": "Telegram",
+      "icon": "telegram",
+      "color": "26A5E4",
+      "url": "https://t.me/USERNAME",
+      "show": false
+    },
+    {
+      "label": "X",
+      "icon": "x",
+      "color": "000000",
+      "url": "https://x.com/USERNAME",
+      "show": false
+    },
+    {
+      "label": "Instagram",
+      "icon": "instagram",
+      "color": "E4405F",
+      "url": "https://instagram.com/USERNAME",
+      "show": false
+    },
+    {
+      "label": "Portfolio",
+      "icon": "googlechrome",
+      "color": "00ff41",
+      "url": "",
+      "show": false
+    }
+  ],
+  "projects": [
+    {
+      "name": "Eflutter",
+      "desc": "Flutter playground — experiments, widgets and app skeletons.",
+      "tech": "Flutter · Dart",
+      "url": "https://github.com/vaezhadi/Eflutter",
+      "status": "ACTIVE"
+    }
+  ],
+  "funFacts": [],
+  "quote": "Talk is cheap. Show me the code.",
+  "footerCta": "Got an idea? Let's build it."
+}

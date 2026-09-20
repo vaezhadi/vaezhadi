@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 46" width="1200" height="46" role="img" aria-label="divider">
+<title>divider</title>
+<defs>
+<filter id="dvGlow" x="-60%" y="-60%" width="220%" height="220%">
+  <feGaussianBlur stdDeviation="5" result="b"/>
+  <feFlood flood-color="#00ff41" flood-opacity="0.9" result="c"/>
+  <feComposite in="c" in2="b" operator="in" result="g"/>
+  <feMerge><feMergeNode in="g"/><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+
+<linearGradient id="dvLine" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0" stop-color="#00ff41" stop-opacity="0"/>
+<stop offset="0.2" stop-color="#1f6b3d" stop-opacity="0.9"/>
+<stop offset="0.8" stop-color="#1f6b3d" stop-opacity="0.9"/>
+<stop offset="1" stop-color="#00ff41" stop-opacity="0"/>
+</linearGradient></defs>
+
+<path d="M40 23 H1160" stroke="url(#dvLine)" stroke-width="1.4"/>
+<path d="M40 23 H1160" stroke="#00ff41" stroke-width="1.4" stroke-dasharray="6 14" opacity="0.8">
+  <animate attributeName="stroke-dashoffset" from="0" to="-200" dur="6s" repeatCount="indefinite"/>
+</path>
+<g>
+  <animateTransform attributeName="transform" type="translate" values="-560 0; 560 0" dur="5.5s" repeatCount="indefinite" />
+  <circle cx="600" cy="23" r="3.6" fill="#7dffb0" filter="url(#dvGlow)"/>
+  <rect x="596" y="22" width="70" height="2" fill="url(#dvLine)" opacity="0.9"/>
+</g>
+<g transform="translate(600 23)">
+  <g><animateTransform attributeName="transform" type="rotate" values="0;360" dur="14s" repeatCount="indefinite" />
+    <path d="M0 -11 L9.5 -5.5 L9.5 5.5 L0 11 L-9.5 5.5 L-9.5 -5.5 Z" fill="#000000" stroke="#00ff41" stroke-width="1.2" opacity="0.85"/>
+  </g>
+  <circle r="3" fill="#00ff41"><animate attributeName="opacity" values="1;0.2;1" dur="2.1s" repeatCount="indefinite" /></circle>
+  <g><animateTransform attributeName="transform" type="rotate" values="360;0" dur="22s" repeatCount="indefinite" />
+    <circle r="16" fill="none" stroke="#1f6b3d" stroke-width="1" stroke-dasharray="2 6"/>
+  </g>
+</g>
+</svg>

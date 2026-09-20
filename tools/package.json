@@ -1,0 +1,21 @@
+{
+  "name": "vaezhadi-profile-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build-assets.mjs && node build-readme.mjs",
+    "assets": "node build-assets.mjs",
+    "readme": "node build-readme.mjs",
+    "preview": "node preview.mjs",
+    "preview:assets": "node build-assets.mjs --preview"
+  },
+  "dependencies": {
+    "marked": "^18.0.0"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "acorn": "^8.18.0",
+    "acorn-jsx": "^5.3.2"
+  },
+  "description": "Generates the animated SVG assets and README.md for the vaezhadi profile repository"
+}

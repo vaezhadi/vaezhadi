@@ -1,0 +1,32 @@
+name: 🐍 Contribution snake
+
+on:
+  schedule:
+    - cron: "17 3 * * *" # daily, 03:17 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/snake.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  snake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Generate the snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            assets/generated/snake.svg?color_snake=%2300ff41&color_dots=%23071a10,%2312512c,%231d6b41,%2300ff41,%237dffb0
+
+      - name: Commit it back
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(snake): refresh contribution snake 🐍"
+          file_pattern: "assets/generated/snake.svg"

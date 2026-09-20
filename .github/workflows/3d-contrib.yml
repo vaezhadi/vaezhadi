@@ -1,0 +1,31 @@
+name: 🌐 3D contribution graph
+
+on:
+  schedule:
+    - cron: "37 3 * * *" # daily, 03:37 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/3d-contrib.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Generate the 3D calendar
+        uses: yoshi389111/github-profile-3d-contrib@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+
+      - name: Commit it back
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(3d): refresh contribution skyline 🌐"
+          file_pattern: "profile-3d-contrib/*.svg"

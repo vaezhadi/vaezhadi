@@ -1,0 +1,2188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" width="1000" height="360" role="img" aria-label="3D contribution graph (pending first run)">
+<title>3D contribution graph (pending first run)</title>
+<defs>
+<filter id="tdGlow" x="-60%" y="-60%" width="220%" height="220%">
+  <feGaussianBlur stdDeviation="8" result="b"/>
+  <feFlood flood-color="#00ff41" flood-opacity="0.9" result="c"/>
+  <feComposite in="c" in2="b" operator="in" result="g"/>
+  <feMerge><feMergeNode in="g"/><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+
+<radialGradient id="tdFloor" cx="50%" cy="50%" r="70%">
+<stop offset="0" stop-color="#00ff41" stop-opacity="0.12"/>
+<stop offset="1" stop-color="#00ff41" stop-opacity="0"/>
+</radialGradient>
+
+<linearGradient id="tdTitle" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0" stop-color="#00ff41" stop-opacity="0"/>
+<stop offset="0.5" stop-color="#7dffb0" stop-opacity="0.9"/>
+<stop offset="1" stop-color="#00ff41" stop-opacity="0"/>
+</linearGradient></defs>
+
+<rect width="1000" height="360" fill="#000000"/>
+<ellipse cx="500" cy="210" rx="430" ry="120" fill="url(#tdFloor)"/>
+<text x="30" y="34" font-family="'JetBrains Mono','Fira Code','Cascadia Code',ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace" font-size="12.5" fill="#00ff41" text-anchor="start" font-weight="600">[ 3D CONTRIBUTION SKYLINE ]</text>
+<text x="970" y="34" font-family="'JetBrains Mono','Fira Code','Cascadia Code',ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace" font-size="11" fill="#12512c" text-anchor="end">// placeholder — filled by the 3d-contrib workflow</text>
+<path d="M30 46 H970" stroke="url(#tdTitle)" stroke-width="1"/>
+<g transform="translate(311.5 92.75)">
+  <g transform="translate(-311.5 -92.75)">
+    
+    <path d="M298.5 97.25 L311.5 103.75 L311.5 105.75 L298.5 99.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 103.75 L324.5 97.25 L324.5 99.25 L311.5 105.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 90.75 L324.5 97.25 L311.5 103.75 L298.5 97.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(298.5 99.25)">
+  <g transform="translate(-298.5 -99.25)">
+    
+    <path d="M285.5 103.75 L298.5 110.25 L298.5 112.25 L285.5 105.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 110.25 L311.5 103.75 L311.5 105.75 L298.5 112.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 97.25 L311.5 103.75 L298.5 110.25 L285.5 103.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(285.5 105.75)">
+  <g transform="translate(-285.5 -105.75)">
+    
+    <path d="M272.5 110.25 L285.5 116.75 L285.5 118.75 L272.5 112.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 116.75 L298.5 110.25 L298.5 112.25 L285.5 118.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 103.75 L298.5 110.25 L285.5 116.75 L272.5 110.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(272.5 112.25)">
+  <g transform="translate(-272.5 -112.25)">
+    
+    <path d="M259.5 116.75 L272.5 123.25 L272.5 125.25 L259.5 118.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 123.25 L285.5 116.75 L285.5 118.75 L272.5 125.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 110.25 L285.5 116.75 L272.5 123.25 L259.5 116.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(259.5 118.75)">
+  <g transform="translate(-259.5 -118.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.19s" begin="1.99s" repeatCount="indefinite" additive="sum"/>
+    <path d="M246.5 75.4175251852721 L259.5 81.9175251852721 L259.5 131.75 L246.5 125.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 81.9175251852721 L272.5 75.4175251852721 L272.5 125.25 L259.5 131.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 68.9175251852721 L272.5 75.4175251852721 L259.5 81.9175251852721 L246.5 75.4175251852721 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(246.5 125.25)">
+  <g transform="translate(-246.5 -125.25)">
+    
+    <path d="M233.5 129.75 L246.5 136.25 L246.5 138.25 L233.5 131.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M246.5 136.25 L259.5 129.75 L259.5 131.75 L246.5 138.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M246.5 123.25 L259.5 129.75 L246.5 136.25 L233.5 129.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(233.5 131.75)">
+  <g transform="translate(-233.5 -131.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.52s" begin="1.32s" repeatCount="indefinite" additive="sum"/>
+    <path d="M220.5 103.2813233686611 L233.5 109.7813233686611 L233.5 144.75 L220.5 138.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M233.5 109.7813233686611 L246.5 103.2813233686611 L246.5 138.25 L233.5 144.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M233.5 96.7813233686611 L246.5 103.2813233686611 L233.5 109.7813233686611 L220.5 103.2813233686611 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(220.5 138.25)">
+  <g transform="translate(-220.5 -138.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.85s" begin="1.65s" repeatCount="indefinite" additive="sum"/>
+    <path d="M207.5 102.55364777520299 L220.5 109.05364777520299 L220.5 151.25 L207.5 144.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M220.5 109.05364777520299 L233.5 102.55364777520299 L233.5 144.75 L220.5 151.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M220.5 96.05364777520299 L233.5 102.55364777520299 L220.5 109.05364777520299 L207.5 102.55364777520299 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(207.5 144.75)">
+  <g transform="translate(-207.5 -144.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.85s" begin="1.65s" repeatCount="indefinite" additive="sum"/>
+    <path d="M194.5 109.01025572046638 L207.5 115.51025572046638 L207.5 157.75 L194.5 151.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M207.5 115.51025572046638 L220.5 109.01025572046638 L220.5 151.25 L207.5 157.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M207.5 102.51025572046638 L220.5 109.01025572046638 L207.5 115.51025572046638 L194.5 109.01025572046638 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(324.5 99.25)">
+  <g transform="translate(-324.5 -99.25)">
+    
+    <path d="M311.5 103.75 L324.5 110.25 L324.5 112.25 L311.5 105.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 110.25 L337.5 103.75 L337.5 105.75 L324.5 112.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 97.25 L337.5 103.75 L324.5 110.25 L311.5 103.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(311.5 105.75)">
+  <g transform="translate(-311.5 -105.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.86s" begin="1.66s" repeatCount="indefinite" additive="sum"/>
+    <path d="M298.5 69.83915606886148 L311.5 76.33915606886148 L311.5 118.75 L298.5 112.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 76.33915606886148 L324.5 69.83915606886148 L324.5 112.25 L311.5 118.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 63.339156068861485 L324.5 69.83915606886148 L311.5 76.33915606886148 L298.5 69.83915606886148 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(298.5 112.25)">
+  <g transform="translate(-298.5 -112.25)">
+    
+    <path d="M285.5 87.75123642757535 L298.5 94.25123642757535 L298.5 125.25 L285.5 118.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 94.25123642757535 L311.5 87.75123642757535 L311.5 118.75 L298.5 125.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 81.25123642757535 L311.5 87.75123642757535 L298.5 94.25123642757535 L285.5 87.75123642757535 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(285.5 118.75)">
+  <g transform="translate(-285.5 -118.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.15s" begin="1.95s" repeatCount="indefinite" additive="sum"/>
+    <path d="M272.5 76.44956441503018 L285.5 82.94956441503018 L285.5 131.75 L272.5 125.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 82.94956441503018 L298.5 76.44956441503018 L298.5 125.25 L285.5 131.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 69.94956441503018 L298.5 76.44956441503018 L285.5 82.94956441503018 L272.5 76.44956441503018 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(272.5 125.25)">
+  <g transform="translate(-272.5 -125.25)">
+    
+    <path d="M259.5 129.75 L272.5 136.25 L272.5 138.25 L259.5 131.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 136.25 L285.5 129.75 L285.5 131.75 L272.5 138.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 123.25 L285.5 129.75 L272.5 136.25 L259.5 129.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(259.5 131.75)">
+  <g transform="translate(-259.5 -131.75)">
+    
+    <path d="M246.5 136.25 L259.5 142.75 L259.5 144.75 L246.5 138.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 142.75 L272.5 136.25 L272.5 138.25 L259.5 144.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 129.75 L272.5 136.25 L259.5 142.75 L246.5 136.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(246.5 138.25)">
+  <g transform="translate(-246.5 -138.25)">
+    
+    <path d="M233.5 142.75 L246.5 149.25 L246.5 151.25 L233.5 144.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M246.5 149.25 L259.5 142.75 L259.5 144.75 L246.5 151.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M246.5 136.25 L259.5 142.75 L246.5 149.25 L233.5 142.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(233.5 144.75)">
+  <g transform="translate(-233.5 -144.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.04s" begin="1.84s" repeatCount="indefinite" additive="sum"/>
+    <path d="M220.5 104.84183710161597 L233.5 111.34183710161597 L233.5 157.75 L220.5 151.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M233.5 111.34183710161597 L246.5 104.84183710161597 L246.5 151.25 L233.5 157.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M233.5 98.34183710161597 L246.5 104.84183710161597 L233.5 111.34183710161597 L220.5 104.84183710161597 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(220.5 151.25)">
+  <g transform="translate(-220.5 -151.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.63s" begin="1.43s" repeatCount="indefinite" additive="sum"/>
+    <path d="M207.5 120.22301677521318 L220.5 126.72301677521318 L220.5 164.25 L207.5 157.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M220.5 126.72301677521318 L233.5 120.22301677521318 L233.5 157.75 L220.5 164.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M220.5 113.72301677521318 L233.5 120.22301677521318 L220.5 126.72301677521318 L207.5 120.22301677521318 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(337.5 105.75)">
+  <g transform="translate(-337.5 -105.75)">
+    
+    <path d="M324.5 81.1129914727062 L337.5 87.6129914727062 L337.5 118.75 L324.5 112.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 87.6129914727062 L350.5 81.1129914727062 L350.5 112.25 L337.5 118.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 74.6129914727062 L350.5 81.1129914727062 L337.5 87.6129914727062 L324.5 81.1129914727062 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(324.5 112.25)">
+  <g transform="translate(-324.5 -112.25)">
+    
+    <path d="M311.5 116.75 L324.5 123.25 L324.5 125.25 L311.5 118.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 123.25 L337.5 116.75 L337.5 118.75 L324.5 125.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 110.25 L337.5 116.75 L324.5 123.25 L311.5 116.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(311.5 118.75)">
+  <g transform="translate(-311.5 -118.75)">
+    
+    <path d="M298.5 123.25 L311.5 129.75 L311.5 131.75 L298.5 125.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 129.75 L324.5 123.25 L324.5 125.25 L311.5 131.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 116.75 L324.5 123.25 L311.5 129.75 L298.5 123.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(298.5 125.25)">
+  <g transform="translate(-298.5 -125.25)">
+    
+    <path d="M285.5 129.75 L298.5 136.25 L298.5 138.25 L285.5 131.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 136.25 L311.5 129.75 L311.5 131.75 L298.5 138.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 123.25 L311.5 129.75 L298.5 136.25 L285.5 129.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(285.5 131.75)">
+  <g transform="translate(-285.5 -131.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.13s" begin="1.93s" repeatCount="indefinite" additive="sum"/>
+    <path d="M272.5 89.80214369948953 L285.5 96.30214369948953 L285.5 144.75 L272.5 138.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 96.30214369948953 L298.5 89.80214369948953 L298.5 138.25 L285.5 144.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 83.30214369948953 L298.5 89.80214369948953 L285.5 96.30214369948953 L272.5 89.80214369948953 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(272.5 138.25)">
+  <g transform="translate(-272.5 -138.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.58s" begin="1.38s" repeatCount="indefinite" additive="sum"/>
+    <path d="M259.5 108.29489423613995 L272.5 114.79489423613995 L272.5 151.25 L259.5 144.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 114.79489423613995 L285.5 108.29489423613995 L285.5 144.75 L272.5 151.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 101.79489423613995 L285.5 108.29489423613995 L272.5 114.79489423613995 L259.5 108.29489423613995 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(259.5 144.75)">
+  <g transform="translate(-259.5 -144.75)">
+    
+    <path d="M246.5 149.25 L259.5 155.75 L259.5 157.75 L246.5 151.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 155.75 L272.5 149.25 L272.5 151.25 L259.5 157.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 142.75 L272.5 149.25 L259.5 155.75 L246.5 149.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(246.5 151.25)">
+  <g transform="translate(-246.5 -151.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.54s" begin="1.34s" repeatCount="indefinite" additive="sum"/>
+    <path d="M233.5 122.37892678193748 L246.5 128.87892678193748 L246.5 164.25 L233.5 157.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M246.5 128.87892678193748 L259.5 122.37892678193748 L259.5 157.75 L246.5 164.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M246.5 115.87892678193748 L259.5 122.37892678193748 L246.5 128.87892678193748 L233.5 122.37892678193748 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(233.5 157.75)">
+  <g transform="translate(-233.5 -157.75)">
+    
+    <path d="M220.5 162.25 L233.5 168.75 L233.5 170.75 L220.5 164.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M233.5 168.75 L246.5 162.25 L246.5 164.25 L233.5 170.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M233.5 155.75 L246.5 162.25 L233.5 168.75 L220.5 162.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(350.5 112.25)">
+  <g transform="translate(-350.5 -112.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.15s" begin="1.95s" repeatCount="indefinite" additive="sum"/>
+    <path d="M337.5 69.84879961144179 L350.5 76.34879961144179 L350.5 125.25 L337.5 118.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 76.34879961144179 L363.5 69.84879961144179 L363.5 118.75 L350.5 125.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 63.34879961144179 L363.5 69.84879961144179 L350.5 76.34879961144179 L337.5 69.84879961144179 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(337.5 118.75)">
+  <g transform="translate(-337.5 -118.75)">
+    
+    <path d="M324.5 123.25 L337.5 129.75 L337.5 131.75 L324.5 125.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 129.75 L350.5 123.25 L350.5 125.25 L337.5 131.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 116.75 L350.5 123.25 L337.5 129.75 L324.5 123.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(324.5 125.25)">
+  <g transform="translate(-324.5 -125.25)">
+    
+    <path d="M311.5 129.75 L324.5 136.25 L324.5 138.25 L311.5 131.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 136.25 L337.5 129.75 L337.5 131.75 L324.5 138.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 123.25 L337.5 129.75 L324.5 136.25 L311.5 129.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(311.5 131.75)">
+  <g transform="translate(-311.5 -131.75)">
+    
+    <path d="M298.5 108.5037118755281 L311.5 115.0037118755281 L311.5 144.75 L298.5 138.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 115.0037118755281 L324.5 108.5037118755281 L324.5 138.25 L311.5 144.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 102.0037118755281 L324.5 108.5037118755281 L311.5 115.0037118755281 L298.5 108.5037118755281 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(298.5 138.25)">
+  <g transform="translate(-298.5 -138.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.19s" begin="1.99s" repeatCount="indefinite" additive="sum"/>
+    <path d="M285.5 94.97192842885852 L298.5 101.47192842885852 L298.5 151.25 L285.5 144.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 101.47192842885852 L311.5 94.97192842885852 L311.5 144.75 L298.5 151.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 88.47192842885852 L311.5 94.97192842885852 L298.5 101.47192842885852 L285.5 94.97192842885852 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(285.5 144.75)">
+  <g transform="translate(-285.5 -144.75)">
+    
+    <path d="M272.5 149.25 L285.5 155.75 L285.5 157.75 L272.5 151.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 155.75 L298.5 149.25 L298.5 151.25 L285.5 157.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 142.75 L298.5 149.25 L285.5 155.75 L272.5 149.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(272.5 151.25)">
+  <g transform="translate(-272.5 -151.25)">
+    
+    <path d="M259.5 155.75 L272.5 162.25 L272.5 164.25 L259.5 157.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 162.25 L285.5 155.75 L285.5 157.75 L272.5 164.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 149.25 L285.5 155.75 L272.5 162.25 L259.5 155.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(259.5 157.75)">
+  <g transform="translate(-259.5 -157.75)">
+    
+    <path d="M246.5 162.25 L259.5 168.75 L259.5 170.75 L246.5 164.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 168.75 L272.5 162.25 L272.5 164.25 L259.5 170.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 155.75 L272.5 162.25 L259.5 168.75 L246.5 162.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(246.5 164.25)">
+  <g transform="translate(-246.5 -164.25)">
+    
+    <path d="M233.5 168.75 L246.5 175.25 L246.5 177.25 L233.5 170.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M246.5 175.25 L259.5 168.75 L259.5 170.75 L246.5 177.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M246.5 162.25 L259.5 168.75 L246.5 175.25 L233.5 168.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(363.5 118.75)">
+  <g transform="translate(-363.5 -118.75)">
+    
+    <path d="M350.5 123.25 L363.5 129.75 L363.5 131.75 L350.5 125.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 129.75 L376.5 123.25 L376.5 125.25 L363.5 131.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 116.75 L376.5 123.25 L363.5 129.75 L350.5 123.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(350.5 125.25)">
+  <g transform="translate(-350.5 -125.25)">
+    
+    <path d="M337.5 129.75 L350.5 136.25 L350.5 138.25 L337.5 131.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 136.25 L363.5 129.75 L363.5 131.75 L350.5 138.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 123.25 L363.5 129.75 L350.5 136.25 L337.5 129.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(337.5 131.75)">
+  <g transform="translate(-337.5 -131.75)">
+    
+    <path d="M324.5 136.25 L337.5 142.75 L337.5 144.75 L324.5 138.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 142.75 L350.5 136.25 L350.5 138.25 L337.5 144.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 129.75 L350.5 136.25 L337.5 142.75 L324.5 136.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(324.5 138.25)">
+  <g transform="translate(-324.5 -138.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.92s" begin="1.72s" repeatCount="indefinite" additive="sum"/>
+    <path d="M311.5 100.96270604524761 L324.5 107.46270604524761 L324.5 151.25 L311.5 144.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 107.46270604524761 L337.5 100.96270604524761 L337.5 144.75 L324.5 151.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 94.46270604524761 L337.5 100.96270604524761 L324.5 107.46270604524761 L311.5 100.96270604524761 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(311.5 144.75)">
+  <g transform="translate(-311.5 -144.75)">
+    
+    <path d="M298.5 149.25 L311.5 155.75 L311.5 157.75 L298.5 151.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 155.75 L324.5 149.25 L324.5 151.25 L311.5 157.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 142.75 L324.5 149.25 L311.5 155.75 L298.5 149.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(298.5 151.25)">
+  <g transform="translate(-298.5 -151.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.56s" begin="1.36s" repeatCount="indefinite" additive="sum"/>
+    <path d="M285.5 121.83522839006037 L298.5 128.33522839006037 L298.5 164.25 L285.5 157.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 128.33522839006037 L311.5 121.83522839006037 L311.5 157.75 L298.5 164.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 115.33522839006037 L311.5 121.83522839006037 L298.5 128.33522839006037 L285.5 121.83522839006037 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(285.5 157.75)">
+  <g transform="translate(-285.5 -157.75)">
+    
+    <path d="M272.5 162.25 L285.5 168.75 L285.5 170.75 L272.5 164.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 168.75 L298.5 162.25 L298.5 164.25 L285.5 170.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 155.75 L298.5 162.25 L285.5 168.75 L272.5 162.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(272.5 164.25)">
+  <g transform="translate(-272.5 -164.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.66s" begin="1.46s" repeatCount="indefinite" additive="sum"/>
+    <path d="M259.5 132.7387315183878 L272.5 139.2387315183878 L272.5 177.25 L259.5 170.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 139.2387315183878 L285.5 132.7387315183878 L285.5 170.75 L272.5 177.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 126.2387315183878 L285.5 132.7387315183878 L272.5 139.2387315183878 L259.5 132.7387315183878 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(259.5 170.75)">
+  <g transform="translate(-259.5 -170.75)">
+    
+    <path d="M246.5 175.25 L259.5 181.75 L259.5 183.75 L246.5 177.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 181.75 L272.5 175.25 L272.5 177.25 L259.5 183.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M259.5 168.75 L272.5 175.25 L259.5 181.75 L246.5 175.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(376.5 125.25)">
+  <g transform="translate(-376.5 -125.25)">
+    
+    <path d="M363.5 129.75 L376.5 136.25 L376.5 138.25 L363.5 131.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 136.25 L389.5 129.75 L389.5 131.75 L376.5 138.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 123.25 L389.5 129.75 L376.5 136.25 L363.5 129.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(363.5 131.75)">
+  <g transform="translate(-363.5 -131.75)">
+    
+    <path d="M350.5 136.25 L363.5 142.75 L363.5 144.75 L350.5 138.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 142.75 L376.5 136.25 L376.5 138.25 L363.5 144.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 129.75 L376.5 136.25 L363.5 142.75 L350.5 136.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(350.5 138.25)">
+  <g transform="translate(-350.5 -138.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="3.97s" begin="1.77s" repeatCount="indefinite" additive="sum"/>
+    <path d="M337.5 99.82793624699116 L350.5 106.32793624699116 L350.5 151.25 L337.5 144.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 106.32793624699116 L363.5 99.82793624699116 L363.5 144.75 L350.5 151.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 93.32793624699116 L363.5 99.82793624699116 L350.5 106.32793624699116 L337.5 99.82793624699116 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(337.5 144.75)">
+  <g transform="translate(-337.5 -144.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.54s" begin="1.34s" repeatCount="indefinite" additive="sum"/>
+    <path d="M324.5 115.68393035884947 L337.5 122.18393035884947 L337.5 157.75 L324.5 151.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 122.18393035884947 L350.5 115.68393035884947 L350.5 151.25 L337.5 157.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 109.18393035884947 L350.5 115.68393035884947 L337.5 122.18393035884947 L324.5 115.68393035884947 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(324.5 151.25)">
+  <g transform="translate(-324.5 -151.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.72s" begin="1.52s" repeatCount="indefinite" additive="sum"/>
+    <path d="M311.5 118.25555769354105 L324.5 124.75555769354105 L324.5 164.25 L311.5 157.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 124.75555769354105 L337.5 118.25555769354105 L337.5 157.75 L324.5 164.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 111.75555769354105 L337.5 118.25555769354105 L324.5 124.75555769354105 L311.5 118.25555769354105 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(311.5 157.75)">
+  <g transform="translate(-311.5 -157.75)">
+    
+    <path d="M298.5 162.25 L311.5 168.75 L311.5 170.75 L298.5 164.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 168.75 L324.5 162.25 L324.5 164.25 L311.5 170.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 155.75 L324.5 162.25 L311.5 168.75 L298.5 162.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(298.5 164.25)">
+  <g transform="translate(-298.5 -164.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.70s" begin="1.50s" repeatCount="indefinite" additive="sum"/>
+    <path d="M285.5 131.83532223291695 L298.5 138.33532223291695 L298.5 177.25 L285.5 170.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 138.33532223291695 L311.5 131.83532223291695 L311.5 170.75 L298.5 177.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 125.33532223291695 L311.5 131.83532223291695 L298.5 138.33532223291695 L285.5 131.83532223291695 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(285.5 170.75)">
+  <g transform="translate(-285.5 -170.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.14s" begin="1.94s" repeatCount="indefinite" additive="sum"/>
+    <path d="M272.5 128.5155493458733 L285.5 135.0155493458733 L285.5 183.75 L272.5 177.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 135.0155493458733 L298.5 128.5155493458733 L298.5 177.25 L285.5 183.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 122.0155493458733 L298.5 128.5155493458733 L285.5 135.0155493458733 L272.5 128.5155493458733 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(272.5 177.25)">
+  <g transform="translate(-272.5 -177.25)">
+    
+    <path d="M259.5 151.24123173113912 L272.5 157.74123173113912 L272.5 190.25 L259.5 183.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 157.74123173113912 L285.5 151.24123173113912 L285.5 183.75 L272.5 190.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M272.5 144.74123173113912 L285.5 151.24123173113912 L272.5 157.74123173113912 L259.5 151.24123173113912 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(389.5 131.75)">
+  <g transform="translate(-389.5 -131.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.75s" begin="1.55s" repeatCount="indefinite" additive="sum"/>
+    <path d="M376.5 98.22225534636527 L389.5 104.72225534636527 L389.5 144.75 L376.5 138.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 104.72225534636527 L402.5 98.22225534636527 L402.5 138.25 L389.5 144.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 91.72225534636527 L402.5 98.22225534636527 L389.5 104.72225534636527 L376.5 98.22225534636527 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(376.5 138.25)">
+  <g transform="translate(-376.5 -138.25)">
+    
+    <path d="M363.5 142.75 L376.5 149.25 L376.5 151.25 L363.5 144.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 149.25 L389.5 142.75 L389.5 144.75 L376.5 151.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 136.25 L389.5 142.75 L376.5 149.25 L363.5 142.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(363.5 144.75)">
+  <g transform="translate(-363.5 -144.75)">
+    
+    <path d="M350.5 149.25 L363.5 155.75 L363.5 157.75 L350.5 151.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 155.75 L376.5 149.25 L376.5 151.25 L363.5 157.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 142.75 L376.5 149.25 L363.5 155.75 L350.5 149.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(350.5 151.25)">
+  <g transform="translate(-350.5 -151.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.55s" begin="1.35s" repeatCount="indefinite" additive="sum"/>
+    <path d="M337.5 122.07188158482313 L350.5 128.57188158482313 L350.5 164.25 L337.5 157.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 128.57188158482313 L363.5 122.07188158482313 L363.5 157.75 L350.5 164.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 115.57188158482313 L363.5 122.07188158482313 L350.5 128.57188158482313 L337.5 122.07188158482313 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(337.5 157.75)">
+  <g transform="translate(-337.5 -157.75)">
+    
+    <path d="M324.5 162.25 L337.5 168.75 L337.5 170.75 L324.5 164.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 168.75 L350.5 162.25 L350.5 164.25 L337.5 170.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 155.75 L350.5 162.25 L337.5 168.75 L324.5 162.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(324.5 164.25)">
+  <g transform="translate(-324.5 -164.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.19s" begin="1.99s" repeatCount="indefinite" additive="sum"/>
+    <path d="M311.5 120.91259138006717 L324.5 127.41259138006717 L324.5 177.25 L311.5 170.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 127.41259138006717 L337.5 120.91259138006717 L337.5 170.75 L324.5 177.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 114.41259138006717 L337.5 120.91259138006717 L324.5 127.41259138006717 L311.5 120.91259138006717 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(311.5 170.75)">
+  <g transform="translate(-311.5 -170.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.04s" begin="1.84s" repeatCount="indefinite" additive="sum"/>
+    <path d="M298.5 130.74323261715472 L311.5 137.24323261715472 L311.5 183.75 L298.5 177.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 137.24323261715472 L324.5 130.74323261715472 L324.5 177.25 L311.5 183.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 124.24323261715472 L324.5 130.74323261715472 L311.5 137.24323261715472 L298.5 130.74323261715472 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(298.5 177.25)">
+  <g transform="translate(-298.5 -177.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.11s" begin="1.91s" repeatCount="indefinite" additive="sum"/>
+    <path d="M285.5 135.62424972467124 L298.5 142.12424972467124 L298.5 190.25 L285.5 183.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 142.12424972467124 L311.5 135.62424972467124 L311.5 183.75 L298.5 190.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 129.12424972467124 L311.5 135.62424972467124 L298.5 142.12424972467124 L285.5 135.62424972467124 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(285.5 183.75)">
+  <g transform="translate(-285.5 -183.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.87s" begin="1.67s" repeatCount="indefinite" additive="sum"/>
+    <path d="M272.5 147.47901532426476 L285.5 153.97901532426476 L285.5 196.75 L272.5 190.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 153.97901532426476 L298.5 147.47901532426476 L298.5 190.25 L285.5 196.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M285.5 140.97901532426476 L298.5 147.47901532426476 L285.5 153.97901532426476 L272.5 147.47901532426476 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(402.5 138.25)">
+  <g transform="translate(-402.5 -138.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.53s" begin="1.33s" repeatCount="indefinite" additive="sum"/>
+    <path d="M389.5 109.52094233501703 L402.5 116.02094233501703 L402.5 151.25 L389.5 144.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 116.02094233501703 L415.5 109.52094233501703 L415.5 144.75 L402.5 151.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 103.02094233501703 L415.5 109.52094233501703 L402.5 116.02094233501703 L389.5 109.52094233501703 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(389.5 144.75)">
+  <g transform="translate(-389.5 -144.75)">
+    
+    <path d="M376.5 149.25 L389.5 155.75 L389.5 157.75 L376.5 151.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 155.75 L402.5 149.25 L402.5 151.25 L389.5 157.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 142.75 L402.5 149.25 L389.5 155.75 L376.5 149.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(376.5 151.25)">
+  <g transform="translate(-376.5 -151.25)">
+    
+    <path d="M363.5 128.55378411803395 L376.5 135.05378411803395 L376.5 164.25 L363.5 157.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 135.05378411803395 L389.5 128.55378411803395 L389.5 157.75 L376.5 164.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 122.05378411803395 L389.5 128.55378411803395 L376.5 135.05378411803395 L363.5 128.55378411803395 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(363.5 157.75)">
+  <g transform="translate(-363.5 -157.75)">
+    
+    <path d="M350.5 162.25 L363.5 168.75 L363.5 170.75 L350.5 164.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 168.75 L376.5 162.25 L376.5 164.25 L363.5 170.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 155.75 L376.5 162.25 L363.5 168.75 L350.5 162.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(350.5 164.25)">
+  <g transform="translate(-350.5 -164.25)">
+    
+    <path d="M337.5 168.75 L350.5 175.25 L350.5 177.25 L337.5 170.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 175.25 L363.5 168.75 L363.5 170.75 L350.5 177.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 162.25 L363.5 168.75 L350.5 175.25 L337.5 168.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(337.5 170.75)">
+  <g transform="translate(-337.5 -170.75)">
+    
+    <path d="M324.5 175.25 L337.5 181.75 L337.5 183.75 L324.5 177.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 181.75 L350.5 175.25 L350.5 177.25 L337.5 183.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 168.75 L350.5 175.25 L337.5 181.75 L324.5 175.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(324.5 177.25)">
+  <g transform="translate(-324.5 -177.25)">
+    
+    <path d="M311.5 152.88444989547133 L324.5 159.38444989547133 L324.5 190.25 L311.5 183.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 159.38444989547133 L337.5 152.88444989547133 L337.5 183.75 L324.5 190.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 146.38444989547133 L337.5 152.88444989547133 L324.5 159.38444989547133 L311.5 152.88444989547133 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(311.5 183.75)">
+  <g transform="translate(-311.5 -183.75)">
+    
+    <path d="M298.5 188.25 L311.5 194.75 L311.5 196.75 L298.5 190.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 194.75 L324.5 188.25 L324.5 190.25 L311.5 196.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 181.75 L324.5 188.25 L311.5 194.75 L298.5 188.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(298.5 190.25)">
+  <g transform="translate(-298.5 -190.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="3.96s" begin="1.76s" repeatCount="indefinite" additive="sum"/>
+    <path d="M285.5 152.10222473647445 L298.5 158.60222473647445 L298.5 203.25 L285.5 196.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 158.60222473647445 L311.5 152.10222473647445 L311.5 196.75 L298.5 203.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M298.5 145.60222473647445 L311.5 152.10222473647445 L298.5 158.60222473647445 L285.5 152.10222473647445 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(415.5 144.75)">
+  <g transform="translate(-415.5 -144.75)">
+    
+    <path d="M402.5 149.25 L415.5 155.75 L415.5 157.75 L402.5 151.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 155.75 L428.5 149.25 L428.5 151.25 L415.5 157.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 142.75 L428.5 149.25 L415.5 155.75 L402.5 149.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(402.5 151.25)">
+  <g transform="translate(-402.5 -151.25)">
+    
+    <path d="M389.5 155.75 L402.5 162.25 L402.5 164.25 L389.5 157.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 162.25 L415.5 155.75 L415.5 157.75 L402.5 164.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 149.25 L415.5 155.75 L402.5 162.25 L389.5 155.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(389.5 157.75)">
+  <g transform="translate(-389.5 -157.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.72s" begin="1.52s" repeatCount="indefinite" additive="sum"/>
+    <path d="M376.5 124.84866490215063 L389.5 131.34866490215063 L389.5 170.75 L376.5 164.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 131.34866490215063 L402.5 124.84866490215063 L402.5 164.25 L389.5 170.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 118.34866490215063 L402.5 124.84866490215063 L389.5 131.34866490215063 L376.5 124.84866490215063 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(376.5 164.25)">
+  <g transform="translate(-376.5 -164.25)">
+    
+    <path d="M363.5 168.75 L376.5 175.25 L376.5 177.25 L363.5 170.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 175.25 L389.5 168.75 L389.5 170.75 L376.5 177.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 162.25 L389.5 168.75 L376.5 175.25 L363.5 168.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(363.5 170.75)">
+  <g transform="translate(-363.5 -170.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.81s" begin="1.61s" repeatCount="indefinite" additive="sum"/>
+    <path d="M350.5 135.73785168398172 L363.5 142.23785168398172 L363.5 183.75 L350.5 177.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 142.23785168398172 L376.5 135.73785168398172 L376.5 177.25 L363.5 183.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 129.23785168398172 L376.5 135.73785168398172 L363.5 142.23785168398172 L350.5 135.73785168398172 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(350.5 177.25)">
+  <g transform="translate(-350.5 -177.25)">
+    
+    <path d="M337.5 181.75 L350.5 188.25 L350.5 190.25 L337.5 183.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 188.25 L363.5 181.75 L363.5 183.75 L350.5 190.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 175.25 L363.5 181.75 L350.5 188.25 L337.5 181.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(337.5 183.75)">
+  <g transform="translate(-337.5 -183.75)">
+    
+    <path d="M324.5 161.45567172486335 L337.5 167.95567172486335 L337.5 196.75 L324.5 190.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 167.95567172486335 L350.5 161.45567172486335 L350.5 190.25 L337.5 196.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 154.95567172486335 L350.5 161.45567172486335 L337.5 167.95567172486335 L324.5 161.45567172486335 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(324.5 190.25)">
+  <g transform="translate(-324.5 -190.25)">
+    
+    <path d="M311.5 168.33388255164027 L324.5 174.83388255164027 L324.5 203.25 L311.5 196.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 174.83388255164027 L337.5 168.33388255164027 L337.5 196.75 L324.5 203.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 161.83388255164027 L337.5 168.33388255164027 L324.5 174.83388255164027 L311.5 168.33388255164027 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(311.5 196.75)">
+  <g transform="translate(-311.5 -196.75)">
+    
+    <path d="M298.5 172.3568521682173 L311.5 178.8568521682173 L311.5 209.75 L298.5 203.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 178.8568521682173 L324.5 172.3568521682173 L324.5 203.25 L311.5 209.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M311.5 165.8568521682173 L324.5 172.3568521682173 L311.5 178.8568521682173 L298.5 172.3568521682173 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(428.5 151.25)">
+  <g transform="translate(-428.5 -151.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.12s" begin="1.92s" repeatCount="indefinite" additive="sum"/>
+    <path d="M415.5 109.47762754652649 L428.5 115.97762754652649 L428.5 164.25 L415.5 157.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 115.97762754652649 L441.5 109.47762754652649 L441.5 157.75 L428.5 164.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 102.97762754652649 L441.5 109.47762754652649 L428.5 115.97762754652649 L415.5 109.47762754652649 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(415.5 157.75)">
+  <g transform="translate(-415.5 -157.75)">
+    
+    <path d="M402.5 162.25 L415.5 168.75 L415.5 170.75 L402.5 164.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 168.75 L428.5 162.25 L428.5 164.25 L415.5 170.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 155.75 L428.5 162.25 L415.5 168.75 L402.5 162.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(402.5 164.25)">
+  <g transform="translate(-402.5 -164.25)">
+    
+    <path d="M389.5 168.75 L402.5 175.25 L402.5 177.25 L389.5 170.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 175.25 L415.5 168.75 L415.5 170.75 L402.5 177.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 162.25 L415.5 168.75 L402.5 175.25 L389.5 168.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(389.5 170.75)">
+  <g transform="translate(-389.5 -170.75)">
+    
+    <path d="M376.5 175.25 L389.5 181.75 L389.5 183.75 L376.5 177.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 181.75 L402.5 175.25 L402.5 177.25 L389.5 183.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 168.75 L402.5 175.25 L389.5 181.75 L376.5 175.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(376.5 177.25)">
+  <g transform="translate(-376.5 -177.25)">
+    
+    <path d="M363.5 181.75 L376.5 188.25 L376.5 190.25 L363.5 183.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 188.25 L389.5 181.75 L389.5 183.75 L376.5 190.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 175.25 L389.5 181.75 L376.5 188.25 L363.5 181.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(363.5 183.75)">
+  <g transform="translate(-363.5 -183.75)">
+    
+    <path d="M350.5 188.25 L363.5 194.75 L363.5 196.75 L350.5 190.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 194.75 L376.5 188.25 L376.5 190.25 L363.5 196.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 181.75 L376.5 188.25 L363.5 194.75 L350.5 188.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(350.5 190.25)">
+  <g transform="translate(-350.5 -190.25)">
+    
+    <path d="M337.5 194.75 L350.5 201.25 L350.5 203.25 L337.5 196.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 201.25 L363.5 194.75 L363.5 196.75 L350.5 203.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 188.25 L363.5 194.75 L350.5 201.25 L337.5 194.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(337.5 196.75)">
+  <g transform="translate(-337.5 -196.75)">
+    
+    <path d="M324.5 201.25 L337.5 207.75 L337.5 209.75 L324.5 203.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 207.75 L350.5 201.25 L350.5 203.25 L337.5 209.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 194.75 L350.5 201.25 L337.5 207.75 L324.5 201.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(324.5 203.25)">
+  <g transform="translate(-324.5 -203.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.48s" begin="1.28s" repeatCount="indefinite" additive="sum"/>
+    <path d="M311.5 175.58974191360176 L324.5 182.08974191360176 L324.5 216.25 L311.5 209.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 182.08974191360176 L337.5 175.58974191360176 L337.5 209.75 L324.5 216.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M324.5 169.08974191360176 L337.5 175.58974191360176 L324.5 182.08974191360176 L311.5 175.58974191360176 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(441.5 157.75)">
+  <g transform="translate(-441.5 -157.75)">
+    
+    <path d="M428.5 135.18452133517712 L441.5 141.68452133517712 L441.5 170.75 L428.5 164.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 141.68452133517712 L454.5 135.18452133517712 L454.5 164.25 L441.5 170.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 128.68452133517712 L454.5 135.18452133517712 L441.5 141.68452133517712 L428.5 135.18452133517712 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(428.5 164.25)">
+  <g transform="translate(-428.5 -164.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.10s" begin="1.90s" repeatCount="indefinite" additive="sum"/>
+    <path d="M415.5 123.0494607463479 L428.5 129.5494607463479 L428.5 177.25 L415.5 170.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 129.5494607463479 L441.5 123.0494607463479 L441.5 170.75 L428.5 177.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 116.5494607463479 L441.5 123.0494607463479 L428.5 129.5494607463479 L415.5 123.0494607463479 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(415.5 170.75)">
+  <g transform="translate(-415.5 -170.75)">
+    
+    <path d="M402.5 175.25 L415.5 181.75 L415.5 183.75 L402.5 177.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 181.75 L428.5 175.25 L428.5 177.25 L415.5 183.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 168.75 L428.5 175.25 L415.5 181.75 L402.5 175.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(402.5 177.25)">
+  <g transform="translate(-402.5 -177.25)">
+    
+    <path d="M389.5 181.75 L402.5 188.25 L402.5 190.25 L389.5 183.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 188.25 L415.5 181.75 L415.5 183.75 L402.5 190.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 175.25 L415.5 181.75 L402.5 188.25 L389.5 181.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(389.5 183.75)">
+  <g transform="translate(-389.5 -183.75)">
+    
+    <path d="M376.5 188.25 L389.5 194.75 L389.5 196.75 L376.5 190.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 194.75 L402.5 188.25 L402.5 190.25 L389.5 196.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 181.75 L402.5 188.25 L389.5 194.75 L376.5 188.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(376.5 190.25)">
+  <g transform="translate(-376.5 -190.25)">
+    
+    <path d="M363.5 194.75 L376.5 201.25 L376.5 203.25 L363.5 196.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 201.25 L389.5 194.75 L389.5 196.75 L376.5 203.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 188.25 L389.5 194.75 L376.5 201.25 L363.5 194.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(363.5 196.75)">
+  <g transform="translate(-363.5 -196.75)">
+    
+    <path d="M350.5 171.48216676246375 L363.5 177.98216676246375 L363.5 209.75 L350.5 203.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 177.98216676246375 L376.5 171.48216676246375 L376.5 203.25 L363.5 209.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 164.98216676246375 L376.5 171.48216676246375 L363.5 177.98216676246375 L350.5 171.48216676246375 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(350.5 203.25)">
+  <g transform="translate(-350.5 -203.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.64s" begin="1.44s" repeatCount="indefinite" additive="sum"/>
+    <path d="M337.5 172.0684409653768 L350.5 178.5684409653768 L350.5 216.25 L337.5 209.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 178.5684409653768 L363.5 172.0684409653768 L363.5 209.75 L350.5 216.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 165.5684409653768 L363.5 172.0684409653768 L350.5 178.5684409653768 L337.5 172.0684409653768 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(337.5 209.75)">
+  <g transform="translate(-337.5 -209.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.72s" begin="1.52s" repeatCount="indefinite" additive="sum"/>
+    <path d="M324.5 176.81828836165369 L337.5 183.31828836165369 L337.5 222.75 L324.5 216.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 183.31828836165369 L350.5 176.81828836165369 L350.5 216.25 L337.5 222.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M337.5 170.31828836165369 L350.5 176.81828836165369 L337.5 183.31828836165369 L324.5 176.81828836165369 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(454.5 164.25)">
+  <g transform="translate(-454.5 -164.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.18s" begin="1.98s" repeatCount="indefinite" additive="sum"/>
+    <path d="M441.5 121.15332291927189 L454.5 127.65332291927189 L454.5 177.25 L441.5 170.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 127.65332291927189 L467.5 121.15332291927189 L467.5 170.75 L454.5 177.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 114.65332291927189 L467.5 121.15332291927189 L454.5 127.65332291927189 L441.5 121.15332291927189 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(441.5 170.75)">
+  <g transform="translate(-441.5 -170.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.60s" begin="1.40s" repeatCount="indefinite" additive="sum"/>
+    <path d="M428.5 140.55359096918255 L441.5 147.05359096918255 L441.5 183.75 L428.5 177.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 147.05359096918255 L454.5 140.55359096918255 L454.5 177.25 L441.5 183.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 134.05359096918255 L454.5 140.55359096918255 L441.5 147.05359096918255 L428.5 140.55359096918255 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(428.5 177.25)">
+  <g transform="translate(-428.5 -177.25)">
+    
+    <path d="M415.5 181.75 L428.5 188.25 L428.5 190.25 L415.5 183.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 188.25 L441.5 181.75 L441.5 183.75 L428.5 190.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 175.25 L441.5 181.75 L428.5 188.25 L415.5 181.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(415.5 183.75)">
+  <g transform="translate(-415.5 -183.75)">
+    
+    <path d="M402.5 188.25 L415.5 194.75 L415.5 196.75 L402.5 190.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 194.75 L428.5 188.25 L428.5 190.25 L415.5 196.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 181.75 L428.5 188.25 L415.5 194.75 L402.5 188.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(402.5 190.25)">
+  <g transform="translate(-402.5 -190.25)">
+    
+    <path d="M389.5 194.75 L402.5 201.25 L402.5 203.25 L389.5 196.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 201.25 L415.5 194.75 L415.5 196.75 L402.5 203.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 188.25 L415.5 194.75 L402.5 201.25 L389.5 194.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(389.5 196.75)">
+  <g transform="translate(-389.5 -196.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.50s" begin="1.30s" repeatCount="indefinite" additive="sum"/>
+    <path d="M376.5 168.59798594284803 L389.5 175.09798594284803 L389.5 209.75 L376.5 203.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 175.09798594284803 L402.5 168.59798594284803 L402.5 203.25 L389.5 209.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 162.09798594284803 L402.5 168.59798594284803 L389.5 175.09798594284803 L376.5 168.59798594284803 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(376.5 203.25)">
+  <g transform="translate(-376.5 -203.25)">
+    
+    <path d="M363.5 207.75 L376.5 214.25 L376.5 216.25 L363.5 209.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 214.25 L389.5 207.75 L389.5 209.75 L376.5 216.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 201.25 L389.5 207.75 L376.5 214.25 L363.5 207.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(363.5 209.75)">
+  <g transform="translate(-363.5 -209.75)">
+    
+    <path d="M350.5 214.25 L363.5 220.75 L363.5 222.75 L350.5 216.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 220.75 L376.5 214.25 L376.5 216.25 L363.5 222.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 207.75 L376.5 214.25 L363.5 220.75 L350.5 214.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(350.5 216.25)">
+  <g transform="translate(-350.5 -216.25)">
+    
+    <path d="M337.5 220.75 L350.5 227.25 L350.5 229.25 L337.5 222.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 227.25 L363.5 220.75 L363.5 222.75 L350.5 229.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M350.5 214.25 L363.5 220.75 L350.5 227.25 L337.5 220.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(467.5 170.75)">
+  <g transform="translate(-467.5 -170.75)">
+    
+    <path d="M454.5 145.53481948934495 L467.5 152.03481948934495 L467.5 183.75 L454.5 177.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 152.03481948934495 L480.5 145.53481948934495 L480.5 177.25 L467.5 183.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 139.03481948934495 L480.5 145.53481948934495 L467.5 152.03481948934495 L454.5 145.53481948934495 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(454.5 177.25)">
+  <g transform="translate(-454.5 -177.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.78s" begin="1.58s" repeatCount="indefinite" additive="sum"/>
+    <path d="M441.5 142.966274054721 L454.5 149.466274054721 L454.5 190.25 L441.5 183.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 149.466274054721 L467.5 142.966274054721 L467.5 183.75 L454.5 190.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 136.466274054721 L467.5 142.966274054721 L454.5 149.466274054721 L441.5 142.966274054721 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(441.5 183.75)">
+  <g transform="translate(-441.5 -183.75)">
+    
+    <path d="M428.5 161.5667433841154 L441.5 168.0667433841154 L441.5 196.75 L428.5 190.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 168.0667433841154 L454.5 161.5667433841154 L454.5 190.25 L441.5 196.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 155.0667433841154 L454.5 161.5667433841154 L441.5 168.0667433841154 L428.5 161.5667433841154 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(428.5 190.25)">
+  <g transform="translate(-428.5 -190.25)">
+    
+    <path d="M415.5 194.75 L428.5 201.25 L428.5 203.25 L415.5 196.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 201.25 L441.5 194.75 L441.5 196.75 L428.5 203.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 188.25 L441.5 194.75 L428.5 201.25 L415.5 194.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(415.5 196.75)">
+  <g transform="translate(-415.5 -196.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.10s" begin="1.90s" repeatCount="indefinite" additive="sum"/>
+    <path d="M402.5 155.44669526442885 L415.5 161.94669526442885 L415.5 209.75 L402.5 203.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 161.94669526442885 L428.5 155.44669526442885 L428.5 203.25 L415.5 209.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 148.94669526442885 L428.5 155.44669526442885 L415.5 161.94669526442885 L402.5 155.44669526442885 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(402.5 203.25)">
+  <g transform="translate(-402.5 -203.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.04s" begin="1.84s" repeatCount="indefinite" additive="sum"/>
+    <path d="M389.5 163.3791713602841 L402.5 169.8791713602841 L402.5 216.25 L389.5 209.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 169.8791713602841 L415.5 163.3791713602841 L415.5 209.75 L402.5 216.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 156.8791713602841 L415.5 163.3791713602841 L402.5 169.8791713602841 L389.5 163.3791713602841 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(389.5 209.75)">
+  <g transform="translate(-389.5 -209.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.02s" begin="1.82s" repeatCount="indefinite" additive="sum"/>
+    <path d="M376.5 170.31993826758116 L389.5 176.81993826758116 L389.5 222.75 L376.5 216.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 176.81993826758116 L402.5 170.31993826758116 L402.5 216.25 L389.5 222.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 163.81993826758116 L402.5 170.31993826758116 L389.5 176.81993826758116 L376.5 170.31993826758116 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(376.5 216.25)">
+  <g transform="translate(-376.5 -216.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.56s" begin="1.36s" repeatCount="indefinite" additive="sum"/>
+    <path d="M363.5 186.79350657574832 L376.5 193.29350657574832 L376.5 229.25 L363.5 222.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 193.29350657574832 L389.5 186.79350657574832 L389.5 222.75 L376.5 229.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 180.29350657574832 L389.5 186.79350657574832 L376.5 193.29350657574832 L363.5 186.79350657574832 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(363.5 222.75)">
+  <g transform="translate(-363.5 -222.75)">
+    
+    <path d="M350.5 227.25 L363.5 233.75 L363.5 235.75 L350.5 229.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 233.75 L376.5 227.25 L376.5 229.25 L363.5 235.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M363.5 220.75 L376.5 227.25 L363.5 233.75 L350.5 227.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(480.5 177.25)">
+  <g transform="translate(-480.5 -177.25)">
+    
+    <path d="M467.5 181.75 L480.5 188.25 L480.5 190.25 L467.5 183.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 188.25 L493.5 181.75 L493.5 183.75 L480.5 190.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 175.25 L493.5 181.75 L480.5 188.25 L467.5 181.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(467.5 183.75)">
+  <g transform="translate(-467.5 -183.75)">
+    
+    <path d="M454.5 188.25 L467.5 194.75 L467.5 196.75 L454.5 190.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 194.75 L480.5 188.25 L480.5 190.25 L467.5 196.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 181.75 L480.5 188.25 L467.5 194.75 L454.5 188.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(454.5 190.25)">
+  <g transform="translate(-454.5 -190.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.03s" begin="1.83s" repeatCount="indefinite" additive="sum"/>
+    <path d="M441.5 150.41229024343193 L454.5 156.91229024343193 L454.5 203.25 L441.5 196.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 156.91229024343193 L467.5 150.41229024343193 L467.5 196.75 L454.5 203.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 143.91229024343193 L467.5 150.41229024343193 L454.5 156.91229024343193 L441.5 150.41229024343193 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(441.5 196.75)">
+  <g transform="translate(-441.5 -196.75)">
+    
+    <path d="M428.5 201.25 L441.5 207.75 L441.5 209.75 L428.5 203.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 207.75 L454.5 201.25 L454.5 203.25 L441.5 209.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 194.75 L454.5 201.25 L441.5 207.75 L428.5 201.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(428.5 203.25)">
+  <g transform="translate(-428.5 -203.25)">
+    
+    <path d="M415.5 176.6606211150065 L428.5 183.1606211150065 L428.5 216.25 L415.5 209.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 183.1606211150065 L441.5 176.6606211150065 L441.5 209.75 L428.5 216.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 170.1606211150065 L441.5 176.6606211150065 L428.5 183.1606211150065 L415.5 176.6606211150065 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(415.5 209.75)">
+  <g transform="translate(-415.5 -209.75)">
+    
+    <path d="M402.5 214.25 L415.5 220.75 L415.5 222.75 L402.5 216.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 220.75 L428.5 214.25 L428.5 216.25 L415.5 222.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 207.75 L428.5 214.25 L415.5 220.75 L402.5 214.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(402.5 216.25)">
+  <g transform="translate(-402.5 -216.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.56s" begin="1.36s" repeatCount="indefinite" additive="sum"/>
+    <path d="M389.5 186.80794172827154 L402.5 193.30794172827154 L402.5 229.25 L389.5 222.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 193.30794172827154 L415.5 186.80794172827154 L415.5 222.75 L402.5 229.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 180.30794172827154 L415.5 186.80794172827154 L402.5 193.30794172827154 L389.5 186.80794172827154 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(389.5 222.75)">
+  <g transform="translate(-389.5 -222.75)">
+    
+    <path d="M376.5 197.6426143683493 L389.5 204.1426143683493 L389.5 235.75 L376.5 229.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 204.1426143683493 L402.5 197.6426143683493 L402.5 229.25 L389.5 235.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 191.1426143683493 L402.5 197.6426143683493 L389.5 204.1426143683493 L376.5 197.6426143683493 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(376.5 229.25)">
+  <g transform="translate(-376.5 -229.25)">
+    
+    <path d="M363.5 205.0631936499849 L376.5 211.5631936499849 L376.5 242.25 L363.5 235.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 211.5631936499849 L389.5 205.0631936499849 L389.5 235.75 L376.5 242.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M376.5 198.5631936499849 L389.5 205.0631936499849 L376.5 211.5631936499849 L363.5 205.0631936499849 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(493.5 183.75)">
+  <g transform="translate(-493.5 -183.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.76s" begin="1.56s" repeatCount="indefinite" additive="sum"/>
+    <path d="M480.5 149.97527742944658 L493.5 156.47527742944658 L493.5 196.75 L480.5 190.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 156.47527742944658 L506.5 149.97527742944658 L506.5 190.25 L493.5 196.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 143.47527742944658 L506.5 149.97527742944658 L493.5 156.47527742944658 L480.5 149.97527742944658 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(480.5 190.25)">
+  <g transform="translate(-480.5 -190.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.06s" begin="1.86s" repeatCount="indefinite" additive="sum"/>
+    <path d="M467.5 149.84033281821758 L480.5 156.34033281821758 L480.5 203.25 L467.5 196.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 156.34033281821758 L493.5 149.84033281821758 L493.5 196.75 L480.5 203.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 143.34033281821758 L493.5 149.84033281821758 L480.5 156.34033281821758 L467.5 149.84033281821758 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(467.5 196.75)">
+  <g transform="translate(-467.5 -196.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.88s" begin="1.68s" repeatCount="indefinite" additive="sum"/>
+    <path d="M454.5 160.1948187686503 L467.5 166.6948187686503 L467.5 209.75 L454.5 203.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 166.6948187686503 L480.5 160.1948187686503 L480.5 203.25 L467.5 209.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 153.6948187686503 L480.5 160.1948187686503 L467.5 166.6948187686503 L454.5 160.1948187686503 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(454.5 203.25)">
+  <g transform="translate(-454.5 -203.25)">
+    
+    <path d="M441.5 207.75 L454.5 214.25 L454.5 216.25 L441.5 209.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 214.25 L467.5 207.75 L467.5 209.75 L454.5 216.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 201.25 L467.5 207.75 L454.5 214.25 L441.5 207.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(441.5 209.75)">
+  <g transform="translate(-441.5 -209.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.05s" begin="1.85s" repeatCount="indefinite" additive="sum"/>
+    <path d="M428.5 169.6446258276701 L441.5 176.1446258276701 L441.5 222.75 L428.5 216.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 176.1446258276701 L454.5 169.6446258276701 L454.5 216.25 L441.5 222.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 163.1446258276701 L454.5 169.6446258276701 L441.5 176.1446258276701 L428.5 169.6446258276701 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(428.5 216.25)">
+  <g transform="translate(-428.5 -216.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.20s" begin="2.00s" repeatCount="indefinite" additive="sum"/>
+    <path d="M415.5 172.8387218862772 L428.5 179.3387218862772 L428.5 229.25 L415.5 222.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 179.3387218862772 L441.5 172.8387218862772 L441.5 222.75 L428.5 229.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 166.3387218862772 L441.5 172.8387218862772 L428.5 179.3387218862772 L415.5 172.8387218862772 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(415.5 222.75)">
+  <g transform="translate(-415.5 -222.75)">
+    
+    <path d="M402.5 227.25 L415.5 233.75 L415.5 235.75 L402.5 229.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 233.75 L428.5 227.25 L428.5 229.25 L415.5 235.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 220.75 L428.5 227.25 L415.5 233.75 L402.5 227.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(402.5 229.25)">
+  <g transform="translate(-402.5 -229.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.49s" begin="1.29s" repeatCount="indefinite" additive="sum"/>
+    <path d="M389.5 201.4524500090629 L402.5 207.9524500090629 L402.5 242.25 L389.5 235.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 207.9524500090629 L415.5 201.4524500090629 L415.5 235.75 L402.5 242.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 194.9524500090629 L415.5 201.4524500090629 L402.5 207.9524500090629 L389.5 201.4524500090629 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(389.5 235.75)">
+  <g transform="translate(-389.5 -235.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.00s" begin="1.80s" repeatCount="indefinite" additive="sum"/>
+    <path d="M376.5 196.72438423521817 L389.5 203.22438423521817 L389.5 248.75 L376.5 242.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 203.22438423521817 L402.5 196.72438423521817 L402.5 242.25 L389.5 248.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M389.5 190.22438423521817 L402.5 196.72438423521817 L389.5 203.22438423521817 L376.5 196.72438423521817 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(506.5 190.25)">
+  <g transform="translate(-506.5 -190.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.75s" begin="1.55s" repeatCount="indefinite" additive="sum"/>
+    <path d="M493.5 156.5731914108619 L506.5 163.0731914108619 L506.5 203.25 L493.5 196.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 163.0731914108619 L519.5 156.5731914108619 L519.5 196.75 L506.5 203.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 150.0731914108619 L519.5 156.5731914108619 L506.5 163.0731914108619 L493.5 156.5731914108619 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(493.5 196.75)">
+  <g transform="translate(-493.5 -196.75)">
+    
+    <path d="M480.5 201.25 L493.5 207.75 L493.5 209.75 L480.5 203.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 207.75 L506.5 201.25 L506.5 203.25 L493.5 209.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 194.75 L506.5 201.25 L493.5 207.75 L480.5 201.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(480.5 203.25)">
+  <g transform="translate(-480.5 -203.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.56s" begin="1.36s" repeatCount="indefinite" additive="sum"/>
+    <path d="M467.5 173.78363715205342 L480.5 180.28363715205342 L480.5 216.25 L467.5 209.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 180.28363715205342 L493.5 173.78363715205342 L493.5 209.75 L480.5 216.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 167.28363715205342 L493.5 173.78363715205342 L480.5 180.28363715205342 L467.5 173.78363715205342 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(467.5 209.75)">
+  <g transform="translate(-467.5 -209.75)">
+    
+    <path d="M454.5 214.25 L467.5 220.75 L467.5 222.75 L454.5 216.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 220.75 L480.5 214.25 L480.5 216.25 L467.5 222.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 207.75 L480.5 214.25 L467.5 220.75 L454.5 214.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(454.5 216.25)">
+  <g transform="translate(-454.5 -216.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.91s" begin="1.71s" repeatCount="indefinite" additive="sum"/>
+    <path d="M441.5 179.05940122250468 L454.5 185.55940122250468 L454.5 229.25 L441.5 222.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 185.55940122250468 L467.5 179.05940122250468 L467.5 222.75 L454.5 229.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 172.55940122250468 L467.5 179.05940122250468 L454.5 185.55940122250468 L441.5 179.05940122250468 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(441.5 222.75)">
+  <g transform="translate(-441.5 -222.75)">
+    
+    <path d="M428.5 227.25 L441.5 233.75 L441.5 235.75 L428.5 229.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 233.75 L454.5 227.25 L454.5 229.25 L441.5 235.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 220.75 L454.5 227.25 L441.5 233.75 L428.5 227.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(428.5 229.25)">
+  <g transform="translate(-428.5 -229.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.62s" begin="1.42s" repeatCount="indefinite" additive="sum"/>
+    <path d="M415.5 198.50190317165107 L428.5 205.00190317165107 L428.5 242.25 L415.5 235.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 205.00190317165107 L441.5 198.50190317165107 L441.5 235.75 L428.5 242.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 192.00190317165107 L441.5 198.50190317165107 L428.5 205.00190317165107 L415.5 198.50190317165107 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(415.5 235.75)">
+  <g transform="translate(-415.5 -235.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.49s" begin="1.29s" repeatCount="indefinite" additive="sum"/>
+    <path d="M402.5 207.81343157030642 L415.5 214.31343157030642 L415.5 248.75 L402.5 242.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 214.31343157030642 L428.5 207.81343157030642 L428.5 242.25 L415.5 248.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 201.31343157030642 L428.5 207.81343157030642 L415.5 214.31343157030642 L402.5 207.81343157030642 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(402.5 242.25)">
+  <g transform="translate(-402.5 -242.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.60s" begin="1.40s" repeatCount="indefinite" additive="sum"/>
+    <path d="M389.5 211.88107482437044 L402.5 218.38107482437044 L402.5 255.25 L389.5 248.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 218.38107482437044 L415.5 211.88107482437044 L415.5 248.75 L402.5 255.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M402.5 205.38107482437044 L415.5 211.88107482437044 L402.5 218.38107482437044 L389.5 211.88107482437044 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(519.5 196.75)">
+  <g transform="translate(-519.5 -196.75)">
+    
+    <path d="M506.5 173.40388175379485 L519.5 179.90388175379485 L519.5 209.75 L506.5 203.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 179.90388175379485 L532.5 173.40388175379485 L532.5 203.25 L519.5 209.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 166.90388175379485 L532.5 173.40388175379485 L519.5 179.90388175379485 L506.5 173.40388175379485 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(506.5 203.25)">
+  <g transform="translate(-506.5 -203.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.68s" begin="1.48s" repeatCount="indefinite" additive="sum"/>
+    <path d="M493.5 171.17617672402412 L506.5 177.67617672402412 L506.5 216.25 L493.5 209.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 177.67617672402412 L519.5 171.17617672402412 L519.5 209.75 L506.5 216.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 164.67617672402412 L519.5 171.17617672402412 L506.5 177.67617672402412 L493.5 171.17617672402412 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(493.5 209.75)">
+  <g transform="translate(-493.5 -209.75)">
+    
+    <path d="M480.5 214.25 L493.5 220.75 L493.5 222.75 L480.5 216.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 220.75 L506.5 214.25 L506.5 216.25 L493.5 222.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 207.75 L506.5 214.25 L493.5 220.75 L480.5 214.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(480.5 216.25)">
+  <g transform="translate(-480.5 -216.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.65s" begin="1.45s" repeatCount="indefinite" additive="sum"/>
+    <path d="M467.5 184.95921020023525 L480.5 191.45921020023525 L480.5 229.25 L467.5 222.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 191.45921020023525 L493.5 184.95921020023525 L493.5 222.75 L480.5 229.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 178.45921020023525 L493.5 184.95921020023525 L480.5 191.45921020023525 L467.5 184.95921020023525 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(467.5 222.75)">
+  <g transform="translate(-467.5 -222.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.74s" begin="1.54s" repeatCount="indefinite" additive="sum"/>
+    <path d="M454.5 189.38811789266765 L467.5 195.88811789266765 L467.5 235.75 L454.5 229.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 195.88811789266765 L480.5 189.38811789266765 L480.5 229.25 L467.5 235.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 182.88811789266765 L480.5 189.38811789266765 L467.5 195.88811789266765 L454.5 189.38811789266765 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(454.5 229.25)">
+  <g transform="translate(-454.5 -229.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.18s" begin="1.98s" repeatCount="indefinite" additive="sum"/>
+    <path d="M441.5 186.12128791958094 L454.5 192.62128791958094 L454.5 242.25 L441.5 235.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 192.62128791958094 L467.5 186.12128791958094 L467.5 235.75 L454.5 242.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 179.62128791958094 L467.5 186.12128791958094 L454.5 192.62128791958094 L441.5 186.12128791958094 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(441.5 235.75)">
+  <g transform="translate(-441.5 -235.75)">
+    
+    <path d="M428.5 240.25 L441.5 246.75 L441.5 248.75 L428.5 242.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 246.75 L454.5 240.25 L454.5 242.25 L441.5 248.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 233.75 L454.5 240.25 L441.5 246.75 L428.5 240.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(428.5 242.25)">
+  <g transform="translate(-428.5 -242.25)">
+    
+    <path d="M415.5 246.75 L428.5 253.25 L428.5 255.25 L415.5 248.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 253.25 L441.5 246.75 L441.5 248.75 L428.5 255.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 240.25 L441.5 246.75 L428.5 253.25 L415.5 246.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(415.5 248.75)">
+  <g transform="translate(-415.5 -248.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.93s" begin="1.73s" repeatCount="indefinite" additive="sum"/>
+    <path d="M402.5 211.27266606781632 L415.5 217.77266606781632 L415.5 261.75 L402.5 255.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 217.77266606781632 L428.5 211.27266606781632 L428.5 255.25 L415.5 261.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M415.5 204.77266606781632 L428.5 211.27266606781632 L415.5 217.77266606781632 L402.5 211.27266606781632 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(532.5 203.25)">
+  <g transform="translate(-532.5 -203.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.19s" begin="1.99s" repeatCount="indefinite" additive="sum"/>
+    <path d="M519.5 159.953608635813 L532.5 166.453608635813 L532.5 216.25 L519.5 209.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 166.453608635813 L545.5 159.953608635813 L545.5 209.75 L532.5 216.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 153.453608635813 L545.5 159.953608635813 L532.5 166.453608635813 L519.5 159.953608635813 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(519.5 209.75)">
+  <g transform="translate(-519.5 -209.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.92s" begin="1.72s" repeatCount="indefinite" additive="sum"/>
+    <path d="M506.5 172.36756232287735 L519.5 178.86756232287735 L519.5 222.75 L506.5 216.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 178.86756232287735 L532.5 172.36756232287735 L532.5 216.25 L519.5 222.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 165.86756232287735 L532.5 172.36756232287735 L519.5 178.86756232287735 L506.5 172.36756232287735 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(506.5 216.25)">
+  <g transform="translate(-506.5 -216.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.15s" begin="1.95s" repeatCount="indefinite" additive="sum"/>
+    <path d="M493.5 173.9454889288172 L506.5 180.4454889288172 L506.5 229.25 L493.5 222.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 180.4454889288172 L519.5 173.9454889288172 L519.5 222.75 L506.5 229.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 167.4454889288172 L519.5 173.9454889288172 L506.5 180.4454889288172 L493.5 173.9454889288172 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(493.5 222.75)">
+  <g transform="translate(-493.5 -222.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.80s" begin="1.60s" repeatCount="indefinite" additive="sum"/>
+    <path d="M480.5 187.9953644387424 L493.5 194.4953644387424 L493.5 235.75 L480.5 229.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 194.4953644387424 L506.5 187.9953644387424 L506.5 229.25 L493.5 235.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 181.4953644387424 L506.5 187.9953644387424 L493.5 194.4953644387424 L480.5 187.9953644387424 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(480.5 229.25)">
+  <g transform="translate(-480.5 -229.25)">
+    
+    <path d="M467.5 233.75 L480.5 240.25 L480.5 242.25 L467.5 235.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 240.25 L493.5 233.75 L493.5 235.75 L480.5 242.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 227.25 L493.5 233.75 L480.5 240.25 L467.5 233.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(467.5 235.75)">
+  <g transform="translate(-467.5 -235.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.01s" begin="1.81s" repeatCount="indefinite" additive="sum"/>
+    <path d="M454.5 196.34175297804177 L467.5 202.84175297804177 L467.5 248.75 L454.5 242.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 202.84175297804177 L480.5 196.34175297804177 L480.5 242.25 L467.5 248.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 189.84175297804177 L480.5 196.34175297804177 L467.5 202.84175297804177 L454.5 196.34175297804177 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(454.5 242.25)">
+  <g transform="translate(-454.5 -242.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.78s" begin="1.58s" repeatCount="indefinite" additive="sum"/>
+    <path d="M441.5 207.89696426596493 L454.5 214.39696426596493 L454.5 255.25 L441.5 248.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 214.39696426596493 L467.5 207.89696426596493 L467.5 248.75 L454.5 255.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 201.39696426596493 L467.5 207.89696426596493 L454.5 214.39696426596493 L441.5 207.89696426596493 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(441.5 248.75)">
+  <g transform="translate(-441.5 -248.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.77;1 1" dur="3.45s" begin="1.25s" repeatCount="indefinite" additive="sum"/>
+    <path d="M428.5 221.85655407980084 L441.5 228.35655407980084 L441.5 261.75 L428.5 255.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 228.35655407980084 L454.5 221.85655407980084 L454.5 255.25 L441.5 261.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 215.35655407980084 L454.5 221.85655407980084 L441.5 228.35655407980084 L428.5 221.85655407980084 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(428.5 255.25)">
+  <g transform="translate(-428.5 -255.25)">
+    
+    <path d="M415.5 259.75 L428.5 266.25 L428.5 268.25 L415.5 261.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 266.25 L441.5 259.75 L441.5 261.75 L428.5 268.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M428.5 253.25 L441.5 259.75 L428.5 266.25 L415.5 259.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(545.5 209.75)">
+  <g transform="translate(-545.5 -209.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.19s" begin="1.99s" repeatCount="indefinite" additive="sum"/>
+    <path d="M532.5 166.4663368212059 L545.5 172.9663368212059 L545.5 222.75 L532.5 216.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 172.9663368212059 L558.5 166.4663368212059 L558.5 216.25 L545.5 222.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 159.9663368212059 L558.5 166.4663368212059 L545.5 172.9663368212059 L532.5 166.4663368212059 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(532.5 216.25)">
+  <g transform="translate(-532.5 -216.25)">
+    
+    <path d="M519.5 192.84631176665425 L532.5 199.34631176665425 L532.5 229.25 L519.5 222.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 199.34631176665425 L545.5 192.84631176665425 L545.5 222.75 L532.5 229.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 186.34631176665425 L545.5 192.84631176665425 L532.5 199.34631176665425 L519.5 192.84631176665425 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(519.5 222.75)">
+  <g transform="translate(-519.5 -222.75)">
+    
+    <path d="M506.5 227.25 L519.5 233.75 L519.5 235.75 L506.5 229.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 233.75 L532.5 227.25 L532.5 229.25 L519.5 235.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 220.75 L532.5 227.25 L519.5 233.75 L506.5 227.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(506.5 229.25)">
+  <g transform="translate(-506.5 -229.25)">
+    
+    <path d="M493.5 233.75 L506.5 240.25 L506.5 242.25 L493.5 235.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 240.25 L519.5 233.75 L519.5 235.75 L506.5 242.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 227.25 L519.5 233.75 L506.5 240.25 L493.5 233.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(493.5 235.75)">
+  <g transform="translate(-493.5 -235.75)">
+    
+    <path d="M480.5 240.25 L493.5 246.75 L493.5 248.75 L480.5 242.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 246.75 L506.5 240.25 L506.5 242.25 L493.5 248.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 233.75 L506.5 240.25 L493.5 246.75 L480.5 240.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(480.5 242.25)">
+  <g transform="translate(-480.5 -242.25)">
+    
+    <path d="M467.5 246.75 L480.5 253.25 L480.5 255.25 L467.5 248.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 253.25 L493.5 246.75 L493.5 248.75 L480.5 255.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 240.25 L493.5 246.75 L480.5 253.25 L467.5 246.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(467.5 248.75)">
+  <g transform="translate(-467.5 -248.75)">
+    
+    <path d="M454.5 253.25 L467.5 259.75 L467.5 261.75 L454.5 255.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 259.75 L480.5 253.25 L480.5 255.25 L467.5 261.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 246.75 L480.5 253.25 L467.5 259.75 L454.5 253.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(454.5 255.25)">
+  <g transform="translate(-454.5 -255.25)">
+    
+    <path d="M441.5 259.75 L454.5 266.25 L454.5 268.25 L441.5 261.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 266.25 L467.5 259.75 L467.5 261.75 L454.5 268.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 253.25 L467.5 259.75 L454.5 266.25 L441.5 259.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(441.5 261.75)">
+  <g transform="translate(-441.5 -261.75)">
+    
+    <path d="M428.5 266.25 L441.5 272.75 L441.5 274.75 L428.5 268.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 272.75 L454.5 266.25 L454.5 268.25 L441.5 274.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M441.5 259.75 L454.5 266.25 L441.5 272.75 L428.5 266.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(558.5 216.25)">
+  <g transform="translate(-558.5 -216.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.47s" begin="1.27s" repeatCount="indefinite" additive="sum"/>
+    <path d="M545.5 188.87679187301546 L558.5 195.37679187301546 L558.5 229.25 L545.5 222.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 195.37679187301546 L571.5 188.87679187301546 L571.5 222.75 L558.5 229.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 182.37679187301546 L571.5 188.87679187301546 L558.5 195.37679187301546 L545.5 188.87679187301546 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(545.5 222.75)">
+  <g transform="translate(-545.5 -222.75)">
+    
+    <path d="M532.5 227.25 L545.5 233.75 L545.5 235.75 L532.5 229.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 233.75 L558.5 227.25 L558.5 229.25 L545.5 235.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 220.75 L558.5 227.25 L545.5 233.75 L532.5 227.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(532.5 229.25)">
+  <g transform="translate(-532.5 -229.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.06s" begin="1.86s" repeatCount="indefinite" additive="sum"/>
+    <path d="M519.5 188.91944447811693 L532.5 195.41944447811693 L532.5 242.25 L519.5 235.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 195.41944447811693 L545.5 188.91944447811693 L545.5 235.75 L532.5 242.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 182.41944447811693 L545.5 188.91944447811693 L532.5 195.41944447811693 L519.5 188.91944447811693 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(519.5 235.75)">
+  <g transform="translate(-519.5 -235.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.60s" begin="1.40s" repeatCount="indefinite" additive="sum"/>
+    <path d="M506.5 205.4855139683932 L519.5 211.9855139683932 L519.5 248.75 L506.5 242.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 211.9855139683932 L532.5 205.4855139683932 L532.5 242.25 L519.5 248.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 198.9855139683932 L532.5 205.4855139683932 L519.5 211.9855139683932 L506.5 205.4855139683932 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(506.5 242.25)">
+  <g transform="translate(-506.5 -242.25)">
+    
+    <path d="M493.5 246.75 L506.5 253.25 L506.5 255.25 L493.5 248.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 253.25 L519.5 246.75 L519.5 248.75 L506.5 255.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 240.25 L519.5 246.75 L506.5 253.25 L493.5 246.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(493.5 248.75)">
+  <g transform="translate(-493.5 -248.75)">
+    
+    <path d="M480.5 253.25 L493.5 259.75 L493.5 261.75 L480.5 255.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 259.75 L506.5 253.25 L506.5 255.25 L493.5 261.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 246.75 L506.5 253.25 L493.5 259.75 L480.5 253.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(480.5 255.25)">
+  <g transform="translate(-480.5 -255.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.90s" begin="1.70s" repeatCount="indefinite" additive="sum"/>
+    <path d="M467.5 218.34092858154327 L480.5 224.84092858154327 L480.5 268.25 L467.5 261.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 224.84092858154327 L493.5 218.34092858154327 L493.5 261.75 L480.5 268.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 211.84092858154327 L493.5 218.34092858154327 L480.5 224.84092858154327 L467.5 218.34092858154327 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(467.5 261.75)">
+  <g transform="translate(-467.5 -261.75)">
+    
+    <path d="M454.5 266.25 L467.5 272.75 L467.5 274.75 L454.5 268.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 272.75 L480.5 266.25 L480.5 268.25 L467.5 274.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 259.75 L480.5 266.25 L467.5 272.75 L454.5 266.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(454.5 268.25)">
+  <g transform="translate(-454.5 -268.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.07s" begin="1.87s" repeatCount="indefinite" additive="sum"/>
+    <path d="M441.5 227.58468301407993 L454.5 234.08468301407993 L454.5 281.25 L441.5 274.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 234.08468301407993 L467.5 227.58468301407993 L467.5 274.75 L454.5 281.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M454.5 221.08468301407993 L467.5 227.58468301407993 L454.5 234.08468301407993 L441.5 227.58468301407993 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(571.5 222.75)">
+  <g transform="translate(-571.5 -222.75)">
+    
+    <path d="M558.5 227.25 L571.5 233.75 L571.5 235.75 L558.5 229.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 233.75 L584.5 227.25 L584.5 229.25 L571.5 235.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 220.75 L584.5 227.25 L571.5 233.75 L558.5 227.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(558.5 229.25)">
+  <g transform="translate(-558.5 -229.25)">
+    
+    <path d="M545.5 233.75 L558.5 240.25 L558.5 242.25 L545.5 235.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 240.25 L571.5 233.75 L571.5 235.75 L558.5 242.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 227.25 L571.5 233.75 L558.5 240.25 L545.5 233.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(545.5 235.75)">
+  <g transform="translate(-545.5 -235.75)">
+    
+    <path d="M532.5 240.25 L545.5 246.75 L545.5 248.75 L532.5 242.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 246.75 L558.5 240.25 L558.5 242.25 L545.5 248.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 233.75 L558.5 240.25 L545.5 246.75 L532.5 240.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(532.5 242.25)">
+  <g transform="translate(-532.5 -242.25)">
+    
+    <path d="M519.5 218.16138325072825 L532.5 224.66138325072825 L532.5 255.25 L519.5 248.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 224.66138325072825 L545.5 218.16138325072825 L545.5 248.75 L532.5 255.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 211.66138325072825 L545.5 218.16138325072825 L532.5 224.66138325072825 L519.5 218.16138325072825 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(519.5 248.75)">
+  <g transform="translate(-519.5 -248.75)">
+    
+    <path d="M506.5 253.25 L519.5 259.75 L519.5 261.75 L506.5 255.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 259.75 L532.5 253.25 L532.5 255.25 L519.5 261.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 246.75 L532.5 253.25 L519.5 259.75 L506.5 253.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(506.5 255.25)">
+  <g transform="translate(-506.5 -255.25)">
+    
+    <path d="M493.5 259.75 L506.5 266.25 L506.5 268.25 L493.5 261.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 266.25 L519.5 259.75 L519.5 261.75 L506.5 268.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 253.25 L519.5 259.75 L506.5 266.25 L493.5 259.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(493.5 261.75)">
+  <g transform="translate(-493.5 -261.75)">
+    
+    <path d="M480.5 266.25 L493.5 272.75 L493.5 274.75 L480.5 268.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 272.75 L506.5 266.25 L506.5 268.25 L493.5 274.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 259.75 L506.5 266.25 L493.5 272.75 L480.5 266.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(480.5 268.25)">
+  <g transform="translate(-480.5 -268.25)">
+    
+    <path d="M467.5 241.53548257425427 L480.5 248.03548257425427 L480.5 281.25 L467.5 274.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 248.03548257425427 L493.5 241.53548257425427 L493.5 274.75 L480.5 281.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 235.03548257425427 L493.5 241.53548257425427 L480.5 248.03548257425427 L467.5 241.53548257425427 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(467.5 274.75)">
+  <g transform="translate(-467.5 -274.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.51s" begin="1.31s" repeatCount="indefinite" additive="sum"/>
+    <path d="M454.5 246.33794267196208 L467.5 252.83794267196208 L467.5 287.75 L454.5 281.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 252.83794267196208 L480.5 246.33794267196208 L480.5 281.25 L467.5 287.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M467.5 239.83794267196208 L480.5 246.33794267196208 L467.5 252.83794267196208 L454.5 246.33794267196208 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(584.5 229.25)">
+  <g transform="translate(-584.5 -229.25)">
+    
+    <path d="M571.5 205.16186356637627 L584.5 211.66186356637627 L584.5 242.25 L571.5 235.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 211.66186356637627 L597.5 205.16186356637627 L597.5 235.75 L584.5 242.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 198.66186356637627 L597.5 205.16186356637627 L584.5 211.66186356637627 L571.5 205.16186356637627 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(571.5 235.75)">
+  <g transform="translate(-571.5 -235.75)">
+    
+    <path d="M558.5 240.25 L571.5 246.75 L571.5 248.75 L558.5 242.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 246.75 L584.5 240.25 L584.5 242.25 L571.5 248.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 233.75 L584.5 240.25 L571.5 246.75 L558.5 240.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(558.5 242.25)">
+  <g transform="translate(-558.5 -242.25)">
+    
+    <path d="M545.5 246.75 L558.5 253.25 L558.5 255.25 L545.5 248.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 253.25 L571.5 246.75 L571.5 248.75 L558.5 255.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 240.25 L571.5 246.75 L558.5 253.25 L545.5 246.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(545.5 248.75)">
+  <g transform="translate(-545.5 -248.75)">
+    
+    <path d="M532.5 253.25 L545.5 259.75 L545.5 261.75 L532.5 255.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 259.75 L558.5 253.25 L558.5 255.25 L545.5 261.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 246.75 L558.5 253.25 L545.5 259.75 L532.5 253.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(532.5 255.25)">
+  <g transform="translate(-532.5 -255.25)">
+    
+    <path d="M519.5 230.77350851614028 L532.5 237.27350851614028 L532.5 268.25 L519.5 261.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 237.27350851614028 L545.5 230.77350851614028 L545.5 261.75 L532.5 268.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 224.27350851614028 L545.5 230.77350851614028 L532.5 237.27350851614028 L519.5 230.77350851614028 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(519.5 261.75)">
+  <g transform="translate(-519.5 -261.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.12s" begin="1.92s" repeatCount="indefinite" additive="sum"/>
+    <path d="M506.5 220.0633031958714 L519.5 226.5633031958714 L519.5 274.75 L506.5 268.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 226.5633031958714 L532.5 220.0633031958714 L532.5 268.25 L519.5 274.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 213.5633031958714 L532.5 220.0633031958714 L519.5 226.5633031958714 L506.5 220.0633031958714 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(506.5 268.25)">
+  <g transform="translate(-506.5 -268.25)">
+    
+    <path d="M493.5 243.1204129057005 L506.5 249.6204129057005 L506.5 281.25 L493.5 274.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 249.6204129057005 L519.5 243.1204129057005 L519.5 274.75 L506.5 281.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 236.6204129057005 L519.5 243.1204129057005 L506.5 249.6204129057005 L493.5 243.1204129057005 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(493.5 274.75)">
+  <g transform="translate(-493.5 -274.75)">
+    
+    <path d="M480.5 248.09364050626755 L493.5 254.59364050626755 L493.5 287.75 L480.5 281.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 254.59364050626755 L506.5 248.09364050626755 L506.5 281.25 L493.5 287.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 241.59364050626755 L506.5 248.09364050626755 L493.5 254.59364050626755 L480.5 248.09364050626755 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(480.5 281.25)">
+  <g transform="translate(-480.5 -281.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.17s" begin="1.97s" repeatCount="indefinite" additive="sum"/>
+    <path d="M467.5 238.39759482070804 L480.5 244.89759482070804 L480.5 294.25 L467.5 287.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 244.89759482070804 L493.5 238.39759482070804 L493.5 287.75 L480.5 294.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M480.5 231.89759482070804 L493.5 238.39759482070804 L480.5 244.89759482070804 L467.5 238.39759482070804 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(597.5 235.75)">
+  <g transform="translate(-597.5 -235.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.53s" begin="1.33s" repeatCount="indefinite" additive="sum"/>
+    <path d="M584.5 207.0555858425796 L597.5 213.5555858425796 L597.5 248.75 L584.5 242.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 213.5555858425796 L610.5 207.0555858425796 L610.5 242.25 L597.5 248.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 200.5555858425796 L610.5 207.0555858425796 L597.5 213.5555858425796 L584.5 207.0555858425796 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(584.5 242.25)">
+  <g transform="translate(-584.5 -242.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.01s" begin="1.81s" repeatCount="indefinite" additive="sum"/>
+    <path d="M571.5 202.82757517881691 L584.5 209.32757517881691 L584.5 255.25 L571.5 248.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 209.32757517881691 L597.5 202.82757517881691 L597.5 248.75 L584.5 255.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 196.32757517881691 L597.5 202.82757517881691 L584.5 209.32757517881691 L571.5 202.82757517881691 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(571.5 248.75)">
+  <g transform="translate(-571.5 -248.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.64s" begin="1.44s" repeatCount="indefinite" additive="sum"/>
+    <path d="M558.5 217.52136508375406 L571.5 224.02136508375406 L571.5 261.75 L558.5 255.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 224.02136508375406 L584.5 217.52136508375406 L584.5 255.25 L571.5 261.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 211.02136508375406 L584.5 217.52136508375406 L571.5 224.02136508375406 L558.5 217.52136508375406 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(558.5 255.25)">
+  <g transform="translate(-558.5 -255.25)">
+    
+    <path d="M545.5 230.92474923375994 L558.5 237.42474923375994 L558.5 268.25 L545.5 261.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 237.42474923375994 L571.5 230.92474923375994 L571.5 261.75 L558.5 268.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 224.42474923375994 L571.5 230.92474923375994 L558.5 237.42474923375994 L545.5 230.92474923375994 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(545.5 261.75)">
+  <g transform="translate(-545.5 -261.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.76s" begin="1.56s" repeatCount="indefinite" additive="sum"/>
+    <path d="M532.5 227.82870137225837 L545.5 234.32870137225837 L545.5 274.75 L532.5 268.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 234.32870137225837 L558.5 227.82870137225837 L558.5 268.25 L545.5 274.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 221.32870137225837 L558.5 227.82870137225837 L545.5 234.32870137225837 L532.5 227.82870137225837 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(532.5 268.25)">
+  <g transform="translate(-532.5 -268.25)">
+    
+    <path d="M519.5 245.23072472494096 L532.5 251.73072472494096 L532.5 281.25 L519.5 274.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 251.73072472494096 L545.5 245.23072472494096 L545.5 274.75 L532.5 281.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 238.73072472494096 L545.5 245.23072472494096 L532.5 251.73072472494096 L519.5 245.23072472494096 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(519.5 274.75)">
+  <g transform="translate(-519.5 -274.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.94s" begin="1.74s" repeatCount="indefinite" additive="sum"/>
+    <path d="M506.5 237.0360579593107 L519.5 243.5360579593107 L519.5 287.75 L506.5 281.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 243.5360579593107 L532.5 237.0360579593107 L532.5 281.25 L519.5 287.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 230.5360579593107 L532.5 237.0360579593107 L519.5 243.5360579593107 L506.5 237.0360579593107 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(506.5 281.25)">
+  <g transform="translate(-506.5 -281.25)">
+    
+    <path d="M493.5 285.75 L506.5 292.25 L506.5 294.25 L493.5 287.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 292.25 L519.5 285.75 L519.5 287.75 L506.5 294.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 279.25 L519.5 285.75 L506.5 292.25 L493.5 285.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(493.5 287.75)">
+  <g transform="translate(-493.5 -287.75)">
+    
+    <path d="M480.5 264.5970018878579 L493.5 271.0970018878579 L493.5 300.75 L480.5 294.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 271.0970018878579 L506.5 264.5970018878579 L506.5 294.25 L493.5 300.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M493.5 258.0970018878579 L506.5 264.5970018878579 L493.5 271.0970018878579 L480.5 264.5970018878579 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(610.5 242.25)">
+  <g transform="translate(-610.5 -242.25)">
+    
+    <path d="M597.5 246.75 L610.5 253.25 L610.5 255.25 L597.5 248.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 253.25 L623.5 246.75 L623.5 248.75 L610.5 255.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 240.25 L623.5 246.75 L610.5 253.25 L597.5 246.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(597.5 248.75)">
+  <g transform="translate(-597.5 -248.75)">
+    
+    <path d="M584.5 253.25 L597.5 259.75 L597.5 261.75 L584.5 255.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 259.75 L610.5 253.25 L610.5 255.25 L597.5 261.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 246.75 L610.5 253.25 L597.5 259.75 L584.5 253.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(584.5 255.25)">
+  <g transform="translate(-584.5 -255.25)">
+    
+    <path d="M571.5 259.75 L584.5 266.25 L584.5 268.25 L571.5 261.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 266.25 L597.5 259.75 L597.5 261.75 L584.5 268.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 253.25 L597.5 259.75 L584.5 266.25 L571.5 259.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(571.5 261.75)">
+  <g transform="translate(-571.5 -261.75)">
+    
+    <path d="M558.5 266.25 L571.5 272.75 L571.5 274.75 L558.5 268.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 272.75 L584.5 266.25 L584.5 268.25 L571.5 274.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 259.75 L584.5 266.25 L571.5 272.75 L558.5 266.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(558.5 268.25)">
+  <g transform="translate(-558.5 -268.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.15s" begin="1.95s" repeatCount="indefinite" additive="sum"/>
+    <path d="M545.5 225.90529600065202 L558.5 232.40529600065202 L558.5 281.25 L545.5 274.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 232.40529600065202 L571.5 225.90529600065202 L571.5 274.75 L558.5 281.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 219.40529600065202 L571.5 225.90529600065202 L558.5 232.40529600065202 L545.5 225.90529600065202 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(545.5 274.75)">
+  <g transform="translate(-545.5 -274.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.72s" begin="1.52s" repeatCount="indefinite" additive="sum"/>
+    <path d="M532.5 241.75881071668118 L545.5 248.25881071668118 L545.5 287.75 L532.5 281.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 248.25881071668118 L558.5 241.75881071668118 L558.5 281.25 L545.5 287.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 235.25881071668118 L558.5 241.75881071668118 L545.5 248.25881071668118 L532.5 241.75881071668118 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(532.5 281.25)">
+  <g transform="translate(-532.5 -281.25)">
+    
+    <path d="M519.5 259.6822361648083 L532.5 266.1822361648083 L532.5 294.25 L519.5 287.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 266.1822361648083 L545.5 259.6822361648083 L545.5 287.75 L532.5 294.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 253.18223616480827 L545.5 259.6822361648083 L532.5 266.1822361648083 L519.5 259.6822361648083 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(519.5 287.75)">
+  <g transform="translate(-519.5 -287.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.52s" begin="1.32s" repeatCount="indefinite" additive="sum"/>
+    <path d="M506.5 259.25350469723344 L519.5 265.75350469723344 L519.5 300.75 L506.5 294.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 265.75350469723344 L532.5 259.25350469723344 L532.5 294.25 L519.5 300.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 252.75350469723344 L532.5 259.25350469723344 L519.5 265.75350469723344 L506.5 259.25350469723344 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(506.5 294.25)">
+  <g transform="translate(-506.5 -294.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.14s" begin="1.94s" repeatCount="indefinite" additive="sum"/>
+    <path d="M493.5 252.0821658531204 L506.5 258.5821658531204 L506.5 307.25 L493.5 300.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 258.5821658531204 L519.5 252.0821658531204 L519.5 300.75 L506.5 307.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M506.5 245.5821658531204 L519.5 252.0821658531204 L506.5 258.5821658531204 L493.5 252.0821658531204 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(623.5 248.75)">
+  <g transform="translate(-623.5 -248.75)">
+    
+    <path d="M610.5 253.25 L623.5 259.75 L623.5 261.75 L610.5 255.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 259.75 L636.5 253.25 L636.5 255.25 L623.5 261.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 246.75 L636.5 253.25 L623.5 259.75 L610.5 253.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(610.5 255.25)">
+  <g transform="translate(-610.5 -255.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.90s" begin="1.70s" repeatCount="indefinite" additive="sum"/>
+    <path d="M597.5 218.35115621611476 L610.5 224.85115621611476 L610.5 268.25 L597.5 261.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 224.85115621611476 L623.5 218.35115621611476 L623.5 261.75 L610.5 268.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 211.85115621611476 L623.5 218.35115621611476 L610.5 224.85115621611476 L597.5 218.35115621611476 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(597.5 261.75)">
+  <g transform="translate(-597.5 -261.75)">
+    
+    <path d="M584.5 236.54512552544475 L597.5 243.04512552544475 L597.5 274.75 L584.5 268.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 243.04512552544475 L610.5 236.54512552544475 L610.5 268.25 L597.5 274.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 230.04512552544475 L610.5 236.54512552544475 L597.5 243.04512552544475 L584.5 236.54512552544475 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(584.5 268.25)">
+  <g transform="translate(-584.5 -268.25)">
+    
+    <path d="M571.5 272.75 L584.5 279.25 L584.5 281.25 L571.5 274.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 279.25 L597.5 272.75 L597.5 274.75 L584.5 281.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 266.25 L597.5 272.75 L584.5 279.25 L571.5 272.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(571.5 274.75)">
+  <g transform="translate(-571.5 -274.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.86s" begin="1.66s" repeatCount="indefinite" additive="sum"/>
+    <path d="M558.5 238.64469918515533 L571.5 245.14469918515533 L571.5 287.75 L558.5 281.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 245.14469918515533 L584.5 238.64469918515533 L584.5 281.25 L571.5 287.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 232.14469918515533 L584.5 238.64469918515533 L571.5 245.14469918515533 L558.5 238.64469918515533 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(558.5 281.25)">
+  <g transform="translate(-558.5 -281.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.79s" begin="1.59s" repeatCount="indefinite" additive="sum"/>
+    <path d="M545.5 246.6705659357831 L558.5 253.1705659357831 L558.5 294.25 L545.5 287.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 253.1705659357831 L571.5 246.6705659357831 L571.5 287.75 L558.5 294.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 240.1705659357831 L571.5 246.6705659357831 L558.5 253.1705659357831 L545.5 246.6705659357831 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(545.5 287.75)">
+  <g transform="translate(-545.5 -287.75)">
+    
+    <path d="M532.5 264.189168099314 L545.5 270.689168099314 L545.5 300.75 L532.5 294.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 270.689168099314 L558.5 264.189168099314 L558.5 294.25 L545.5 300.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 257.689168099314 L558.5 264.189168099314 L545.5 270.689168099314 L532.5 264.189168099314 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(532.5 294.25)">
+  <g transform="translate(-532.5 -294.25)">
+    
+    <path d="M519.5 298.75 L532.5 305.25 L532.5 307.25 L519.5 300.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 305.25 L545.5 298.75 L545.5 300.75 L532.5 307.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 292.25 L545.5 298.75 L532.5 305.25 L519.5 298.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(519.5 300.75)">
+  <g transform="translate(-519.5 -300.75)">
+    
+    <path d="M506.5 305.25 L519.5 311.75 L519.5 313.75 L506.5 307.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 311.75 L532.5 305.25 L532.5 307.25 L519.5 313.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M519.5 298.75 L532.5 305.25 L519.5 311.75 L506.5 305.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(636.5 255.25)">
+  <g transform="translate(-636.5 -255.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.49s" begin="1.29s" repeatCount="indefinite" additive="sum"/>
+    <path d="M623.5 227.27770051173866 L636.5 233.77770051173866 L636.5 268.25 L623.5 261.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 233.77770051173866 L649.5 227.27770051173866 L649.5 261.75 L636.5 268.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 220.77770051173866 L649.5 227.27770051173866 L636.5 233.77770051173866 L623.5 227.27770051173866 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(623.5 261.75)">
+  <g transform="translate(-623.5 -261.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.94s" begin="1.74s" repeatCount="indefinite" additive="sum"/>
+    <path d="M610.5 224.01361943781376 L623.5 230.51361943781376 L623.5 274.75 L610.5 268.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 230.51361943781376 L636.5 224.01361943781376 L636.5 268.25 L623.5 274.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 217.51361943781376 L636.5 224.01361943781376 L623.5 230.51361943781376 L610.5 224.01361943781376 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(610.5 268.25)">
+  <g transform="translate(-610.5 -268.25)">
+    
+    <path d="M597.5 241.7836325597018 L610.5 248.2836325597018 L610.5 281.25 L597.5 274.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 248.2836325597018 L623.5 241.7836325597018 L623.5 274.75 L610.5 281.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 235.2836325597018 L623.5 241.7836325597018 L610.5 248.2836325597018 L597.5 241.7836325597018 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(597.5 274.75)">
+  <g transform="translate(-597.5 -274.75)">
+    
+    <path d="M584.5 279.25 L597.5 285.75 L597.5 287.75 L584.5 281.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 285.75 L610.5 279.25 L610.5 281.25 L597.5 287.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 272.75 L610.5 279.25 L597.5 285.75 L584.5 279.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(584.5 281.25)">
+  <g transform="translate(-584.5 -281.25)">
+    
+    <path d="M571.5 258.51385503821075 L584.5 265.01385503821075 L584.5 294.25 L571.5 287.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 265.01385503821075 L597.5 258.51385503821075 L597.5 287.75 L584.5 294.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 252.01385503821075 L597.5 258.51385503821075 L584.5 265.01385503821075 L571.5 258.51385503821075 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(571.5 287.75)">
+  <g transform="translate(-571.5 -287.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.85;1 1" dur="4.19s" begin="1.99s" repeatCount="indefinite" additive="sum"/>
+    <path d="M558.5 244.4475523661822 L571.5 250.9475523661822 L571.5 300.75 L558.5 294.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 250.9475523661822 L584.5 244.4475523661822 L584.5 294.25 L571.5 300.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 237.9475523661822 L584.5 244.4475523661822 L571.5 250.9475523661822 L558.5 244.4475523661822 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(558.5 294.25)">
+  <g transform="translate(-558.5 -294.25)">
+    
+    <path d="M545.5 298.75 L558.5 305.25 L558.5 307.25 L545.5 300.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 305.25 L571.5 298.75 L571.5 300.75 L558.5 307.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 292.25 L571.5 298.75 L558.5 305.25 L545.5 298.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(545.5 300.75)">
+  <g transform="translate(-545.5 -300.75)">
+    
+    <path d="M532.5 305.25 L545.5 311.75 L545.5 313.75 L532.5 307.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 311.75 L558.5 305.25 L558.5 307.25 L545.5 313.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 298.75 L558.5 305.25 L545.5 311.75 L532.5 305.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(532.5 307.25)">
+  <g transform="translate(-532.5 -307.25)">
+    
+    <path d="M519.5 311.75 L532.5 318.25 L532.5 320.25 L519.5 313.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 318.25 L545.5 311.75 L545.5 313.75 L532.5 320.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M532.5 305.25 L545.5 311.75 L532.5 318.25 L519.5 311.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(649.5 261.75)">
+  <g transform="translate(-649.5 -261.75)">
+    
+    <path d="M636.5 238.15340051893145 L649.5 244.65340051893145 L649.5 274.75 L636.5 268.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M649.5 244.65340051893145 L662.5 238.15340051893145 L662.5 268.25 L649.5 274.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M649.5 231.65340051893145 L662.5 238.15340051893145 L649.5 244.65340051893145 L636.5 238.15340051893145 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(636.5 268.25)">
+  <g transform="translate(-636.5 -268.25)">
+    
+    <path d="M623.5 272.75 L636.5 279.25 L636.5 281.25 L623.5 274.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 279.25 L649.5 272.75 L649.5 274.75 L636.5 281.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 266.25 L649.5 272.75 L636.5 279.25 L623.5 272.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(623.5 274.75)">
+  <g transform="translate(-623.5 -274.75)">
+    
+    <path d="M610.5 279.25 L623.5 285.75 L623.5 287.75 L610.5 281.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 285.75 L636.5 279.25 L636.5 281.25 L623.5 287.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 272.75 L636.5 279.25 L623.5 285.75 L610.5 279.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(610.5 281.25)">
+  <g transform="translate(-610.5 -281.25)">
+    
+    <path d="M597.5 256.0577059946954 L610.5 262.5577059946954 L610.5 294.25 L597.5 287.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 262.5577059946954 L623.5 256.0577059946954 L623.5 287.75 L610.5 294.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 249.55770599469543 L623.5 256.0577059946954 L610.5 262.5577059946954 L597.5 256.0577059946954 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(597.5 287.75)">
+  <g transform="translate(-597.5 -287.75)">
+    
+    <path d="M584.5 292.25 L597.5 298.75 L597.5 300.75 L584.5 294.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 298.75 L610.5 292.25 L610.5 294.25 L597.5 300.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 285.75 L610.5 292.25 L597.5 298.75 L584.5 292.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(584.5 294.25)">
+  <g transform="translate(-584.5 -294.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="3.98s" begin="1.78s" repeatCount="indefinite" additive="sum"/>
+    <path d="M571.5 255.62920213118196 L584.5 262.12920213118196 L584.5 307.25 L571.5 300.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 262.12920213118196 L597.5 255.62920213118196 L597.5 300.75 L584.5 307.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 249.12920213118196 L597.5 255.62920213118196 L584.5 262.12920213118196 L571.5 255.62920213118196 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(571.5 300.75)">
+  <g transform="translate(-571.5 -300.75)">
+    
+    <path d="M558.5 274.25377479288727 L571.5 280.75377479288727 L571.5 313.75 L558.5 307.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 280.75377479288727 L584.5 274.25377479288727 L584.5 307.25 L571.5 313.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 267.75377479288727 L584.5 274.25377479288727 L571.5 280.75377479288727 L558.5 274.25377479288727 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(558.5 307.25)">
+  <g transform="translate(-558.5 -307.25)">
+    
+    <path d="M545.5 282.6377847138792 L558.5 289.1377847138792 L558.5 320.25 L545.5 313.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 289.1377847138792 L571.5 282.6377847138792 L571.5 313.75 L558.5 320.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 276.1377847138792 L571.5 282.6377847138792 L558.5 289.1377847138792 L545.5 282.6377847138792 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(545.5 313.75)">
+  <g transform="translate(-545.5 -313.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.78;1 1" dur="3.47s" begin="1.27s" repeatCount="indefinite" additive="sum"/>
+    <path d="M532.5 286.3686219993979 L545.5 292.8686219993979 L545.5 326.75 L532.5 320.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 292.8686219993979 L558.5 286.3686219993979 L558.5 320.25 L545.5 326.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M545.5 279.8686219993979 L558.5 286.3686219993979 L545.5 292.8686219993979 L532.5 286.3686219993979 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(662.5 268.25)">
+  <g transform="translate(-662.5 -268.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.78s" begin="1.58s" repeatCount="indefinite" additive="sum"/>
+    <path d="M649.5 234.02664250414819 L662.5 240.52664250414819 L662.5 281.25 L649.5 274.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M662.5 240.52664250414819 L675.5 234.02664250414819 L675.5 274.75 L662.5 281.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M662.5 227.52664250414819 L675.5 234.02664250414819 L662.5 240.52664250414819 L649.5 234.02664250414819 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(649.5 274.75)">
+  <g transform="translate(-649.5 -274.75)">
+    
+    <path d="M636.5 279.25 L649.5 285.75 L649.5 287.75 L636.5 281.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M649.5 285.75 L662.5 279.25 L662.5 281.25 L649.5 287.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M649.5 272.75 L662.5 279.25 L649.5 285.75 L636.5 279.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(636.5 281.25)">
+  <g transform="translate(-636.5 -281.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.04s" begin="1.84s" repeatCount="indefinite" additive="sum"/>
+    <path d="M623.5 241.31102033238858 L636.5 247.81102033238858 L636.5 294.25 L623.5 287.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 247.81102033238858 L649.5 241.31102033238858 L649.5 287.75 L636.5 294.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 234.81102033238858 L649.5 241.31102033238858 L636.5 247.81102033238858 L623.5 241.31102033238858 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(623.5 287.75)">
+  <g transform="translate(-623.5 -287.75)">
+    
+    <path d="M610.5 262.7473034383729 L623.5 269.2473034383729 L623.5 300.75 L610.5 294.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 269.2473034383729 L636.5 262.7473034383729 L636.5 294.25 L623.5 300.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 256.2473034383729 L636.5 262.7473034383729 L623.5 269.2473034383729 L610.5 262.7473034383729 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(610.5 294.25)">
+  <g transform="translate(-610.5 -294.25)">
+    
+    <path d="M597.5 298.75 L610.5 305.25 L610.5 307.25 L597.5 300.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 305.25 L623.5 298.75 L623.5 300.75 L610.5 307.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 292.25 L623.5 298.75 L610.5 305.25 L597.5 298.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(597.5 300.75)">
+  <g transform="translate(-597.5 -300.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.80s" begin="1.60s" repeatCount="indefinite" additive="sum"/>
+    <path d="M584.5 266.11448985990137 L597.5 272.61448985990137 L597.5 313.75 L584.5 307.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 272.61448985990137 L610.5 266.11448985990137 L610.5 307.25 L597.5 313.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 259.61448985990137 L610.5 266.11448985990137 L597.5 272.61448985990137 L584.5 266.11448985990137 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(584.5 307.25)">
+  <g transform="translate(-584.5 -307.25)">
+    
+    <path d="M571.5 311.75 L584.5 318.25 L584.5 320.25 L571.5 313.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 318.25 L597.5 311.75 L597.5 313.75 L584.5 320.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 305.25 L597.5 311.75 L584.5 318.25 L571.5 311.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(571.5 313.75)">
+  <g transform="translate(-571.5 -313.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.66s" begin="1.46s" repeatCount="indefinite" additive="sum"/>
+    <path d="M558.5 282.1749760983512 L571.5 288.6749760983512 L571.5 326.75 L558.5 320.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 288.6749760983512 L584.5 282.1749760983512 L584.5 320.25 L571.5 326.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 275.6749760983512 L584.5 282.1749760983512 L571.5 288.6749760983512 L558.5 282.1749760983512 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(558.5 320.25)">
+  <g transform="translate(-558.5 -320.25)">
+    
+    <path d="M545.5 324.75 L558.5 331.25 L558.5 333.25 L545.5 326.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 331.25 L571.5 324.75 L571.5 326.75 L558.5 333.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M558.5 318.25 L571.5 324.75 L558.5 331.25 L545.5 324.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(675.5 274.75)">
+  <g transform="translate(-675.5 -274.75)">
+    
+    <path d="M662.5 279.25 L675.5 285.75 L675.5 287.75 L662.5 281.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M675.5 285.75 L688.5 279.25 L688.5 281.25 L675.5 287.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M675.5 272.75 L688.5 279.25 L675.5 285.75 L662.5 279.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(662.5 281.25)">
+  <g transform="translate(-662.5 -281.25)">
+    
+    <path d="M649.5 285.75 L662.5 292.25 L662.5 294.25 L649.5 287.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M662.5 292.25 L675.5 285.75 L675.5 287.75 L662.5 294.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M662.5 279.25 L675.5 285.75 L662.5 292.25 L649.5 285.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(649.5 287.75)">
+  <g transform="translate(-649.5 -287.75)">
+    
+    <path d="M636.5 292.25 L649.5 298.75 L649.5 300.75 L636.5 294.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M649.5 298.75 L662.5 292.25 L662.5 294.25 L649.5 300.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M649.5 285.75 L662.5 292.25 L649.5 298.75 L636.5 292.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(636.5 294.25)">
+  <g transform="translate(-636.5 -294.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.14s" begin="1.94s" repeatCount="indefinite" additive="sum"/>
+    <path d="M623.5 252.05136713478714 L636.5 258.55136713478714 L636.5 307.25 L623.5 300.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 258.55136713478714 L649.5 252.05136713478714 L649.5 300.75 L636.5 307.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 245.55136713478714 L649.5 252.05136713478714 L636.5 258.55136713478714 L623.5 252.05136713478714 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(623.5 300.75)">
+  <g transform="translate(-623.5 -300.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.84;1 1" dur="4.08s" begin="1.88s" repeatCount="indefinite" additive="sum"/>
+    <path d="M610.5 259.8822036758065 L623.5 266.3822036758065 L623.5 313.75 L610.5 307.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 266.3822036758065 L636.5 259.8822036758065 L636.5 307.25 L623.5 313.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 253.38220367580652 L636.5 259.8822036758065 L623.5 266.3822036758065 L610.5 259.8822036758065 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(610.5 307.25)">
+  <g transform="translate(-610.5 -307.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.73s" begin="1.53s" repeatCount="indefinite" additive="sum"/>
+    <path d="M597.5 274.04510489013046 L610.5 280.54510489013046 L610.5 320.25 L597.5 313.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 280.54510489013046 L623.5 274.04510489013046 L623.5 313.75 L610.5 320.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 267.54510489013046 L623.5 274.04510489013046 L610.5 280.54510489013046 L597.5 274.04510489013046 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(597.5 313.75)">
+  <g transform="translate(-597.5 -313.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.82;1 1" dur="3.90s" begin="1.70s" repeatCount="indefinite" additive="sum"/>
+    <path d="M584.5 276.92023718263954 L597.5 283.42023718263954 L597.5 326.75 L584.5 320.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 283.42023718263954 L610.5 276.92023718263954 L610.5 320.25 L597.5 326.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 270.42023718263954 L610.5 276.92023718263954 L597.5 283.42023718263954 L584.5 276.92023718263954 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(584.5 320.25)">
+  <g transform="translate(-584.5 -320.25)">
+    
+    <path d="M571.5 324.75 L584.5 331.25 L584.5 333.25 L571.5 326.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 331.25 L597.5 324.75 L597.5 326.75 L584.5 333.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 318.25 L597.5 324.75 L584.5 331.25 L571.5 324.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(571.5 326.75)">
+  <g transform="translate(-571.5 -326.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.81;1 1" dur="3.76s" begin="1.56s" repeatCount="indefinite" additive="sum"/>
+    <path d="M558.5 292.89759490452707 L571.5 299.39759490452707 L571.5 339.75 L558.5 333.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 299.39759490452707 L584.5 292.89759490452707 L584.5 333.25 L571.5 339.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M571.5 286.39759490452707 L584.5 292.89759490452707 L571.5 299.39759490452707 L558.5 292.89759490452707 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(688.5 281.25)">
+  <g transform="translate(-688.5 -281.25)">
+    
+    <path d="M675.5 256.100164023228 L688.5 262.600164023228 L688.5 294.25 L675.5 287.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M688.5 262.600164023228 L701.5 256.100164023228 L701.5 287.75 L688.5 294.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M688.5 249.600164023228 L701.5 256.100164023228 L688.5 262.600164023228 L675.5 256.100164023228 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(675.5 287.75)">
+  <g transform="translate(-675.5 -287.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.79;1 1" dur="3.62s" begin="1.42s" repeatCount="indefinite" additive="sum"/>
+    <path d="M662.5 256.9843596285209 L675.5 263.4843596285209 L675.5 300.75 L662.5 294.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M675.5 263.4843596285209 L688.5 256.9843596285209 L688.5 294.25 L675.5 300.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M675.5 250.4843596285209 L688.5 256.9843596285209 L675.5 263.4843596285209 L662.5 256.9843596285209 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(662.5 294.25)">
+  <g transform="translate(-662.5 -294.25)">
+    
+    <path d="M649.5 298.75 L662.5 305.25 L662.5 307.25 L649.5 300.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M662.5 305.25 L675.5 298.75 L675.5 300.75 L662.5 307.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M662.5 292.25 L675.5 298.75 L662.5 305.25 L649.5 298.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(649.5 300.75)">
+  <g transform="translate(-649.5 -300.75)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.80;1 1" dur="3.66s" begin="1.46s" repeatCount="indefinite" additive="sum"/>
+    <path d="M636.5 269.1830816362053 L649.5 275.6830816362053 L649.5 313.75 L636.5 307.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M649.5 275.6830816362053 L662.5 269.1830816362053 L662.5 307.25 L649.5 313.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M649.5 262.6830816362053 L662.5 269.1830816362053 L649.5 275.6830816362053 L636.5 269.1830816362053 Z" fill="#00ff41" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(636.5 307.25)">
+  <g transform="translate(-636.5 -307.25)">
+    
+    <path d="M623.5 311.75 L636.5 318.25 L636.5 320.25 L623.5 313.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 318.25 L649.5 311.75 L649.5 313.75 L636.5 320.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M636.5 305.25 L649.5 311.75 L636.5 318.25 L623.5 311.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(623.5 313.75)">
+  <g transform="translate(-623.5 -313.75)">
+    
+    <path d="M610.5 287.4296856429428 L623.5 293.9296856429428 L623.5 326.75 L610.5 320.25 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 293.9296856429428 L636.5 287.4296856429428 L636.5 320.25 L623.5 326.75 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M623.5 280.9296856429428 L636.5 287.4296856429428 L623.5 293.9296856429428 L610.5 287.4296856429428 Z" fill="#1f6b3d" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(610.5 320.25)">
+  <g transform="translate(-610.5 -320.25)">
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 0.83;1 1" dur="4.01s" begin="1.81s" repeatCount="indefinite" additive="sum"/>
+    <path d="M597.5 280.9680608008057 L610.5 287.4680608008057 L610.5 333.25 L597.5 326.75 Z" fill="#0a3f23" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 287.4680608008057 L623.5 280.9680608008057 L623.5 326.75 L610.5 333.25 Z" fill="#0e5730" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M610.5 274.4680608008057 L623.5 280.9680608008057 L610.5 287.4680608008057 L597.5 280.9680608008057 Z" fill="#7dffb0" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(597.5 326.75)">
+  <g transform="translate(-597.5 -326.75)">
+    
+    <path d="M584.5 331.25 L597.5 337.75 L597.5 339.75 L584.5 333.25 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 337.75 L610.5 331.25 L610.5 333.25 L597.5 339.75 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M597.5 324.75 L610.5 331.25 L597.5 337.75 L584.5 331.25 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<g transform="translate(584.5 333.25)">
+  <g transform="translate(-584.5 -333.25)">
+    
+    <path d="M571.5 337.75 L584.5 344.25 L584.5 346.25 L571.5 339.75 Z" fill="#081a10" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 344.25 L597.5 337.75 L597.5 339.75 L584.5 346.25 Z" fill="#0b2416" stroke="#0a2e1b" stroke-width="0.6"/>
+    <path d="M584.5 331.25 L597.5 337.75 L584.5 344.25 L571.5 337.75 Z" fill="#0b2416" stroke="#00ff4144" stroke-width="0.6"/>
+  </g>
+</g>
+<text x="500" y="342" font-family="'JetBrains Mono','Fira Code','Cascadia Code',ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace" font-size="11" fill="#12512c" text-anchor="middle">every block is a day — keep them tall</text>
+</svg>
