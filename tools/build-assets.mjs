@@ -15,6 +15,9 @@ const cfg = JSON.parse(readFileSync(new URL('./profile.config.json', import.meta
 const { identity, skills, quote } = cfg;
 
 const PREVIEW = process.argv.includes('--preview');
+const PNG = process.argv.includes('--png');
+/* a still frame must not contain the one-shot lights or the typing caret */
+const STILL = PREVIEW || PNG;
 mkdirSync(new URL('../assets', import.meta.url), { recursive: true });
 if (PREVIEW) mkdirSync(new URL('./.preview', import.meta.url), { recursive: true });
 
@@ -48,7 +51,7 @@ const skillItems = (skills || []).map((s) => (typeof s === 'string' ? s : s.name
 const skillRows = Math.ceil(skillItems.length / 2);
 const colW = CW / 2;
 
-const sweep = (args) => (PREVIEW ? '' : lightSweep(args));
+const sweep = (args) => (STILL ? '' : lightSweep(args));
 
 const S = [];                 // body parts
 const P = [];                 // defs parts
@@ -142,7 +145,7 @@ const TITLE_SIZE = 19;
 const cw = TITLE_SIZE * 0.6;
 const ty = round((W - tagline.length * cw) / 2);
 const typed = typeLine({ content: tagline, x: ty, y: 350, size: TITLE_SIZE, start: t.typed, perChar: TECH, fill: T.text });
-S.push(`<g opacity="0">${fadeIn(t.typed - 0.2, 0.4)}${typed.glyphs}${PREVIEW ? '' : typed.caret}</g>`);
+S.push(`<g opacity="0">${fadeIn(t.typed - 0.2, 0.4)}${typed.glyphs}${STILL ? '' : typed.caret}</g>`);
 
 /* ---- helper: hairline separator (drawn left → right) ---------------- */
 const sepAt = (y, begin) =>
@@ -234,7 +237,7 @@ writeFileSync(new URL('../assets/card.svg', import.meta.url), clean);
 console.log(`  ✓ assets/card.svg  (${(Buffer.byteLength(clean) / 1024).toFixed(1)} KB, ${W}×${H})`);
 console.log(`    avatar photo: ${avatarData ? 'embedded from assets/avatar.*' : 'none — add assets/avatar.png and rebuild'}`);
 
-if (PREVIEW) {
+if (PREVIEW || PNG) {
   const finals = [...clean.matchAll(/<animate attributeName="width"[^>]*to="([\d.]+)"/g)].map((m) => m[1]);
   let k = 0;
   const flat = clean
@@ -248,4 +251,27 @@ if (PREVIEW) {
   }).render().asPng();
   writeFileSync(new URL('./.preview/card.png', import.meta.url), png);
   console.log('    → tools/.preview/card.png');
+}
+
+/* ------------------------------------------------------------------
+ *  --png : also write a still image of the settled card (2×).
+ *  Handy for previewing outside a browser, and as an emergency
+ *  fallback for clients that refuse to animate SVG.
+ * ------------------------------------------------------------------ */
+if (PNG) {
+  const finals = [...clean.matchAll(/<animate attributeName="width"[^>]*to="([\d.]+)"/g)].map((m) => m[1]);
+  let k = 0;
+  const still = clean
+    .replace(/<animateTransform[^>]*>/g, '')
+    .replace(/<animate[^>]*>/g, '')
+    .replace(/width="0"/g, () => `width="${finals[k++] ?? 0}"`)
+    .replace(/(?<!stop-)opacity="0"/g, 'opacity="1"')
+    /* sweeps are transient; in a still they would show up as a solid wash */
+    .replace(/fill="url\(#(cardSweep|sweepG)\)"/g, 'fill="none"');
+  const png = new Resvg(still, {
+    fitTo: { mode: 'zoom', value: 2 },
+    font: { loadSystemFonts: true, defaultFontFamily: 'sans-serif' },
+  }).render().asPng();
+  writeFileSync(new URL('../assets/card.png', import.meta.url), png);
+  console.log(`  ✓ assets/card.png  (${(png.length / 1024).toFixed(0)} KB, still frame @2×)`);
 }
