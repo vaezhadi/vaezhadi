@@ -7,6 +7,6 @@
 
 <div align="center">
 
-<img src="./assets/card.svg" alt="Hadi Vaez — Full-Stack Developer" width="100%" />
+<img src="./assets/card.svg?v=2" alt="Hadi Vaez — Full-Stack Developer" width="100%" />
 
 </div>

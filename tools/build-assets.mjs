@@ -18,7 +18,8 @@ import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { Resvg } from '@resvg/resvg-js';
 import { brand, slugFor } from './icons.mjs';
-import { T, MONO, esc, text, rect, round, lgrad, rgrad, wrapText, svg } from './svg-lib.mjs';
+import { validateCard } from './validate-svg.mjs';
+import { T, MONO, esc, text, rect, rectEl, round, lgrad, rgrad, wrapText, svg } from './svg-lib.mjs';
 
 const cfg = JSON.parse(readFileSync(new URL('./profile.config.json', import.meta.url), 'utf8'));
 const { identity, skills, quote } = cfg;
@@ -55,10 +56,10 @@ const rule = ({ x, y, w, begin, dur = 1, fill = 'url(#hairGrad)' }) => {
   if (isFrame()) {
     return rect({ x, y, w: round(w * ease(prog(begin, dur))), h: 1, fill });
   }
-  return rect({
-    x, y, w: 0, h: 1, fill,
-    extra: `<animate attributeName="width" from="0" to="${round(w)}" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${round(w)}"/>`,
-  });
+  return rectEl(
+    { x, y, w: 0, h: 1, fill },
+    `<animate attributeName="width" from="0" to="${round(w)}" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${round(w)}"/>`,
+  );
 };
 
 /* one typewriter glyph, pinned to its own monospace cell */
@@ -67,10 +68,7 @@ const glyph = ({ ch, x, y, size, fill, begin, ls = 0, family = MONO }) => {
   if (isFrame()) {
     return text({ x, y, size, fill, family, content: ch, lock: cell, op: done(begin) ? 1 : 0 });
   }
-  return text({
-    x, y, size, fill, family, content: ch, lock: cell, op: 0,
-    extra: `<animate attributeName="opacity" from="0" to="1" begin="${round(begin)}s" dur="0.06s" fill="freeze" calcMode="discrete" values="0;1"/>`,
-  });
+  return `<text x="${round(x)}" y="${round(y)}" font-family="${family}" font-size="${round(size)}" fill="${fill}" text-anchor="start" textLength="${round(cell)}" lengthAdjust="spacingAndGlyphs" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${round(begin)}s" dur="0.06s" fill="freeze" calcMode="discrete" values="0;1"/>${esc(ch)}</text>`;
 };
 
 /* a whole string typed out; returns the markup and when it finishes */
@@ -158,9 +156,9 @@ function iconTile({ item, x, y, size = 92, begin, index }) {
       })()
     : 0.1;
 
-  const haloOp = isFrame()
-    ? breathe
-    : `<animate attributeName="opacity" values="0;0.26;0.1;0.26;0.1" dur="4.4s" begin="${round(haloBegin)}s" repeatCount="indefinite"/>`;
+  const halo = isFrame()
+    ? `<circle cx="${round(x + size / 2)}" cy="${round(y + size / 2)}" r="${round(size * 0.42)}" fill="url(#halo${index})" opacity="${breathe}"/>`
+    : `<circle cx="${round(x + size / 2)}" cy="${round(y + size / 2)}" r="${round(size * 0.42)}" fill="url(#halo${index})" opacity="0"><animate attributeName="opacity" values="0;0.26;0.1;0.26;0.1" dur="4.4s" begin="${round(haloBegin)}s" repeatCount="indefinite"/></circle>`;
 
   /* the whole tile floats gently, all tiles share the period */
   const floatBegin = begin + 0.9;
@@ -172,7 +170,7 @@ function iconTile({ item, x, y, size = 92, begin, index }) {
   })();
 
   const inner = `
-  <circle cx="${round(x + size / 2)}" cy="${round(y + size / 2)}" r="${round(size * 0.42)}" fill="url(#halo${index})" opacity="${haloOp}"/>
+  ${halo}
   ${outline}
   ${solid}`;
 
@@ -193,7 +191,7 @@ function iconTile({ item, x, y, size = 92, begin, index }) {
         ${rect({ x, y: underY, w: round(size * ease(prog(begin + 0.15, 0.9))), h: 1, fill: icon ? icon.color : T.muted })}
       </g>`
     : `<g opacity="0"><animate attributeName="opacity" values="0.75;0.75;0" dur="1.6s" begin="${round(begin + 0.15)}s" fill="freeze"/>
-        ${rect({ x, y: underY, w: 0, h: 1, fill: icon ? icon.color : T.muted, extra: `<animate attributeName="width" from="0" to="${size}" begin="${round(begin + 0.15)}s" dur="0.9s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${size}"/>` })}
+        ${rectEl({ x, y: underY, w: 0, h: 1, fill: icon ? icon.color : T.muted }, `<animate attributeName="width" from="0" to="${size}" begin="${round(begin + 0.15)}s" dur="0.9s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${size}"/>`)}
       </g>`;
   const hairLine = isFrame()
     ? rect({ x, y: underY, w: round(size * ease(prog(begin + 0.15, 0.9))), h: 1, fill: T.hair })
@@ -328,14 +326,16 @@ function build() {
     (() => {
       const per = round(2 * (W - 1.5) + 2 * (H - 1.5) - 8 * 22 + 2 * Math.PI * 22);
       const drawn = isFrame() ? ease(prog(0.05, 1.3)) : 0;
+      const border = rectEl(
+        {
+          x: 0.75, y: 0.75, w: W - 1.5, h: H - 1.5, rx: 22, fill: T.card, stroke: T.hair, sw: 1.5,
+          extra: `stroke-dasharray="${per}" stroke-dashoffset="${isFrame() ? round(per * (1 - drawn)) : per}"`,
+        },
+        isFrame() ? '' : `<animate attributeName="stroke-dashoffset" from="${per}" to="0" begin="0.05s" dur="1.3s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="${per};0"/>`,
+      );
       return `<g opacity="${isFrame() ? drawn : 0}">
         ${isFrame() ? '' : fade(0.05, 0.6)}
-        ${rect({
-          x: 0.75, y: 0.75, w: W - 1.5, h: H - 1.5, rx: 22, fill: T.card, stroke: T.hair, sw: 1.5,
-          extra: isFrame()
-            ? `stroke-dasharray="${per}" stroke-dashoffset="${round(per * (1 - drawn))}"`
-            : `stroke-dasharray="${per}" stroke-dashoffset="${per}"><animate attributeName="stroke-dashoffset" from="${per}" to="0" begin="0.05s" dur="1.3s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="${per};0"/>`,
-        }).replace('></rect>', '>')}
+        ${border}
       </g>`;
     })(),
     `<ellipse cx="${W / 2}" cy="4" rx="540" ry="250" fill="url(#cardGlow)" opacity="${isFrame() ? round(0.85 + 0.1 * Math.sin(FRAME)) : 0.9}">
@@ -379,13 +379,15 @@ const render = (t, zoom = 1) => {
 FRAME = null;
 const { card, total, W, H } = build();
 const clean = card.replace(/\n{3,}/g, '\n\n');
+/* refuse to write a file GitHub would reject — this is what bit us before */
+const info = validateCard(clean);
 writeFileSync(OUT('assets/card.svg'), clean);
-console.log(`  ✓ assets/card.svg  ${W}×${H}, ${(Buffer.byteLength(clean) / 1024).toFixed(1)} KB, animation runs ${round(total)}s`);
+console.log(`  ✓ assets/card.svg  ${W}×${H}, ${(info.bytes / 1024).toFixed(1)} KB, animation runs ${round(total)}s — XML valid (${info.groups} groups, ${info.defined} ids)`);
 
 if (process.argv.includes('--png')) {
   const { png } = render(1e6, 2);
-  writeFileSync(new URL('./.preview/card-still.png', import.meta.url), png);
-  console.log('  ✓ tools/.preview/card-still.png  (settled frame @2×)');
+  writeFileSync(OUT('assets/card.png'), png);
+  console.log(`  ✓ assets/card.png  (settled frame @2×, ${(png.length / 1024).toFixed(0)} KB)`);
 }
 
 if (process.argv.includes('--gif')) {

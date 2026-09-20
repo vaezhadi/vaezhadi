@@ -19,7 +19,7 @@ const md = `<!-- ─────────────────────
 
 <div align="center">
 
-<img src="./assets/card.svg" alt="${identity.name} — ${identity.role}" width="100%" />
+<img src="./assets/card.svg?v=2" alt="${identity.name} — ${identity.role}" width="100%" />
 
 </div>
 `;
