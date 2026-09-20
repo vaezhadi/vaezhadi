@@ -8,7 +8,8 @@
     "card:png": "node build-assets.mjs --png",
     "card:gif": "node build-assets.mjs --gif",
     "readme": "node build-readme.mjs",
-    "preview": "node preview.mjs"
+    "preview": "node preview.mjs",
+    "validate": "node validate-svg.mjs"
   },
   "dependencies": {
     "marked": "^18.0.0"

@@ -18,7 +18,7 @@ import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { Resvg } from '@resvg/resvg-js';
 import { brand, slugFor } from './icons.mjs';
-import { XMLValidator } from 'fast-xml-parser';
+import { validateCard } from './validate-svg.mjs';
 import { T, MONO, esc, text, rect, rectEl, round, lgrad, rgrad, wrapText, svg } from './svg-lib.mjs';
 
 const cfg = JSON.parse(readFileSync(new URL('./profile.config.json', import.meta.url), 'utf8'));
@@ -379,13 +379,10 @@ const render = (t, zoom = 1) => {
 FRAME = null;
 const { card, total, W, H } = build();
 const clean = card.replace(/\n{3,}/g, '\n\n');
-const verdict = XMLValidator.validate(clean);
-if (verdict !== true) {
-  const { err } = verdict;
-  throw new Error(`card.svg is not well-formed XML (line ${err.line}, col ${err.col}: ${err.msg}) — GitHub would refuse it`);
-}
+/* refuse to write a file GitHub would reject — this is what bit us before */
+const info = validateCard(clean);
 writeFileSync(OUT('assets/card.svg'), clean);
-console.log(`  ✓ assets/card.svg  ${W}×${H}, ${(Buffer.byteLength(clean) / 1024).toFixed(1)} KB, animation runs ${round(total)}s`);
+console.log(`  ✓ assets/card.svg  ${W}×${H}, ${(info.bytes / 1024).toFixed(1)} KB, animation runs ${round(total)}s — XML valid (${info.groups} groups, ${info.defined} ids)`);
 
 if (process.argv.includes('--png')) {
   const { png } = render(1e6, 2);
