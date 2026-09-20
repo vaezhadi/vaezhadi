@@ -83,37 +83,41 @@ ${shimmer({ x: lineX, y: lineY, w: 110, h: 1.5, travel: lineW, dur: 9, begin: 2.
 }
 
 /* ==================================================================
- * 2. SKILLS — two calm columns of labels and hairline meters that
- *    fill once, then stay put.
+ * 2. STACK — an index of technologies. Each hairline draws itself, a
+ *    single soft light travels along it, then everything stays quiet.
  * ================================================================== */
 function skillsPanel() {
-  const W = 1064, H = 250;
-  const colX = [40, 580], rowH = 50, startY = 44;
-  const labelW = 190, barW = 220;
+  const W = 1064, H = 176;
+  const colX = [40, 580], rowH = 46, startY = 40;
+  const nameW = 160, ruleW = 300;
+  const items = (cfg.skills || []).map((s) => (typeof s === 'string' ? s : s.name));
   const rows = [];
 
-  skills.slice(0, 8).forEach((s, i) => {
-    const col = Math.floor(i / 4), row = i % 4;
+  items.slice(0, 6).forEach((name, i) => {
+    const col = Math.floor(i / 3), row = i % 3;
     const x = colX[col], y = startY + row * rowH;
-    const bw = (barW * s.level) / 100;
-    const begin = 0.25 + (row * 2 + col) * 0.09;
-    const barX = x + labelW;
+    const ruleX = x + nameW;
+    const t = 0.25 + (row * 2 + col) * 0.1;
 
-    rows.push(`<g opacity="0">${fadeIn(begin, 0.7)}
-  ${text({ x, y, size: 14.5, fill: T.muted, content: s.name })}
-  ${text({ x: x + labelW + barW + 46, y, size: 13, weight: 500, fill: T.muted, anchor: 'end', content: `${s.level}%` })}
-  ${rect({ x: barX, y: y - 7, w: barW, h: 4, rx: 2, fill: T.track })}
-  ${rect({ x: barX, y: y - 7, w: 0, h: 4, rx: 2, fill: 'url(#skFill)', extra: growW(bw, begin + 0.2, 1.05) })}
+    rows.push(`<g opacity="0">${fadeIn(t, 0.65)}
+  ${text({ x, y, size: 15, fill: T.text, content: name })}
+  ${rect({ x: ruleX, y: y - 5, w: 0, h: 1, fill: T.hair, extra: growW(ruleW, t + 0.18, 0.95) })}
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0.85;0" dur="1.5s" begin="${round(t + 0.9)}s" fill="freeze" keyTimes="0;0.35;1"/>
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="-90 0; ${round(ruleW)} 0" dur="1.5s" begin="${round(t + 0.9)}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.7 0.3 1" values="-90 0;${round(ruleW)} 0"/>
+      ${rect({ x: ruleX, y: y - 5.5, w: 90, h: 2, rx: 1, fill: 'url(#skShim)' })}
+    </g>
+  </g>
 </g>`);
   });
 
   return svg({
     w: W, h: H,
-    title: 'Skills',
-    defs: lgrad('skFill', [[0, T.deep, 1], [1, T.accent, 1]]),
+    title: 'Stack',
+    defs: lgrad('skShim', [[0, T.accent, 0], [0.5, T.accentSoft, 0.9], [1, T.accent, 0]]),
     body: `
 <rect width="${W}" height="${H}" fill="${T.bg}"/>
-<path d="M40 ${H - 32} H${W - 40}" stroke="${T.hair}" stroke-width="1"/>
 ${rows.join('\n')}`,
   });
 }
@@ -136,34 +140,34 @@ ${shimmer({ x: 60, y: y - 0.5, w: 140, h: 2, travel: W - 260, dur: 12, begin: 1.
 }
 
 /* ==================================================================
- * 4. FOOTER — one line of invitation and a quiet live dot
+ * 4. FOOTER — one line of invitation, a quiet live handle
  * ================================================================== */
 function footer() {
-  const W = 1200, H = 168;
-  const cta = cfg.footer?.headline || 'Let’s build something.';
-  const sub = cfg.footer?.sub || identity.email;
+  const W = 1200, H = 156;
+  const cta = cfg.footer?.headline || 'Let\u2019s build something.';
+  const handle = `@${identity.handle}`;
   return svg({
     w: W, h: H,
     title: cta,
-    defs: `${lgrad('ftRule', [[0, T.accent, 0], [0.5, T.hair, 1], [1, T.accent, 0]])}`,
+    defs: lgrad('ftRule', [[0, T.accent, 0], [0.5, T.hair, 1], [1, T.accent, 0]]),
     body: `
 <rect width="${W}" height="${H}" fill="${T.bg}"/>
-${rect({ x: 60, y: 28, w: W - 120, h: 1, fill: 'url(#ftRule)' })}
+${rect({ x: 60, y: 26, w: W - 120, h: 1, fill: 'url(#ftRule)' })}
 
 <g opacity="0">${fadeIn(0.2, 0.9)}${riseIn(0.2, 0.9, 10)}
-  ${text({ x: W / 2, y: 84, size: 26, weight: 600, ls: 0.5, fill: T.text, anchor: 'middle', content: cta })}
+  ${text({ x: W / 2, y: 80, size: 26, weight: 600, ls: 0.5, fill: T.text, anchor: 'middle', content: cta })}
 </g>
 
-<g opacity="0">${fadeIn(0.55, 0.9)}
-  ${text({ x: W / 2, y: 118, size: 14, fill: T.muted, anchor: 'middle', content: sub, lock: sub.length * 8.6 })}
+<g opacity="0">${fadeIn(0.6, 0.9)}
+  ${text({ x: W / 2, y: 114, size: 14, fill: T.muted, anchor: 'middle', content: handle })}
 </g>
 
-<circle cx="${round(W / 2 - (sub.length * 8.6) / 2 - 16)}" cy="113.5" r="4" fill="${T.accent}">
+<circle cx="${round(W / 2 - handle.length * 4.05 - 16)}" cy="109.5" r="4" fill="${T.accent}">
   ${anim('opacity', '1;0.2;1', '2.4s')}
 </circle>
 
 <g opacity="0">${fadeIn(0.9, 0.8)}
-  ${text({ x: W / 2, y: 148, size: 12, fill: T.dim, anchor: 'middle', content: `${identity.handle} · ${identity.location}` })}
+  ${text({ x: W / 2, y: 142, size: 12, fill: T.dim, anchor: 'middle', content: identity.location })}
 </g>`,
   });
 }

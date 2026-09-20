@@ -6,19 +6,13 @@
 
 <div align="center">
 
-<img src="./assets/hero.svg" alt="Hadi Vaez — Flutter Developer" width="100%" />
+<img src="./assets/hero.svg" alt="Hadi Vaez — Full-Stack Developer" width="100%" />
 
 </div>
 
-<p align="center">[hello@example.com](mailto:example@example.com)</p>
-
 ## About
 
-Flutter developer based in Tehran, Iran (UTC+03:30). I care about clean architecture, fast interfaces and shipping things that actually get used.
-
-Currently building with **Flutter**, **Dart**, **Firebase**  ·  learning Kotlin, Swift, Clean Architecture  ·  open to freelance · full-time.
-
-<br />
+Full-stack developer. Flutter and Dart on the client, Python, Go and JavaScript on the server, C++ when it has to be fast. I care about clean architecture, fast interfaces and shipping things that actually get used.
 
 <div align="center"><em>Talk is cheap. Show me the code.</em></div>
 
@@ -33,12 +27,6 @@ Currently building with **Flutter**, **Dart**, **Firebase**  ·  learning Kotlin
 <img src="./assets/skills.svg" alt="skills" width="100%" />
 
 </div>
-
-## Projects
-
-| Project | Description | Built with |
-|:--|:--|:--|
-| **[Eflutter](https://github.com/vaezhadi/Eflutter)** | Flutter playground — experiments, widgets and app skeletons. | `Flutter · Dart` |
 
 <div align="center">
 <img src="./assets/divider.svg" alt="" width="100%" />

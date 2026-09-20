@@ -2,126 +2,51 @@
   "identity": {
     "handle": "vaezhadi",
     "name": "Hadi Vaez",
-    "role": "Flutter Developer",
+    "role": "Full-Stack Developer",
     "tagline": "I build apps that feel alive.",
-    "location": "Tehran, Iran",
+    "location": "Raccoon City",
     "timezone": "UTC+03:30",
     "availableFor": "Freelance · Full-time",
     "email": "hello@example.com",
-    "about": "Flutter developer based in Tehran, Iran (UTC+03:30). I care about clean architecture, fast interfaces and shipping things that actually get used."
+    "about": "Full-stack developer. Flutter and Dart on the client, Python, Go and JavaScript on the server, C++ when it has to be fast. I care about clean architecture, fast interfaces and shipping things that actually get used."
   },
-  "socials": [
-    {
-      "label": "Email",
-      "icon": "gmail",
-      "color": "EA4335",
-      "url": "mailto:example@example.com",
-      "show": true
-    },
-    {
-      "label": "LinkedIn",
-      "icon": "linkedin",
-      "color": "0A66C2",
-      "url": "https://linkedin.com/in/USERNAME",
-      "show": false
-    },
-    {
-      "label": "Telegram",
-      "icon": "telegram",
-      "color": "26A5E4",
-      "url": "https://t.me/USERNAME",
-      "show": false
-    },
-    {
-      "label": "X",
-      "icon": "x",
-      "color": "000000",
-      "url": "https://x.com/USERNAME",
-      "show": false
-    },
-    {
-      "label": "Instagram",
-      "icon": "instagram",
-      "color": "E4405F",
-      "url": "https://instagram.com/USERNAME",
-      "show": false
-    },
-    {
-      "label": "Portfolio",
-      "icon": "googlechrome",
-      "color": "00ff41",
-      "url": "",
-      "show": false
-    }
-  ],
+  "socials": [],
   "skills": [
     {
-      "name": "Flutter",
-      "level": 90
+      "name": "Flutter"
     },
     {
-      "name": "Dart",
-      "level": 88
+      "name": "Dart"
     },
     {
-      "name": "Firebase",
-      "level": 78
+      "name": "Python"
     },
     {
-      "name": "REST / API Design",
-      "level": 74
+      "name": "JavaScript"
     },
     {
-      "name": "UI / UX Implementation",
-      "level": 82
+      "name": "Go"
     },
     {
-      "name": "Git & Collaboration",
-      "level": 80
-    },
-    {
-      "name": "Kotlin (native)",
-      "level": 55
-    },
-    {
-      "name": "CI / CD",
-      "level": 50
+      "name": "C++"
     }
   ],
   "stack": {
     "primary": [
       "Flutter",
       "Dart",
-      "Firebase",
-      "REST API",
-      "Git"
+      "Python",
+      "JavaScript",
+      "Go",
+      "C++"
     ],
-    "learning": [
-      "Kotlin",
-      "Swift",
-      "Clean Architecture",
-      "CI/CD"
-    ],
-    "tools": [
-      "VS Code",
-      "Android Studio",
-      "Figma",
-      "Postman",
-      "GitHub Actions"
-    ]
+    "learning": [],
+    "tools": []
   },
-  "projects": [
-    {
-      "name": "Eflutter",
-      "desc": "Flutter playground — experiments, widgets and app skeletons.",
-      "tech": "Flutter · Dart",
-      "url": "https://github.com/vaezhadi/Eflutter",
-      "status": "ACTIVE"
-    }
-  ],
+  "projects": [],
   "quote": "Talk is cheap. Show me the code.",
   "footer": {
     "headline": "Let’s build something.",
-    "sub": "hello@example.com"
+    "sub": ""
   }
 }

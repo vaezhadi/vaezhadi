@@ -1,58 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1064 250" width="1064" height="250" role="img" aria-label="Skills">
-<title>Skills</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1064 176" width="1064" height="176" role="img" aria-label="Stack">
+<title>Stack</title>
 <defs>
-<linearGradient id="skFill" x1="0%" y1="0%" x2="100%" y2="0%">
-<stop offset="0" stop-color="#238636" stop-opacity="1"/><stop offset="1" stop-color="#3fb950" stop-opacity="1"/>
+<linearGradient id="skShim" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0" stop-color="#3fb950" stop-opacity="0"/><stop offset="0.5" stop-color="#56d364" stop-opacity="0.9"/><stop offset="1" stop-color="#3fb950" stop-opacity="0"/>
 </linearGradient></defs>
 
-<rect width="1064" height="250" fill="#000000"/>
-<path d="M40 218 H1024" stroke="#1f2a24" stroke-width="1"/>
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.25s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
-  <text x="40" y="44" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14.5" fill="#8b949e" text-anchor="start">Flutter</text>
-  <text x="496" y="44" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="13" fill="#8b949e" text-anchor="end" font-weight="500">90%</text>
-  <rect x="230" y="37" width="220" height="4" rx="2" fill="#161c19"/>
-  <rect x="230" y="37" width="0" height="4" rx="2" fill="url(#skFill)" <animate attributeName="width" from="0" to="198" begin="0.45s" dur="1.05s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;198"/>/>
+<rect width="1064" height="176" fill="#000000"/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.25s" dur="0.65s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
+  <text x="40" y="40" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="15" fill="#e6edf3" text-anchor="start">Flutter</text>
+  <rect x="200" y="35" width="0" height="1" fill="#1f2a24" <animate attributeName="width" from="0" to="300" begin="0.43s" dur="0.95s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;300"/>/>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0.85;0" dur="1.5s" begin="1.15s" fill="freeze" keyTimes="0;0.35;1"/>
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="-90 0; 300 0" dur="1.5s" begin="1.15s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.7 0.3 1" values="-90 0;300 0"/>
+      <rect x="200" y="34.5" width="90" height="2" rx="1" fill="url(#skShim)"/>
+    </g>
+  </g>
 </g>
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.43s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
-  <text x="40" y="94" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14.5" fill="#8b949e" text-anchor="start">Dart</text>
-  <text x="496" y="94" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="13" fill="#8b949e" text-anchor="end" font-weight="500">88%</text>
-  <rect x="230" y="87" width="220" height="4" rx="2" fill="#161c19"/>
-  <rect x="230" y="87" width="0" height="4" rx="2" fill="url(#skFill)" <animate attributeName="width" from="0" to="193.6" begin="0.63s" dur="1.05s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;193.6"/>/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.45s" dur="0.65s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
+  <text x="40" y="86" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="15" fill="#e6edf3" text-anchor="start">Dart</text>
+  <rect x="200" y="81" width="0" height="1" fill="#1f2a24" <animate attributeName="width" from="0" to="300" begin="0.63s" dur="0.95s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;300"/>/>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0.85;0" dur="1.5s" begin="1.35s" fill="freeze" keyTimes="0;0.35;1"/>
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="-90 0; 300 0" dur="1.5s" begin="1.35s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.7 0.3 1" values="-90 0;300 0"/>
+      <rect x="200" y="80.5" width="90" height="2" rx="1" fill="url(#skShim)"/>
+    </g>
+  </g>
 </g>
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.61s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
-  <text x="40" y="144" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14.5" fill="#8b949e" text-anchor="start">Firebase</text>
-  <text x="496" y="144" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="13" fill="#8b949e" text-anchor="end" font-weight="500">78%</text>
-  <rect x="230" y="137" width="220" height="4" rx="2" fill="#161c19"/>
-  <rect x="230" y="137" width="0" height="4" rx="2" fill="url(#skFill)" <animate attributeName="width" from="0" to="171.6" begin="0.81s" dur="1.05s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;171.6"/>/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.65s" dur="0.65s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
+  <text x="40" y="132" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="15" fill="#e6edf3" text-anchor="start">Python</text>
+  <rect x="200" y="127" width="0" height="1" fill="#1f2a24" <animate attributeName="width" from="0" to="300" begin="0.8300000000000001s" dur="0.95s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;300"/>/>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0.85;0" dur="1.5s" begin="1.55s" fill="freeze" keyTimes="0;0.35;1"/>
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="-90 0; 300 0" dur="1.5s" begin="1.55s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.7 0.3 1" values="-90 0;300 0"/>
+      <rect x="200" y="126.5" width="90" height="2" rx="1" fill="url(#skShim)"/>
+    </g>
+  </g>
 </g>
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.79s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
-  <text x="40" y="194" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14.5" fill="#8b949e" text-anchor="start">REST / API Design</text>
-  <text x="496" y="194" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="13" fill="#8b949e" text-anchor="end" font-weight="500">74%</text>
-  <rect x="230" y="187" width="220" height="4" rx="2" fill="#161c19"/>
-  <rect x="230" y="187" width="0" height="4" rx="2" fill="url(#skFill)" <animate attributeName="width" from="0" to="162.8" begin="0.99s" dur="1.05s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;162.8"/>/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.35s" dur="0.65s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
+  <text x="580" y="40" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="15" fill="#e6edf3" text-anchor="start">JavaScript</text>
+  <rect x="740" y="35" width="0" height="1" fill="#1f2a24" <animate attributeName="width" from="0" to="300" begin="0.53s" dur="0.95s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;300"/>/>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0.85;0" dur="1.5s" begin="1.25s" fill="freeze" keyTimes="0;0.35;1"/>
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="-90 0; 300 0" dur="1.5s" begin="1.25s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.7 0.3 1" values="-90 0;300 0"/>
+      <rect x="740" y="34.5" width="90" height="2" rx="1" fill="url(#skShim)"/>
+    </g>
+  </g>
 </g>
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.33999999999999997s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
-  <text x="580" y="44" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14.5" fill="#8b949e" text-anchor="start">UI / UX Implementation</text>
-  <text x="1036" y="44" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="13" fill="#8b949e" text-anchor="end" font-weight="500">82%</text>
-  <rect x="770" y="37" width="220" height="4" rx="2" fill="#161c19"/>
-  <rect x="770" y="37" width="0" height="4" rx="2" fill="url(#skFill)" <animate attributeName="width" from="0" to="180.4" begin="0.54s" dur="1.05s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;180.4"/>/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.55s" dur="0.65s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
+  <text x="580" y="86" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="15" fill="#e6edf3" text-anchor="start">Go</text>
+  <rect x="740" y="81" width="0" height="1" fill="#1f2a24" <animate attributeName="width" from="0" to="300" begin="0.73s" dur="0.95s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;300"/>/>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0.85;0" dur="1.5s" begin="1.45s" fill="freeze" keyTimes="0;0.35;1"/>
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="-90 0; 300 0" dur="1.5s" begin="1.45s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.7 0.3 1" values="-90 0;300 0"/>
+      <rect x="740" y="80.5" width="90" height="2" rx="1" fill="url(#skShim)"/>
+    </g>
+  </g>
 </g>
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.52s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
-  <text x="580" y="94" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14.5" fill="#8b949e" text-anchor="start">Git &amp; Collaboration</text>
-  <text x="1036" y="94" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="13" fill="#8b949e" text-anchor="end" font-weight="500">80%</text>
-  <rect x="770" y="87" width="220" height="4" rx="2" fill="#161c19"/>
-  <rect x="770" y="87" width="0" height="4" rx="2" fill="url(#skFill)" <animate attributeName="width" from="0" to="176" begin="0.72s" dur="1.05s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;176"/>/>
-</g>
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.7s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
-  <text x="580" y="144" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14.5" fill="#8b949e" text-anchor="start">Kotlin (native)</text>
-  <text x="1036" y="144" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="13" fill="#8b949e" text-anchor="end" font-weight="500">55%</text>
-  <rect x="770" y="137" width="220" height="4" rx="2" fill="#161c19"/>
-  <rect x="770" y="137" width="0" height="4" rx="2" fill="url(#skFill)" <animate attributeName="width" from="0" to="121" begin="0.8999999999999999s" dur="1.05s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;121"/>/>
-</g>
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.88s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
-  <text x="580" y="194" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14.5" fill="#8b949e" text-anchor="start">CI / CD</text>
-  <text x="1036" y="194" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="13" fill="#8b949e" text-anchor="end" font-weight="500">50%</text>
-  <rect x="770" y="187" width="220" height="4" rx="2" fill="#161c19"/>
-  <rect x="770" y="187" width="0" height="4" rx="2" fill="url(#skFill)" <animate attributeName="width" from="0" to="110" begin="1.08s" dur="1.05s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;110"/>/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.75s" dur="0.65s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>
+  <text x="580" y="132" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="15" fill="#e6edf3" text-anchor="start">C++</text>
+  <rect x="740" y="127" width="0" height="1" fill="#1f2a24" <animate attributeName="width" from="0" to="300" begin="0.9299999999999999s" dur="0.95s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;300"/>/>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0.85;0" dur="1.5s" begin="1.65s" fill="freeze" keyTimes="0;0.35;1"/>
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="-90 0; 300 0" dur="1.5s" begin="1.65s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.7 0.3 1" values="-90 0;300 0"/>
+      <rect x="740" y="126.5" width="90" height="2" rx="1" fill="url(#skShim)"/>
+    </g>
+  </g>
 </g>
 </svg>

@@ -35,11 +35,9 @@ const contacts = (() => {
 /* ---------- about ---------- */
 const about = `## About
 
-${identity.about || `${identity.name} — ${identity.role.toLowerCase()} based in ${identity.location} (${identity.timezone}). I care about clean architecture, fast interfaces and shipping things that actually get used.`}
+${identity.about}
 
-Currently building with **${stack.primary.slice(0, 3).join('**, **')}**  ·  learning ${stack.learning.slice(0, 3).join(', ')}  ·  open to ${identity.availableFor.toLowerCase()}.
-
-${quote ? `<br />\n\n<div align="center"><em>${quote}</em></div>` : ''}`;
+${quote ? `<div align="center"><em>${quote}</em></div>` : ''}`;
 
 /* ---------- skills ---------- */
 const skillsSection = `## Skills
