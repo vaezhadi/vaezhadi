@@ -5,10 +5,10 @@
   "scripts": {
     "build": "node build-assets.mjs --png && node build-readme.mjs",
     "assets": "node build-assets.mjs",
+    "card:png": "node build-assets.mjs --png",
+    "card:gif": "node build-assets.mjs --gif",
     "readme": "node build-readme.mjs",
-    "preview": "node preview.mjs",
-    "preview:assets": "node build-assets.mjs --preview",
-    "card:png": "node build-assets.mjs --png"
+    "preview": "node preview.mjs"
   },
   "dependencies": {
     "marked": "^18.0.0"
