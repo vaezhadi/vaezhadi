@@ -52,6 +52,12 @@ export function rect({ x, y, w, h, fill = 'none', rx = 0, stroke = null, sw = 1,
   return `<rect ${a.join(' ')}/>`;
 }
 
+/* rect + child elements (animation) — keeps the XML well formed */
+export function rectEl(attrs, children = '') {
+  const selfClosing = rect(attrs);
+  return children ? selfClosing.replace(/\/>\s*$/, `>${children}</rect>`) : selfClosing;
+}
+
 export const anim = (attr, values, dur, extra = '') =>
   `<animate attributeName="${attr}" values="${values}" dur="${dur}" repeatCount="indefinite" ${extra}/>`;
 
