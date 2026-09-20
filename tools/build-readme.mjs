@@ -21,6 +21,8 @@ const md = `<!-- ─────────────────────
 
 <img src="./assets/card.svg" alt="${identity.name} — ${identity.role}" width="100%" />
 
+**[▶ see it in motion](https://${identity.handle}.github.io/${identity.handle}/)** — full animation, no limits
+
 </div>
 `;
 

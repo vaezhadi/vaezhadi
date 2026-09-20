@@ -97,6 +97,15 @@ createServer((req, res) => {
     return;
   }
 
+  /* the animated site (built by tools/build-site.mjs) */
+  if (url === '/site' || url === '/site/' || url === '/site/index.html') {
+    const file = join(ROOT, 'docs/index.html');
+    if (!existsSync(file)) { res.writeHead(404); res.end('run: node tools/build-site.mjs'); return; }
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+    res.end(readFileSync(file));
+    return;
+  }
+
   if (url === '/' || url === '/index.html') {
     const md = readFileSync(join(ROOT, 'README.md'), 'utf8');
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
@@ -120,7 +129,8 @@ createServer((req, res) => {
   });
   res.end(readFileSync(file));
 }).listen(PORT, '0.0.0.0', () => {
-  console.log(`▸ README preview on http://0.0.0.0:${PORT}`);
+  console.log(`▸ README preview   http://0.0.0.0:${PORT}/`);
+console.log(`▸ animated site    http://0.0.0.0:${PORT}/site`);
 });
 
 /* push reload events */

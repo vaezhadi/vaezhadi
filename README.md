@@ -9,4 +9,6 @@
 
 <img src="./assets/card.svg" alt="Hadi Vaez — Full-Stack Developer" width="100%" />
 
+**[▶ see it in motion](https://vaezhadi.github.io/vaezhadi/)** — full animation, no limits
+
 </div>
