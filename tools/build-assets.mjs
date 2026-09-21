@@ -8,9 +8,9 @@
  *  Text animation
  *    · every line types itself out, character by character, with a caret
  *    · the caret disappears for good once its line is finished
- *    · a light sweeps across the name and the headline on a slow loop
- *    · section labels type in, then their caption rule draws itself
- *    · paragraphs rise line by line as they are typed
+ *    · a neutral wipe (the page colour, not a coloured light) travels across
+ *      the name and the role on a slow loop
+ *    · every heading rises into place as it is typed
  *
  *  Panels / icons
  *    · frosted glass panels: page-tinted fill, hairline border, top sheen
@@ -164,9 +164,9 @@ function textShine({ id, content, x, y, size, weight = 600, width, begin, theme,
     <text x="${round(x)}" y="${round(y)}" font-family="${SANS}" font-size="${round(size)}" fill="#ffffff" text-anchor="${anchor || 'middle'}"${weight !== 400 ? ` font-weight="${weight}"` : ''} xml:space="preserve">${esc(nbsp(content))}</text>
   </mask>`;
   const grad = `<linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="0%">
-    <stop offset="0" stop-color="${theme.accent}" stop-opacity="0"/>
-    <stop offset="0.5" stop-color="${theme.accent}" stop-opacity="0.85"/>
-    <stop offset="1" stop-color="${theme.accent}" stop-opacity="0"/>
+    <stop offset="0" stop-color="${theme.page}" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="${theme.page}" stop-opacity="0.92"/>
+    <stop offset="1" stop-color="${theme.page}" stop-opacity="0"/>
   </linearGradient>`;
 
   const bandW = Math.max(120, width * 0.5);
@@ -237,11 +237,11 @@ function languageTile({ item, x, y, w, h, begin, theme, index }) {
     if (isFrame()) {
       const local = FRAME - haloBegin;
       const phase = local <= 0 ? 0 : 0.5 - 0.5 * Math.cos((2 * Math.PI * local) / 4.4);
-      return rect({ x: x + 1, y: y + 1, w: w - 2, h: h - 2, rx: 16, fill: `url(#${haloId})`, op: round(0.3 + 0.25 * phase) });
+      return rect({ x: x + 1, y: y + 1, w: w - 2, h: h - 2, rx: 16, fill: `url(#${haloId})`, op: round(0.22 + 0.2 * phase) });
     }
     return rectEl(
-      { x: x + 1, y: y + 1, w: w - 2, h: h - 2, rx: 16, fill: `url(#${haloId})`, op: 0.3 },
-      `<animate attributeName="opacity" values="0.25;0.55;0.25" dur="4.4s" begin="${round(haloBegin)}s" repeatCount="indefinite"/>`
+      { x: x + 1, y: y + 1, w: w - 2, h: h - 2, rx: 16, fill: `url(#${haloId})`, op: 0.22 },
+      `<animate attributeName="opacity" values="0.18;0.42;0.18" dur="4.4s" begin="${round(haloBegin)}s" repeatCount="indefinite"/>`
     );
   })();
 
@@ -272,7 +272,7 @@ function languageTile({ item, x, y, w, h, begin, theme, index }) {
     svg: reveal({ begin, dur: 0.55, dy: 12, inner: body }),
     defs: [
       `<radialGradient id="${haloId}" cx="50%" cy="26%" r="90%">
-        <stop offset="0" stop-color="${icon ? icon.color : theme.accent}" stop-opacity="0.26"/>
+        <stop offset="0" stop-color="${icon ? icon.color : theme.accent}" stop-opacity="0.2"/>
         <stop offset="1" stop-color="${icon ? icon.color : theme.accent}" stop-opacity="0"/>
       </radialGradient>`,
     ],
@@ -282,131 +282,142 @@ function languageTile({ item, x, y, w, h, begin, theme, index }) {
 
 /* ==================================================================
  *  THE CARD
+ *
+ *  One centred column with a lot of air around it. The name is the main
+ *  title; every sentence after it is treated as a heading too — its own
+ *  line, bold, generously spaced, big enough to read at a glance.
+ *  The stack sits in a single frosted glass panel.
  * ================================================================== */
 function buildCard(theme) {
   const W = 1000;
-  const PAD = 44;
+  const PAD = 56;
   const CW = W - PAD * 2;
   const CX = W / 2;
   const parts = [];
   const defs = [`<style>${fontCss}</style>`];
 
-  /* ── header ────────────────────────────────────────────────────────── */
-  let t = 0.4;
+  /* every sentence gets a line of its own */
+  const tagBits = identity.tagline.split(/,\s*/);
+  const taglineLines = tagBits.map((b, i) => (i < tagBits.length - 1 ? `${b},` : b));
+  const aboutLines = identity.about.split(/(?<=[.!?])\s+/).filter(Boolean);
+  const quoteLine = `“${quote}”`;
 
-  const nameY = 88;
-  const name = typedText({ content: identity.name, x: CX, y: nameY, size: 34, fill: theme.fg, begin: t, perChar: 0.055, weight: 600 });
-  parts.push(name.svg.replace('</text>', caretTail({ content: identity.name, begin: t, perChar: 0.055, color: theme.accent }) + '</text>'));
-  const nameShine = textShine({
-    id: `shine-${theme.name}-name`, content: identity.name, x: CX, y: nameY, size: 34,
-    weight: 600, width: identity.name.length * 19, begin: name.end + 0.6, theme, period: 7.5,
+  let t = 0.5;
+
+  /* ── the main title ──────────────────────────────────────────────── */
+  const nameY = 112;
+  const name = typedText({
+    content: identity.name, x: CX, y: nameY, size: 54, fill: theme.fg,
+    begin: t, perChar: 0.055, weight: 600,
   });
-  parts.push(nameShine.svg);
-  defs.push(nameShine.defs);
+  parts.push(name.svg.replace('</text>', caretTail({ content: identity.name, begin: t, perChar: 0.055, color: theme.fgSubtle }) + '</text>'));
+  const nameWipe = textShine({
+    id: `wipe-${theme.name}-name`, content: identity.name, x: CX, y: nameY, size: 54,
+    weight: 600, width: identity.name.length * 30, begin: name.end + 0.5, theme, period: 7.5,
+  });
+  parts.push(nameWipe.svg);
+  defs.push(nameWipe.defs);
   t = name.end + 0.45;
 
-  const roleY = nameY + 32;
-  const role = typedText({ content: identity.role, x: CX, y: roleY, size: 15, fill: theme.fgMuted, begin: t, perChar: 0.034 });
-  parts.push(role.svg.replace('</text>', caretTail({ content: identity.role, begin: t, perChar: 0.034, color: theme.fgSubtle }) + '</text>'));
-  /* a short accent underline draws itself under the role */
-  const underlineW = Math.max(60, identity.role.length * 8);
-  parts.push(`<g opacity="0">${isFrame() ? '' : fade(role.end + 0.05, 0.4)}${(() => {
-    if (isFrame()) return rect({ x: CX - underlineW / 2, y: roleY + 12, w: round(underlineW * ease(prog(role.end + 0.1, 0.7))), h: 2, rx: 1, fill: theme.accent, op: 0.75 });
-    return rectEl({ x: CX - underlineW / 2, y: roleY + 12, w: 0, h: 2, rx: 1, fill: theme.accent, op: 0.75 },
-      `<animate attributeName="width" from="0" to="${round(underlineW)}" begin="${round(role.end + 0.1)}s" dur="0.7s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${round(underlineW)}"/>`);
-  })()}</g>`);
-  t = role.end + 0.85;
-
-  const headY = roleY + 44;
-  const headline = typedText({ content: identity.tagline, x: CX, y: headY, size: 17, fill: theme.fg, begin: t, perChar: 0.02 });
-  parts.push(headline.svg.replace('</text>', caretTail({ content: identity.tagline, begin: t, perChar: 0.02, color: theme.accent }) + '</text>'));
-  const headShine = textShine({
-    id: `shine-${theme.name}-head`, content: identity.tagline, x: CX, y: headY, size: 17,
-    weight: 400, width: identity.tagline.length * 9.2, begin: headline.end + 0.8, theme, period: 8.5,
+  /* ── role: the second title line ─────────────────────────────────── */
+  const roleY = nameY + 54;
+  const role = typedText({
+    content: identity.role, x: CX, y: roleY, size: 26, fill: theme.fgMuted,
+    begin: t, perChar: 0.04, weight: 600,
   });
-  parts.push(headShine.svg);
-  defs.push(headShine.defs);
-  t = headline.end + 0.85;
+  parts.push(role.svg.replace('</text>', caretTail({ content: identity.role, begin: t, perChar: 0.04, color: theme.fgSubtle }) + '</text>'));
+  const roleWipe = textShine({
+    id: `wipe-${theme.name}-role`, content: identity.role, x: CX, y: roleY, size: 26,
+    weight: 600, width: identity.role.length * 15, begin: role.end + 1.4, theme, period: 9.5,
+  });
+  parts.push(roleWipe.svg);
+  defs.push(roleWipe.defs);
+  t = role.end + 1.2;
 
-  /* ── glass panel: about ────────────────────────────────────────────── */
-  const panelPad = 34;
-  const aboutLines = wrapText(identity.about, CW - panelPad * 2, 15, 0.62);
-  const aboutLabelY = 0;
-  const aboutPanelY = headY + 62;
-  const aboutPanelH = 74 + aboutLines.length * 27 + 66;
-
-  parts.push(glassPanel({ x: PAD, y: aboutPanelY, w: CW, h: aboutPanelH, begin: t, theme }));
-
-  const labelBegin = t + 0.5;
-  const labelAbout = typedText({ content: 'ABOUT', x: CX, y: aboutPanelY + 40, size: 11.5, fill: theme.accent, begin: labelBegin, perChar: 0.05, weight: 600 });
-  parts.push(labelAbout.svg);
-  const captionW = 54;
-  parts.push(reveal({
-    begin: labelAbout.end + 0.05, dur: 0.5, dy: 0,
-    inner: rect({ x: CX - captionW / 2, y: aboutPanelY + 50, w: captionW, h: 1, fill: theme.accent, op: 0.35 }),
-  }));
-
-  let lineT = labelAbout.end + 0.4;
-  aboutLines.forEach((line, i) => {
-    const y = aboutPanelY + 84 + i * 27;
-    const begin = lineT + i * 0.16;
-    const ln = typedText({ content: line, x: CX, y, size: 15, fill: theme.fgMuted, begin, perChar: 0.009 });
+  /* ── the tagline, one clause per line ────────────────────────────── */
+  const tagY = roleY + 94;
+  const tagStep = 52;
+  let tagEnd = t;
+  taglineLines.forEach((line, i) => {
+    const begin = t + i * 0.35;
+    const ln = typedText({
+      content: line, x: CX, y: tagY + i * tagStep, size: 27, fill: theme.fg,
+      begin, perChar: 0.04, weight: 600,
+    });
     parts.push(reveal({
-      begin, dur: 0.45, dy: 7,
-      inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.009, color: theme.fgSubtle }) + '</text>'),
+      begin, dur: 0.6, dy: 12,
+      inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.04, color: theme.fgSubtle }) + '</text>'),
     }));
+    tagEnd = Math.max(tagEnd, ln.end);
   });
-  /* the quote, centred under the paragraph and typed like everything else */
-  const quoteLine = `\u201c${quote}\u201d`;
-  const quoteBegin = lineT + (aboutLines.length - 1) * 0.16 + Math.max(...aboutLines.map((l) => l.length)) * 0.009 + 0.35;
-  const quoteY = aboutPanelY + 84 + (aboutLines.length - 1) * 27 + 34;
+  t = tagEnd + 1.1;
+
+  /* ── about: one sentence per line ────────────────────────────────── */
+  const aboutY = tagY + (taglineLines.length - 1) * tagStep + 96;
+  const aboutStep = 46;
+  let aboutEnd = t;
+  aboutLines.forEach((line, i) => {
+    const begin = t + i * 0.4;
+    const ln = typedText({
+      content: line, x: CX, y: aboutY + i * aboutStep, size: 22.5, fill: theme.fgMuted,
+      begin, perChar: 0.012, weight: 600,
+    });
+    parts.push(reveal({
+      begin, dur: 0.55, dy: 10,
+      inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.012, color: theme.fgSubtle }) + '</text>'),
+    }));
+    aboutEnd = Math.max(aboutEnd, ln.end);
+  });
+  t = aboutEnd + 1.1;
+
+  /* ── the quote ───────────────────────────────────────────────────── */
+  const quoteY = aboutY + (aboutLines.length - 1) * aboutStep + 92;
   const quoteTyped = typedText({
-    content: quoteLine, x: CX, y: quoteY, size: 14.5, fill: theme.fgSubtle, begin: quoteBegin, perChar: 0.016,
+    content: quoteLine, x: CX, y: quoteY, size: 22.5, fill: theme.fgSubtle,
+    begin: t, perChar: 0.016, weight: 600,
   });
   parts.push(reveal({
-    begin: quoteBegin, dur: 0.5, dy: 6,
-    inner: quoteTyped.svg.replace('</text>', caretTail({ content: quoteLine, begin: quoteBegin, perChar: 0.016, color: theme.fgSubtle }) + '</text>'),
+    begin: t, dur: 0.55, dy: 10,
+    inner: quoteTyped.svg.replace('</text>', caretTail({ content: quoteLine, begin: t, perChar: 0.016, color: theme.fgSubtle }) + '</text>'),
   }));
-  t = quoteTyped.end + 0.6;
+  t = quoteTyped.end + 1.1;
 
-  /* ── glass panel: languages ────────────────────────────────────────── */
+  /* ── one frosted panel holds the stack ───────────────────────────── */
+  const innerPad = 30;
   const tileGap = 14;
-  const tileW = Math.floor((CW - panelPad * 2 - tileGap * (langs.length - 1)) / langs.length);
   const tileH = 110;
-  const langPanelY = aboutPanelY + aboutPanelH + 30;
-  const langPanelH = 74 + tileH + 34;
+  const tileW = Math.floor((CW - innerPad * 2 - tileGap * (langs.length - 1)) / langs.length);
+  const rowW = tileW * langs.length + tileGap * (langs.length - 1);
+  const panelY = quoteY + 74;
+  const panelH = innerPad * 2 + tileH;
 
-  parts.push(glassPanel({ x: PAD, y: langPanelY, w: CW, h: langPanelH, begin: t, theme }));
+  parts.push(glassPanel({ x: PAD, y: panelY, w: CW, h: panelH, begin: t, theme }));
 
-  const labelLangBegin = t + 0.5;
-  const labelLang = typedText({ content: 'LANGUAGES', x: CX, y: langPanelY + 40, size: 11.5, fill: theme.accent, begin: labelLangBegin, perChar: 0.05, weight: 600 });
-  parts.push(labelLang.svg);
-  parts.push(reveal({
-    begin: labelLang.end + 0.05, dur: 0.5, dy: 0,
-    inner: rect({ x: CX - 62, y: langPanelY + 50, w: 124, h: 1, fill: theme.accent, op: 0.35 }),
-  }));
-
-  const tilesX = PAD + panelPad;
-  const tilesY = langPanelY + 74;
-  let tileEnd = labelLang.end + 0.5;
+  const tilesX = round(PAD + (CW - rowW) / 2);
+  const tilesY = panelY + innerPad;
+  let tileEnd = t;
   langs.forEach((item, i) => {
     const built = languageTile({
       item, x: tilesX + i * (tileW + tileGap), y: tilesY, w: tileW, h: tileH,
-      begin: labelLang.end + 0.55 + i * 0.16, theme, index: i,
+      begin: t + 0.55 + i * 0.16, theme, index: i,
     });
     parts.push(built.svg);
     defs.push(built.defs);
     tileEnd = Math.max(tileEnd, built.end);
   });
-  t = tileEnd + 0.6;
+  t = tileEnd + 0.8;
 
-  /* ── footer ────────────────────────────────────────────────────────── */
-  const footY = langPanelY + langPanelH + 58;
+  /* ── footer ──────────────────────────────────────────────────────── */
+  const footY = panelY + panelH + 64;
   const handleLine = `@${identity.handle} · ${identity.location}`;
-  const handle = typedText({ content: handleLine, x: CX + 10, y: footY, size: 13.5, fill: theme.fgMuted, begin: t, perChar: 0.028 });
+  const handleW = round(handleLine.length * 6.9);
+  const handle = typedText({
+    content: handleLine, x: CX + 14, y: footY, size: 13.5, fill: theme.fgMuted,
+    begin: t, perChar: 0.028,
+  });
   parts.push(handle.svg);
   const dotBegin = t + handleLine.length * 0.028 + 0.15;
-  const dotCx = round(CX + 10 - handleLine.length * 3.9 - 16);
+  const dotCx = round(CX + 14 - handleW / 2 - 18);
   parts.push(
     isFrame()
       ? `<circle cx="${dotCx}" cy="${footY - 4.5}" r="4" fill="${theme.accent}" opacity="${done(dotBegin) ? 1 : 0}"/>`
@@ -414,9 +425,9 @@ function buildCard(theme) {
           <animate attributeName="opacity" values="1;0.25;1" dur="2.4s" begin="${round(dotBegin + 0.4)}s" repeatCount="indefinite"/>
         </circle>`
   );
-  const total = dotBegin + 0.7;
+  const total = dotBegin + 0.8;
 
-  const H = round(footY + 44);
+  const H = round(footY + 46);
 
   /* the page-colour plate under everything */
   parts.unshift(rect({ x: 0, y: 0, w: W, h: H, fill: theme.page }));
