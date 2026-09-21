@@ -376,7 +376,9 @@ function buildCard(theme) {
       begin, dur: 0.6, dy: 12,
       inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.04, color: theme.fgSubtle }) + '</text>'),
     }));
-    cursor = ln.end + 0.85;
+    /* ~1s of wall time between one line finishing and the next starting
+       (the whole timeline is scaled by SLOW, so 0.51 here is ~1.02s on screen) */
+    cursor = ln.end + 0.51;
   });
   t = cursor + 0.3;
 
@@ -401,21 +403,29 @@ function buildCard(theme) {
   const rowsX = round(aboutPanelX + padX);
   const rowsTop = round(aboutPanelY + padY);
 
-  /* a hairline rail behind the marks: it turns three rows into one story and
-     draws itself downward as they appear */
+  /* a hairline rail linking the marks. Drawn as segments that start below one
+     badge and stop above the next, so it never crosses a badge or its frame
+     (the badge fill is translucent and would let a continuous line show
+     through). Each segment draws itself downward as its row arrives. */
   const railX = round(rowsX + badge / 2 - 0.5);
-  const railY1 = round(rowsTop + badge / 2);
-  const railY2 = round(rowsTop + (rows.length - 1) * rowStep + badge / 2);
-  const railLen = round(railY2 - railY1);
-  const railBegin = t + 0.45;
-  parts.push(
-    isFrame()
-      ? rect({ x: railX, y: railY1, w: 1, h: round(railLen * ease(prog(railBegin, 1.1))), fill: theme.glass.border, op: round(theme.glass.borderOpacity * 1.4, 3) })
-      : rectEl(
-          { x: railX, y: railY1, w: 1, h: 0, fill: theme.glass.border, op: round(theme.glass.borderOpacity * 1.4, 3) },
-          `<animate attributeName="height" from="0" to="${railLen}" begin="${round(railBegin)}s" dur="1.1s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;${railLen}"/>`,
-        ),
-  );
+  const railGap = 3;   /* ends just short of the frames, so the rail reads as a
+                         line that passes behind the badges rather than a dot */
+  let railBegin = t + 0.5;
+  for (let i = 0; i < rows.length - 1; i += 1) {
+    const y1 = round(rowsTop + i * rowStep + badge + railGap);
+    const y2 = round(rowsTop + (i + 1) * rowStep - railGap);
+    const len = round(y2 - y1);
+    const begin = railBegin + i * 0.3;
+    parts.push(
+      isFrame()
+        ? rect({ x: railX, y: y1, w: 1, h: round(len * ease(prog(begin, 0.5))), fill: theme.glass.border, op: round(theme.glass.borderOpacity * 1.7, 3) })
+        : rectEl(
+            { x: railX, y: y1, w: 1, h: 0, fill: theme.glass.border, op: round(theme.glass.borderOpacity * 1.7, 3) },
+            `<animate attributeName="height" from="0" to="${len}" begin="${round(begin)}s" dur="0.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;${len}"/>`,
+          ),
+    );
+  }
+
   let cursor2 = t + 0.4;
 
   rows.forEach((row, i) => {
