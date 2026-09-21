@@ -1,360 +1,552 @@
 /* ------------------------------------------------------------------
- *  build-assets.mjs — the profile card as one animated SVG.
+ *  build-assets.mjs — the profile card.
  *
- *  Two effects, as requested:
- *    1. every line of text types itself out (character by character)
- *    2. the language icons animate: they draw themselves, fill in with
- *       their own brand colour and then breathe in sync with the theme
+ *  Layout: everything is centred, wrapped in glassmorphism panels that sit
+ *  on the profile page colour (#0d1117 dark / #ffffff light) and pick up
+ *  GitHub's palette.
+ *
+ *  Text animation
+ *    · every line types itself out, character by character, with a caret
+ *    · the caret disappears for good once its line is finished
+ *    · a neutral wipe (the page colour, not a coloured light) travels across
+ *      the role on a slow loop — the name itself is left alone
+ *    · every heading rises into place as it is typed, one line at a time
+ *
+ *  Panels / icons
+ *    · frosted glass panels: page-tinted fill, hairline border, top sheen
+ *    · language tiles: the brand glyph draws itself, fills with its colour,
+ *      the tile floats and its halo breathes
  *
  *  Usage
- *    node build-assets.mjs              → assets/card.svg
- *    node build-assets.mjs --png        → + tools/.preview/card-still.png
- *    node build-assets.mjs --gif        → + tools/.preview/card.gif
- *
- *  The same builder renders any point in time (frame mode), which is what
- *  makes the still PNG and the GIF possible — no SMIL evaluation needed.
+ *    node build-assets.mjs             → assets/card-{dark,light}.svg
+ *    node build-assets.mjs --png       → + still frames
+ *    node build-assets.mjs --gif       → + animated previews
  * ------------------------------------------------------------------ */
 import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { Resvg } from '@resvg/resvg-js';
 import { brand, slugFor } from './icons.mjs';
 import { validateCard } from './validate-svg.mjs';
-import { T, MONO, esc, text, rect, rectEl, round, lgrad, rgrad, wrapText, svg } from './svg-lib.mjs';
+import { SANS, esc, text, rect, rectEl, round, wrapText, svg } from './svg-lib.mjs';
 
 const cfg = JSON.parse(readFileSync(new URL('./profile.config.json', import.meta.url), 'utf8'));
 const { identity, skills, quote } = cfg;
 const langs = (skills || []).map((s) => (typeof s === 'string' ? s : s.name));
 
+/* ── the typeface ───────────────────────────────────────────────────────
+   Mona Sans, GitHub's own face. It is subset down to the glyphs this card
+   actually uses and embedded in the file, so the card keeps the same
+   typography on every machine instead of falling back to whatever the
+   viewer happens to have. tools/fonts/ holds the subsets + the OFL licence. */
+const FONT_FILES = [
+  new URL('./fonts/MonaSans-Regular.subset.ttf', import.meta.url).pathname,
+  new URL('./fonts/MonaSans-SemiBold.subset.ttf', import.meta.url).pathname,
+];
+const b64 = (file) => readFileSync(new URL(`./fonts/${file}`, import.meta.url)).toString('base64');
+const fontCss =
+  `@font-face{font-family:'Mona Sans';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,${b64('MonaSans-Regular.subset.woff2')}) format('woff2')}` +
+  `@font-face{font-family:'Mona Sans';font-style:normal;font-weight:600;src:url(data:font/woff2;base64,${b64('MonaSans-SemiBold.subset.woff2')}) format('woff2')}`;
+const CHARSET = new Set(readFileSync(new URL('./fonts/charset.txt', import.meta.url), 'utf8'));
+
+/* Advance widths straight out of the embedded face (tools/fonts/metrics.json,
+   exported by the subsetting script). The card can therefore measure a string
+   before it draws it, which is what lets the icon column below sit exactly
+   where it should instead of where a guess says it should. */
+const METRICS = JSON.parse(readFileSync(new URL('./fonts/metrics.json', import.meta.url), 'utf8'));
+const measure = (str, size, weight = 400) => {
+  const table = METRICS.weights[String(weight)] || METRICS.weights['400'];
+  let units = 0;
+  for (const ch of str) units += table[ch] ?? table[' '] ?? 0;
+  return (units / METRICS.unitsPerEm) * size;
+};
+
+/* The emoji is drawn, not typed: GitHub's SVG renderer has no emoji font, so
+   a real vector is the only way U+1F611 is guaranteed to show up. Path data
+   from Twemoji (CC-BY 4.0) — see tools/icons/README.md. */
+const EMOJI = {
+  '1f611': {
+    viewBox: 36,
+    paths: [
+      { fill: '#FFCC4D', d: 'M36 18c0 9.941-8.059 18-18 18-9.94 0-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18' },
+      { fill: '#664500', d: 'M25 26H11c-.552 0-1-.447-1-1s.448-1 1-1h14c.553 0 1 .447 1 1s-.447 1-1 1zm-10-8H8c-.552 0-1-.448-1-1s.448-1 1-1h7c.552 0 1 .448 1 1s-.448 1-1 1zm13 0h-7c-.553 0-1-.448-1-1s.447-1 1-1h7c.553 0 1 .448 1 1s-.447 1-1 1z' },
+    ],
+  },
+};
+
+/* the two line icons are drawn on a 24 grid in the accent colour */
+const LINE_ICONS = {
+  sparkle: {
+    fill: 'M12 2.6l1.9 6 6 1.9-6 1.9-1.9 6-1.9-6-6-1.9 6-1.9z',
+    extra: 'M18.6 3.2l.75 1.95 1.95.75-1.95.75-.75 1.95-.75-1.95L15.9 5.9l1.95-.75z',
+  },
+  terminal: {
+    stroke: 'M3.2 5.4h17.6a1.6 1.6 0 0 1 1.6 1.6v10a1.6 1.6 0 0 1-1.6 1.6H3.2A1.6 1.6 0 0 1 1.6 17V7a1.6 1.6 0 0 1 1.6-1.6z',
+    extra: 'M6.6 9.4l2.7 2.6-2.7 2.6',
+    extra2: 'M12.4 15h4.6',
+  },
+};
+const usedChars = new Set();
+
+/* ── pacing ─────────────────────────────────────────────────────────────
+   Everything on this card runs at half speed: durations and the gaps in
+   between are scaled together so the choreography stays in order. */
+const SLOW = 2;
+const scaleTimes = (markup) =>
+  markup.replace(/\b(begin|dur)="(-?[\d.]+)s"/g, (m, attr, value) => `${attr}="${round(parseFloat(value) * SLOW)}s"`);
+
 /* ==================================================================
- *  animation helper — one code path for the animated file and for frames
+ *  palettes — GitHub colours + glass tokens
  * ================================================================== */
-let FRAME = null;              // null = emit SMIL, number = render that instant
+const THEMES = {
+  dark: {
+    name: 'dark',
+    page: '#0d1117',
+    surface: '#161b22',
+    border: '#30363d',
+    fg: '#e6edf3',
+    fgMuted: '#8b949e',
+    fgSubtle: '#6e7681',
+    accent: '#3fb950',
+    gold: '#d29922',
+    iconTint: 0.3,
+    glass: {
+      fill: '#ffffff', fillOpacity: 0.045,
+      border: '#ffffff', borderOpacity: 0.12,
+      sheen: 0.09,
+    },
+  },
+};
+
+/* ==================================================================
+ *  animation helpers — SMIL for the file, exact maths for still frames
+ * ================================================================== */
+let FRAME = null;
 const isFrame = () => FRAME !== null;
 const ease = (x) => 1 - Math.pow(1 - x, 3);
 const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const prog = (begin, dur) => (isFrame() ? clamp01((FRAME - begin) / dur) : 0);
 const done = (begin) => (isFrame() ? FRAME >= begin : false);
 
-/* fade in (and optionally rise) a block of children */
-const reveal = ({ begin, dur = 0.9, dy = 0, inner }) => {
+const fade = (begin, dur = 0.8) =>
+  `<animate attributeName="opacity" from="0" to="1" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>`;
+
+const rise = (begin, dur, dy = 10) =>
+  `<animateTransform attributeName="transform" type="translate" from="0 ${dy}" to="0 0" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0 ${dy};0 0"/>`;
+
+const reveal = ({ begin, dur = 0.8, dy = 0, inner }) => {
   if (isFrame()) {
     const k = ease(prog(begin, dur));
-    const tr = dy ? ` transform="translate(0 ${round(dy * (1 - k))})"` : '';
-    return `<g opacity="${round(k)}"${tr}>${inner}</g>`;
+    return `<g opacity="${round(k)}"${dy ? ` transform="translate(0 ${round(dy * (1 - k))})"` : ''}>${inner}</g>`;
   }
   return `<g opacity="0">${fade(begin, dur)}${dy ? rise(begin, dur, dy) : ''}${inner}</g>`;
 };
 
-const fade = (begin, dur = 0.9) =>
-  `<animate attributeName="opacity" from="0" to="1" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;1"/>`;
-
-const rise = (begin, dur, dy = 12) =>
-  `<animateTransform attributeName="transform" type="translate" from="0 ${dy}" to="0 0" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0 ${dy};0 0"/>`;
-
-/* a hairline that draws itself */
-const rule = ({ x, y, w, begin, dur = 1, fill = 'url(#hairGrad)' }) => {
-  if (isFrame()) {
-    return rect({ x, y, w: round(w * ease(prog(begin, dur))), h: 1, fill });
-  }
-  return rectEl(
-    { x, y, w: 0, h: 1, fill },
-    `<animate attributeName="width" from="0" to="${round(w)}" begin="${round(begin)}s" dur="${dur}s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${round(w)}"/>`,
-  );
+/* ==================================================================
+ *  TEXT — proportional type revealed one <tspan> per character
+ * ================================================================== */
+const nbsp = (str) => {
+  usedChars.add('\u00a0'); /* the space substitute the typing engine emits */
+  return str.replace(/ /g, '\u00a0');
 };
 
-/* one typewriter glyph, pinned to its own monospace cell */
-const glyph = ({ ch, x, y, size, fill, begin, ls = 0, family = MONO }) => {
-  const cell = size * 0.6 + ls;
-  if (isFrame()) {
-    return text({ x, y, size, fill, family, content: ch, lock: cell, op: done(begin) ? 1 : 0 });
-  }
-  return `<text x="${round(x)}" y="${round(y)}" font-family="${family}" font-size="${round(size)}" fill="${fill}" text-anchor="start" textLength="${round(cell)}" lengthAdjust="spacingAndGlyphs" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${round(begin)}s" dur="0.06s" fill="freeze" calcMode="discrete" values="0;1"/>${esc(ch)}</text>`;
-};
-
-/* a whole string typed out; returns the markup and when it finishes */
-const type = ({ content, x, y, size, fill = T.text, begin, perChar = 0.03, ls = 0, family = MONO, anchor = 'start' }) => {
-  const cell = size * 0.6 + ls;
+const typedText = ({ content, x, y, size, fill, begin, perChar = 0.03, weight = 400, italic = false, anchor = 'middle' }) => {
   const chars = [...content];
-  const width = chars.length * cell;
-  const startX = anchor === 'middle' ? x - width / 2 : anchor === 'end' ? x - width : x;
-  const body = chars
-    .map((ch, i) => glyph({ ch, x: round(startX + i * cell), y, size, fill, ls, family, begin: begin + i * perChar }))
-    .join('');
-  return { svg: body, end: begin + chars.length * perChar, width, x: startX, cell };
-};
-
-/* the blinking caret that walks along while a line is typing */
-const caret = ({ x, y, size, width, begin, perChar, count, ls = 0, color = T.accent }) => {
-  const cell = size * 0.6 + ls;
-  const end = begin + count * perChar;
-  const barY = round(y - size * 0.78);
-  const bar = (px, op, animated) =>
-    rect({ x: round(px), y: barY, w: round(cell * 0.5), h: round(size * 0.92), rx: 1, fill: color, op });
+  chars.forEach((c) => usedChars.add(c));
+  const attrs = `x="${round(x)}" y="${round(y)}" font-family="${SANS}" font-size="${round(size)}" fill="${fill}" text-anchor="${anchor}" xml:space="preserve"${weight !== 400 ? ` font-weight="${weight}"` : ''}${italic ? ' font-style="italic"' : ''}`;
+  const end = begin + chars.length * perChar;
 
   if (isFrame()) {
-    if (FRAME < begin) return '';
-    /* the still export renders the far future: no caret there */
-    if (FRAME > 1000) return '';
-    const typedCount = Math.min(count, Math.max(0, Math.floor((FRAME - begin) / perChar)));
-    const px = x + typedCount * cell;
-    return bar(px, 0.9, false);
+    const typed = FRAME <= 0 ? 0 : Math.min(chars.length, Math.max(0, Math.round((FRAME - begin) / perChar)));
+    return { svg: `<text ${attrs}>${esc(nbsp(chars.slice(0, typed).join('')))}</text>`, end, length: chars.length };
   }
-  /* while typing it steps cell by cell, then it just blinks */
-  return `<g><animate attributeName="opacity" values="1;1;1;0;1" dur="1.05s" begin="${round(end)}s" repeatCount="indefinite"/>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${round(begin - 0.2)}s" dur="0.2s" fill="freeze"/>
-    <g>
-      <animateTransform attributeName="transform" type="translate" values="${round(x)} 0; ${round(x + count * cell)} 0"
-        dur="${round(count * perChar)}s" begin="${round(begin)}s" fill="freeze" calcMode="discrete"/>
-      ${bar(0, 0.9, true)}
-    </g>
-  </g></g>`;
+
+  const tspans = chars
+    .map((ch, i) => `<tspan opacity="0"><animate attributeName="opacity" from="0" to="1" begin="${round(begin + i * perChar)}s" dur="0.09s" fill="freeze" values="0;1"/>${esc(nbsp(ch))}</tspan>`)
+    .join('');
+  return { svg: `<text ${attrs}>${tspans}</text>`, end, length: chars.length };
 };
+
+/* The caret lives inside the same text element as a trailing glyph, so it
+   sits exactly where the line stopped — and once the line is finished it
+   fades away and never comes back. */
+const caretTail = ({ content, begin, perChar, color }) => {
+  if (isFrame()) return '';
+  const chars = [...content].length;
+  const typing = Math.max(0.3, chars * perChar + 0.15);
+  return `<tspan fill="${color}" opacity="0">
+    <animate attributeName="opacity"
+      values="0;0.95;0.95;0.95;0"
+      keyTimes="0;0.06;0.55;0.88;1"
+      dur="${round(typing)}s" begin="${round(begin)}s" fill="freeze"/>
+    |</tspan>`;
+};
+
+/* ── a light that sweeps across a line of text, on a slow loop ───────── */
+function textShine({ id, content, x, y, size, weight = 600, width, begin, theme, period = 7, dur = 1.5, anchor }) {
+  [...content].forEach((c) => usedChars.add(c));
+  const maskId = `${id}-mask`;
+  const gradId = `${id}-grad`;
+  const mask = `<mask id="${maskId}" maskUnits="userSpaceOnUse" x="${round(x - width - 60)}" y="${round(y - size * 1.4)}" width="${round(width * 3 + 120)}" height="${round(size * 2.4)}">
+    <text x="${round(x)}" y="${round(y)}" font-family="${SANS}" font-size="${round(size)}" fill="#ffffff" text-anchor="${anchor || 'middle'}"${weight !== 400 ? ` font-weight="${weight}"` : ''} xml:space="preserve">${esc(nbsp(content))}</text>
+  </mask>`;
+  const grad = `<linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0" stop-color="${theme.page}" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="${theme.page}" stop-opacity="0.92"/>
+    <stop offset="1" stop-color="${theme.page}" stop-opacity="0"/>
+  </linearGradient>`;
+
+  const bandW = Math.max(120, width * 0.5);
+  const from = round(x - bandW);
+  const to = round(x + width * 1.4 + 60);
+  const bandY = round(y - size * 1.05);
+  const bandH = round(size * 1.35);
+
+  const smil = `<g mask="url(#${maskId})">
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="${from} 0; ${to} 0; ${to} 0" keyTimes="0;0.22;1" dur="${period}s" begin="${round(begin)}s" repeatCount="indefinite"/>
+      ${rect({ x: 0, y: bandY, w: bandW, h: bandH, fill: `url(#${gradId})`, op: 0.9 })}
+    </g>
+  </g>`;
+
+  const frame = (() => {
+    const local = ((FRAME - begin) % period + period) % period;
+    if (FRAME < begin || local > period * 0.22) return '';
+    const k = local / (period * 0.22);
+    const gx = from + (to - from) * k;
+    return `<g mask="url(#${maskId})">${rect({ x: gx, y: bandY, w: bandW, h: bandH, fill: `url(#${gradId})`, op: round(0.9 * Math.sin(Math.PI * k)) })}</g>`;
+  })();
+
+  return { defs: [mask, grad], svg: isFrame() ? frame : smil };
+}
 
 /* ==================================================================
- *  ICON TILES — draw in, fill with the brand colour, then breathe
+ *  GLASS PANEL — frosted card with an accent glow behind it
  * ================================================================== */
-function iconTile({ item, x, y, size = 92, begin, index }) {
+function glassPanel({ x, y, w, h, rx = 20, begin, theme }) {
+  const g = theme.glass;
+  const body = `
+  ${rect({ x, y, w, h, rx, fill: g.fill, extra: `fill-opacity="${g.fillOpacity}"` })}
+  ${rect({ x: x + 0.5, y: y + 0.5, w: w - 1, h: h - 1, rx, fill: 'none', extra: `stroke="${g.border}" stroke-opacity="${g.borderOpacity}" stroke-width="1"` })}
+  ${rect({ x: x + 1, y: y + 1, w: w - 2, h: Math.min(46, h * 0.34), rx, fill: `url(#panelSheen)` })}`;
+  return reveal({ begin, dur: 0.85, dy: 16, inner: body });
+}
+
+/* ==================================================================
+ *  LANGUAGE TILE — glass tile with the brand glyph
+ * ================================================================== */
+/* the two the user reaches for most: a gold collar and a touch more size */
+const FEATURED = new Set(['Python', 'JavaScript']);
+
+function languageTile({ item, x, y, w, h, begin, theme, index }) {
+  const featured = FEATURED.has(item);
+  if (featured) { x -= 4; y -= 4; w += 8; h += 8; }
   const slug = slugFor(item);
-  const icon = slug ? brand(slug, { tint: 0.3 }) : null;
+  const icon = slug ? brand(slug, { tint: theme.iconTint }) : null;
+  const glyph = 34;
+  const k = glyph / 24;
+  const cx = x + w / 2;
+  const iconY = y + 30;
+  const haloId = `tileGlow-${theme.name}-${index}`;
+  const g = theme.glass;
 
-  /* the outline draws itself … */
-  const gIcon = icon ? 40 : 30;
-  const k = gIcon / 24;
-  const ix = round(x + size / 2 - gIcon / 2);
-  const iy = round(y + size / 2 - gIcon / 2);
+  const drawK = isFrame() ? ease(prog(begin + 0.25, 0.65)) : 0;
+  const fillK = isFrame() ? ease(prog(begin + 0.75, 0.5)) : 0;
+  const iconSvg = icon
+    ? `<g transform="translate(${round(cx - glyph / 2)} ${round(iconY)}) scale(${round(k)})">
+        <path d="${icon.path}" pathLength="1" fill="none" stroke="${icon.color}" stroke-width="1.4" stroke-linejoin="round"
+          stroke-dasharray="1" stroke-dashoffset="${isFrame() ? round(1 - drawK) : 1}">
+          ${isFrame() ? '' : `<animate attributeName="stroke-dashoffset" from="1" to="0" begin="${round(begin + 0.25)}s" dur="0.65s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.6 0.2 1" values="1;0"/>`}
+        </path>
+        <path d="${icon.path}" fill="${icon.color}" opacity="${isFrame() ? round(fillK) : 0}">
+          ${isFrame() ? '' : fade(begin + 0.75, 0.5)}
+        </path>
+      </g>`
+    : text({ x: cx, y: iconY + glyph * 0.75, size: 20, weight: 600, fill: theme.fgMuted, anchor: 'middle', content: item.slice(0, 3) });
 
-  const outline = icon
-    ? `<g transform="translate(${ix} ${iy}) scale(${round(k)})">
-      <path d="${icon.path}" pathLength="1" fill="none" stroke="${icon.color}" stroke-width="1.15"
-        stroke-linejoin="round" stroke-linecap="round"
-        stroke-dasharray="1" stroke-dashoffset="${isFrame() ? round(1 - ease(prog(begin + 0.12, 0.85))) : 1}"
-        opacity="${round(0.55 + 0.35 * ease(prog(begin + 0.12, 0.85)))}">
-        ${isFrame() ? '' : `<animate attributeName="stroke-dashoffset" from="1" to="0" begin="${round(begin + 0.12)}s" dur="0.85s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.3 0.6 0.2 1" values="1;0"/>`}
-      </path>
-    </g>`
-    : '';
+  const haloBegin = begin + 0.4;
+  const halo = (() => {
+    if (isFrame()) {
+      const local = FRAME - haloBegin;
+      const phase = local <= 0 ? 0 : 0.5 - 0.5 * Math.cos((2 * Math.PI * local) / 4.4);
+      return rect({ x: x + 1, y: y + 1, w: w - 2, h: h - 2, rx: 16, fill: `url(#${haloId})`, op: round(0.22 + 0.2 * phase) });
+    }
+    return rectEl(
+      { x: x + 1, y: y + 1, w: w - 2, h: h - 2, rx: 16, fill: `url(#${haloId})`, op: 0.22 },
+      `<animate attributeName="opacity" values="0.18;0.42;0.18" dur="4.4s" begin="${round(haloBegin)}s" repeatCount="indefinite"/>`
+    );
+  })();
 
-  /* … then the solid glyph fades in on top */
-  const solid = icon
-    ? `<g transform="translate(${ix} ${iy}) scale(${round(k)})" opacity="${isFrame() ? round(ease(prog(begin + 0.9, 0.6))) : 0}">
-      ${isFrame() ? '' : fade(begin + 0.9, 0.6)}
-      <path d="${icon.path}" fill="${icon.color}"/>
-    </g>`
-    : `<g opacity="${isFrame() ? round(ease(prog(begin + 0.9, 0.6))) : 0}">
-      ${isFrame() ? '' : fade(begin + 0.9, 0.6)}
-      ${text({ x: x + size / 2, y: y + size / 2 + 6, size: 17, weight: 600, fill: T.muted, anchor: 'middle', content: item.slice(0, 3) })}
-    </g>`;
-
-  /* halo behind the glyph: pulses in once, then keeps a slow breath.
-     every tile uses the same period, so the row moves together. */
-  const haloBegin = begin + 0.35;
-  const breathe = isFrame()
-    ? (() => {
-        const local = FRAME - haloBegin;
-        const phase = local <= 0 ? 0 : 0.5 - 0.5 * Math.cos((2 * Math.PI * local) / 4.4);
-        return round(0.1 + 0.16 * phase);
-      })()
-    : 0.1;
-
-  const halo = isFrame()
-    ? `<circle cx="${round(x + size / 2)}" cy="${round(y + size / 2)}" r="${round(size * 0.42)}" fill="url(#halo${index})" opacity="${breathe}"/>`
-    : `<circle cx="${round(x + size / 2)}" cy="${round(y + size / 2)}" r="${round(size * 0.42)}" fill="url(#halo${index})" opacity="0"><animate attributeName="opacity" values="0;0.26;0.1;0.26;0.1" dur="4.4s" begin="${round(haloBegin)}s" repeatCount="indefinite"/></circle>`;
-
-  /* the whole tile floats gently, all tiles share the period */
   const floatBegin = begin + 0.9;
   const floatY = (() => {
     if (!isFrame()) return 0;
     const local = FRAME - floatBegin;
     if (local <= 0) return 0;
-    return round(-2.6 * (0.5 - 0.5 * Math.cos((2 * Math.PI * local) / 4.4)));
+    return round(-2.2 * (0.5 - 0.5 * Math.cos((2 * Math.PI * local) / 4.4)));
   })();
 
-  const inner = `
-  ${halo}
-  ${outline}
-  ${solid}`;
-
-  const tile = reveal({
-    begin, dur: 0.5, dy: 10,
-    inner: `
-    ${rect({ x, y, w: size, h: size, rx: 20, fill: T.track, op: 0.55, stroke: T.hair, sw: 1 })}
-    <g transform="translate(0 ${isFrame() ? floatY : 0})">
-      ${isFrame() ? '' : `<animateTransform attributeName="transform" type="translate" values="0 0; 0 -2.6; 0 0" dur="4.4s" begin="${round(floatBegin)}s" repeatCount="indefinite"/>`}
-      ${inner}
-    </g>`,
+  const label = typedText({
+    content: item, x: cx, y: y + h - 20, size: 13.5,
+    fill: theme.fgMuted, begin: begin + 1.05, perChar: 0.03,
   });
 
-  /* a brand-coloured underline draws under the tile, then settles to hairline */
-  const underY = y + size + 12;
-  const brandLine = isFrame()
-    ? `<g opacity="${round(0.75 * (1 - prog(begin + 1.1, 0.9)))}">
-        ${rect({ x, y: underY, w: round(size * ease(prog(begin + 0.15, 0.9))), h: 1, fill: icon ? icon.color : T.muted })}
-      </g>`
-    : `<g opacity="0"><animate attributeName="opacity" values="0.75;0.75;0" dur="1.6s" begin="${round(begin + 0.15)}s" fill="freeze"/>
-        ${rectEl({ x, y: underY, w: 0, h: 1, fill: icon ? icon.color : T.muted }, `<animate attributeName="width" from="0" to="${size}" begin="${round(begin + 0.15)}s" dur="0.9s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.22 0.61 0.2 1" values="0;${size}"/>`)}
-      </g>`;
-  const hairLine = isFrame()
-    ? rect({ x, y: underY, w: round(size * ease(prog(begin + 0.15, 0.9))), h: 1, fill: T.hair })
-    : '';
+  const body = `
+  ${rect({ x, y, w, h, rx: 16, fill: g.fill, extra: `fill-opacity="${round(g.fillOpacity * 0.9, 3)}"` })}
+  ${rect({ x: x + 0.5, y: y + 0.5, w: w - 1, h: h - 1, rx: 16, fill: 'none', extra: `stroke="${g.border}" stroke-opacity="${g.borderOpacity}" stroke-width="1"` })}
+  ${halo}
+  <g transform="translate(0 ${isFrame() ? floatY : 0})">
+    ${isFrame() ? '' : `<animateTransform attributeName="transform" type="translate" values="0 0; 0 -2.2; 0 0" dur="4.4s" begin="${round(floatBegin)}s" repeatCount="indefinite"/>`}
+    ${iconSvg}
+  </g>
+  ${label.svg}
+  ${featured ? rect({ x: x + 0.75, y: y + 0.75, w: w - 1.5, h: h - 1.5, rx: 15.2, fill: 'none', extra: `stroke="${theme.gold}" stroke-opacity="0.6" stroke-width="1.5"` }) : ''}
+  ${featured ? rect({ x: round(x + w / 2 - 13), y: round(y + h - 9), w: 26, h: 3, rx: 1.5, fill: theme.gold, op: 0.85 }) : ''}`;
 
-  return { svg: `${tile}${brandLine}${hairLine}`, halo: `halo${index}` };
+  return {
+    svg: reveal({ begin, dur: 0.55, dy: 12, inner: body }),
+    defs: [
+      `<radialGradient id="${haloId}" cx="50%" cy="26%" r="90%">
+        <stop offset="0" stop-color="${icon ? icon.color : theme.accent}" stop-opacity="0.2"/>
+        <stop offset="1" stop-color="${icon ? icon.color : theme.accent}" stop-opacity="0"/>
+      </radialGradient>`,
+    ],
+    end: label.end,
+  };
 }
 
 /* ==================================================================
  *  THE CARD
+ *
+ *  One centred column with a lot of air around it. The name is the main
+ *  title; every sentence after it is treated as a heading too — its own
+ *  line, bold, generously spaced, big enough to read at a glance.
+ *  The stack sits in a single frosted glass panel.
  * ================================================================== */
-function build() {
+function buildCard(theme) {
   const W = 1000;
-  const M = 76;
-  const CW = W - M * 2;
+  const PAD = 56;
+  const CW = W - PAD * 2;
+  const CX = W / 2;
+  const parts = [];
+  const defs = [`<style>${fontCss}</style>`];
 
-  const name = identity.name;
-  const role = identity.role.toUpperCase();
-  const headline = identity.tagline;
-  const aboutLines = wrapText(identity.about, CW, 14, 0.6);
+  /* every sentence gets a line of its own */
+  const tagBits = identity.tagline.split(/,\s*/);
+  const taglineLines = tagBits.map((b, i) => (i < tagBits.length - 1 ? `${b},` : b));
+  const aboutLines = identity.about.split(/(?<=[.!?])\s+/).filter(Boolean);
 
-  /* ---- timeline: each text starts once the previous one is done ---- */
-  const S = [];
-  const P = [];
-  let t = 0.45;
+  let t = 0.5;
 
-  /* frame */
-  const perimeter = 2 * (W - 1.5) + 2 * (700 - 1.5);
-  void perimeter;
-
-  /* name */
-  const n = type({ content: name, x: W / 2, y: 100, size: 40, weight: 400, begin: t, perChar: 0.05, anchor: 'middle' });
-  S.push(n.svg, caret({ x: n.x, y: 100, size: 40, width: n.width, begin: t, perChar: 0.05, count: name.length }));
-  t = n.end + 0.35;
-
-  /* role */
-  const r = type({ content: role, x: W / 2, y: 134, size: 13, fill: T.accent, begin: t, perChar: 0.035, ls: 3, anchor: 'middle' });
-  S.push(r.svg, caret({ x: r.x, y: 134, size: 13, width: r.width, begin: t, perChar: 0.035, count: role.length, ls: 3 }));
-  t = r.end + 0.4;
-
-  /* headline */
-  const h = type({ content: headline, x: W / 2, y: 182, size: 18, begin: t, perChar: 0.024, anchor: 'middle' });
-  S.push(h.svg, caret({ x: h.x, y: 182, size: 18, width: h.width, begin: t, perChar: 0.024, count: headline.length }));
-  t = h.end + 0.6;
-
-  /* about */
-  S.push(reveal({ begin: t - 0.2, dur: 0.5, inner: rule({ x: M, y: 214, w: CW, begin: t - 0.2, dur: 0.9 }) }));
-  t += 0.35;
-  const aboutLabel = type({ content: 'ABOUT', x: M, y: 252, size: 11.5, fill: T.accent, begin: t, perChar: 0.045, ls: 3 });
-  S.push(aboutLabel.svg);
-  t = aboutLabel.end + 0.3;
-
-  aboutLines.forEach((line, i) => {
-    const y = 288 + i * 26;
-    const lineBegin = t + i * 0.18;
-    const ln = type({ content: line, x: M, y, size: 14, fill: T.muted, begin: lineBegin, perChar: 0.011 });
-    const cr = caret({ x: ln.x, y, size: 14, width: ln.width, begin: lineBegin, perChar: 0.011, count: line.length, color: T.muted });
-    S.push(reveal({ begin: lineBegin, dur: 0.4, dy: 6, inner: ln.svg + cr }));
+  /* ── the main title ──────────────────────────────────────────────── */
+  const nameY = 112;
+  const name = typedText({
+    content: identity.name, x: CX, y: nameY, size: 54, fill: theme.fg,
+    begin: t, perChar: 0.055, weight: 600,
   });
-  t = t + 0.18 + aboutLines.length * 0.18 + Math.max(...aboutLines.map((l) => l.length)) * 0.011 + 0.35;
+  parts.push(name.svg.replace('</text>', caretTail({ content: identity.name, begin: t, perChar: 0.055, color: theme.fgSubtle }) + '</text>'));
+  t = name.end + 0.3;
 
-  if (quote) {
-    const q = type({ content: quote, x: W / 2, y: 288 + aboutLines.length * 26 + 16, size: 13.5, fill: T.dim, begin: t, perChar: 0.018, anchor: 'middle' });
-    S.push(q.svg);
-    t = q.end + 0.6;
+  /* ── role: the second title line ─────────────────────────────────── */
+  const roleY = nameY + 54;
+  const role = typedText({
+    content: identity.role, x: CX, y: roleY, size: 26, fill: theme.fgMuted,
+    begin: t, perChar: 0.04, weight: 600,
+  });
+  parts.push(role.svg.replace('</text>', caretTail({ content: identity.role, begin: t, perChar: 0.04, color: theme.fgSubtle }) + '</text>'));
+  const roleWipe = textShine({
+    id: `wipe-${theme.name}-role`, content: identity.role, x: CX, y: roleY, size: 26,
+    weight: 600, width: measure(identity.role, 26, 600), begin: role.end + 0.8, theme, period: 9.5,
+  });
+  parts.push(roleWipe.svg);
+  defs.push(roleWipe.defs);
+  t = role.end + 0.6;
+
+  /* ── the tagline, one clause per line ────────────────────────────── */
+  const tagY = roleY + 94;
+  const tagStep = 52;
+  let cursor = t;
+  taglineLines.forEach((line, i) => {
+    /* strictly one after another: a line only starts once the one above it
+       has finished typing and had a beat to be read */
+    const begin = cursor;
+    const ln = typedText({
+      content: line, x: CX, y: tagY + i * tagStep, size: 27, fill: theme.fg,
+      begin, perChar: 0.04, weight: 600,
+    });
+    parts.push(reveal({
+      begin, dur: 0.6, dy: 12,
+      inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.04, color: theme.fgSubtle }) + '</text>'),
+    }));
+    /* ~1s of wall time between one line finishing and the next starting
+       (the whole timeline is scaled by SLOW, so 0.51 here is ~1.02s on screen) */
+    cursor = ln.end + 0.51;
+  });
+  t = cursor + 0.3;
+
+  /* ── about: a feature list — one line per row, each with its own mark ── */
+  const rows = identity.aboutRows || aboutLines.map((line) => ({ icon: null, text: line }));
+  const rowSize = 21.5;
+  const badge = 42;
+  const rowGap = 18;
+  const rowStep = 60;
+  const padX = 34;
+  const padY = 28;
+
+  /* full width, matching the stack panel below it — two panels of different
+     widths read as an accident, the same width reads as a system */
+  const aboutPanelW = CW;
+  const aboutPanelX = PAD;
+  const aboutPanelY = tagY + (taglineLines.length - 1) * tagStep + 78;
+  const aboutH = padY * 2 + (rows.length - 1) * rowStep + badge;
+
+  parts.push(glassPanel({ x: aboutPanelX, y: aboutPanelY, w: aboutPanelW, h: aboutH, begin: t, theme }));
+
+  const rowsX = round(aboutPanelX + padX);
+  const rowsTop = round(aboutPanelY + padY);
+
+  /* a hairline rail linking the marks. Drawn as segments that start below one
+     badge and stop above the next, so it never crosses a badge or its frame
+     (the badge fill is translucent and would let a continuous line show
+     through). Each segment draws itself downward as its row arrives. */
+  const railX = round(rowsX + badge / 2 - 0.5);
+  const railGap = 3;   /* ends just short of the frames, so the rail reads as a
+                         line that passes behind the badges rather than a dot */
+  let railBegin = t + 0.5;
+  for (let i = 0; i < rows.length - 1; i += 1) {
+    const y1 = round(rowsTop + i * rowStep + badge + railGap);
+    const y2 = round(rowsTop + (i + 1) * rowStep - railGap);
+    const len = round(y2 - y1);
+    const begin = railBegin + i * 0.3;
+    parts.push(
+      isFrame()
+        ? rect({ x: railX, y: y1, w: 1, h: round(len * ease(prog(begin, 0.5))), fill: theme.glass.border, op: round(theme.glass.borderOpacity * 1.7, 3) })
+        : rectEl(
+            { x: railX, y: y1, w: 1, h: 0, fill: theme.glass.border, op: round(theme.glass.borderOpacity * 1.7, 3) },
+            `<animate attributeName="height" from="0" to="${len}" begin="${round(begin)}s" dur="0.5s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;${len}"/>`,
+          ),
+    );
   }
 
-  /* stack */
-  S.push(reveal({ begin: t, dur: 0.5, inner: rule({ x: M, y: t > 0 ? 0 : 0, w: CW, begin: t, dur: 0.9 }) }));
-  const stackRuleY = 288 + aboutLines.length * 26 + (quote ? 52 : 12);
-  S.length -= 1;                                  /* drop the placeholder above */
-  S.push(reveal({ begin: t - 0.1, dur: 0.5, inner: rule({ x: M, y: stackRuleY, w: CW, begin: t - 0.1, dur: 0.9 }) }));
-  t += 0.4;
+  let cursor2 = t + 0.4;
 
-  const stackLabel = type({ content: 'STACK', x: M, y: stackRuleY + 40, size: 11.5, fill: T.accent, begin: t, perChar: 0.045, ls: 3 });
-  S.push(stackLabel.svg);
-  t = stackLabel.end + 0.35;
+  rows.forEach((row, i) => {
+    const top = rowsTop + i * rowStep;
+    const cy = round(top + badge / 2);
+    const textX = round(rowsX + badge + rowGap);
+    const begin = cursor2;
 
-  /* tiles */
-  const tile = 92;
-  const gap = (CW - langs.length * tile) / Math.max(1, langs.length - 1);
-  const tileY = stackRuleY + 66;
-  const tileX = (i) => round(M + i * (tile + gap));
+    /* the mark: a glass badge holding a drawn icon (or the emoji) */
+    /* an accent ring settles onto the badge a beat after the row lands */
+    const ringBegin = begin + 0.55;
+    const ring = isFrame()
+      ? rect({ x: rowsX + 0.5, y: top + 0.5, w: badge - 1, h: badge - 1, rx: 12, fill: 'none', extra: `stroke="${theme.accent}" stroke-opacity="${round(0.32 * ease(prog(ringBegin, 0.6)), 3)}" stroke-width="1.25"` })
+      : rectEl(
+          { x: rowsX + 0.5, y: top + 0.5, w: badge - 1, h: badge - 1, rx: 12, fill: 'none', extra: `stroke="${theme.accent}" stroke-width="1.25"`, op: 0 },
+          `<animate attributeName="opacity" from="0" to="0.32" begin="${round(ringBegin)}s" dur="0.6s" fill="freeze" values="0;0.32"/>`,
+        );
 
-  langs.forEach((item, i) => {
-    P.push(`<radialGradient id="halo${i}" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="${(slugFor(item) ? brand(slugFor(item)).color : T.accent)}" stop-opacity="0.45"/>
-      <stop offset="0.6" stop-color="${T.accent}" stop-opacity="0.07"/>
-      <stop offset="1" stop-color="${T.accent}" stop-opacity="0"/>
-    </radialGradient>`);
-    const begin = t + i * 0.16;
-    const built = iconTile({ item, x: tileX(i), y: tileY, size: tile, begin, index: i });
-    S.push(built.svg);
+    const mark = (() => {
+      if (row.icon && row.icon.startsWith('emoji:')) {
+        const e = EMOJI[row.icon.slice(6)];
+        const k = round(26 / e.viewBox);
+        return `<g transform="translate(${round(rowsX + (badge - 26) / 2)} ${round(top + (badge - 26) / 2)}) scale(${k})">${e.paths
+          .map((p) => `<path d="${p.d}" fill="${p.fill}"/>`)
+          .join('')}</g>`;
+      }
+      const icon = LINE_ICONS[row.icon] || LINE_ICONS.sparkle;
+      const k = round(21 / 24);
+      const inner = icon.stroke
+        ? `<path d="${icon.stroke}" fill="none" stroke="${theme.fgMuted}" stroke-width="1.7" stroke-linejoin="round"/>
+           <path d="${icon.extra}" fill="none" stroke="${theme.accent}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+           ${icon.extra2 ? `<path d="${icon.extra2}" fill="none" stroke="${theme.accent}" stroke-width="1.9" stroke-linecap="round"/>` : ''}`
+        : `<path d="${icon.fill}" fill="${theme.accent}"/>${icon.extra ? `<path d="${icon.extra}" fill="${theme.accent}" opacity="0.75"/>` : ''}`;
+      return `<g transform="translate(${round(rowsX + (badge - 21) / 2)} ${round(top + (badge - 21) / 2)}) scale(${k})">${inner}</g>`;
+    })();
 
-    const label = type({ content: item, x: tileX(i) + tile / 2, y: tileY + tile + 34, size: 12.5, fill: T.muted, begin: begin + 1.05, perChar: 0.03, anchor: 'middle' });
-    S.push(label.svg);
+    parts.push(reveal({
+      begin, dur: 0.5, dy: 8,
+      inner: `
+      ${rect({ x: rowsX, y: top, w: badge, h: badge, rx: 12, fill: theme.glass.fill, extra: `fill-opacity="${theme.glass.fillOpacity}"` })}
+      ${rect({ x: rowsX + 0.5, y: top + 0.5, w: badge - 1, h: badge - 1, rx: 12, fill: 'none', extra: `stroke="${theme.glass.border}" stroke-opacity="${theme.glass.borderOpacity}" stroke-width="1"` })}
+      ${ring}
+      ${mark}`,
+    }));
+
+    const ln = typedText({
+      content: row.text, x: textX, y: round(cy + 8), size: rowSize, fill: theme.fg,
+      begin: begin + 0.12, perChar: 0.012, weight: 600, anchor: 'start',
+    });
+    parts.push(reveal({
+      begin: begin + 0.12, dur: 0.5, dy: 8,
+      inner: ln.svg.replace('</text>', caretTail({ content: row.text, begin: begin + 0.12, perChar: 0.012, color: theme.fgSubtle }) + '</text>'),
+    }));
+    cursor2 = ln.end + 0.85;
   });
-  t = t + (langs.length - 1) * 0.16 + 1.05 + Math.max(...langs.map((l) => l.length)) * 0.03 + 0.5;
 
-  /* closing */
-  const closeRuleY = tileY + tile + 64;
-  S.push(reveal({ begin: t, dur: 0.5, inner: rule({ x: M, y: closeRuleY, w: CW, begin: t, dur: 0.9 }) }));
-  t += 0.45;
+  t = cursor2 + 0.45;
 
-  const head = cfg.footer?.headline || 'Let’s build something.';
-  const hp = type({ content: head, x: W / 2, y: closeRuleY + 52, size: 20, begin: t, perChar: 0.035, anchor: 'middle' });
-  S.push(hp.svg, caret({ x: hp.x, y: closeRuleY + 52, size: 20, width: hp.width, begin: t, perChar: 0.035, count: head.length }));
-  t = hp.end + 0.3;
+  /* ── one frosted panel holds the stack ───────────────────────────── */
+  const innerPad = 30;
+  const tileGap = 14;
+  const tileH = 110;
+  const tileW = Math.floor((CW - innerPad * 2 - tileGap * (langs.length - 1)) / langs.length);
+  const rowW = tileW * langs.length + tileGap * (langs.length - 1);
+  const panelY = aboutPanelY + aboutH + 44;
+  const panelH = innerPad * 2 + tileH;
 
+  parts.push(glassPanel({ x: PAD, y: panelY, w: CW, h: panelH, begin: t, theme }));
+
+  const tilesX = round(PAD + (CW - rowW) / 2);
+  const tilesY = panelY + innerPad;
+  let tileEnd = t;
+  langs.forEach((item, i) => {
+    const built = languageTile({
+      item, x: tilesX + i * (tileW + tileGap), y: tilesY, w: tileW, h: tileH,
+      begin: t + 0.3 + i * 0.12, theme, index: i,
+    });
+    parts.push(built.svg);
+    defs.push(built.defs);
+    tileEnd = Math.max(tileEnd, built.end);
+  });
+  t = tileEnd + 0.5;
+
+  /* ── footer ──────────────────────────────────────────────────────── */
+  const footY = panelY + panelH + 64;
   const handleLine = `@${identity.handle} · ${identity.location}`;
-  const hl = type({ content: handleLine, x: W / 2, y: closeRuleY + 84, size: 13, fill: T.dim, begin: t, perChar: 0.03, anchor: 'middle' });
-  S.push(hl.svg);
-  /* the live dot appears once the handle is typed */
-  const dotX = hl.x - 18;
-  const dotBegin = hl.end + 0.1;
-  S.push(
+  const handleW = round(handleLine.length * 6.9);
+  const handle = typedText({
+    content: handleLine, x: CX + 14, y: footY, size: 13.5, fill: theme.fgMuted,
+    begin: t, perChar: 0.028,
+  });
+  parts.push(handle.svg);
+  const dotBegin = t + handleLine.length * 0.028 + 0.15;
+  const dotCx = round(CX + 14 - handleW / 2 - 18);
+  parts.push(
     isFrame()
-      ? `<circle cx="${round(dotX)}" cy="${closeRuleY + 79.5}" r="3.6" fill="${T.accent}" opacity="${done(dotBegin) ? 1 : 0}"/>`
-      : `<circle cx="${round(dotX)}" cy="${closeRuleY + 79.5}" r="3.6" fill="${T.accent}" opacity="0">
-          ${fade(dotBegin, 0.4)}
+      ? `<circle cx="${dotCx}" cy="${footY - 4.5}" r="4" fill="${theme.accent}" opacity="${done(dotBegin) ? 1 : 0}"/>`
+      : `<circle cx="${dotCx}" cy="${footY - 4.5}" r="4" fill="${theme.accent}" opacity="0">${fade(dotBegin, 0.4)}
           <animate attributeName="opacity" values="1;0.25;1" dur="2.4s" begin="${round(dotBegin + 0.4)}s" repeatCount="indefinite"/>
         </circle>`
   );
-  t = t + handleLine.length * 0.03 + 0.6;
+  const total = dotBegin + 0.8;
 
-  /* height follows the content */
-  const H = round(closeRuleY + 84 + 52);
+  const H = round(footY + 46);
 
-  /* card shell */
-  const shell = [
-    rect({ x: 0, y: 0, w: W, h: H, fill: T.bg }),
-    (() => {
-      const per = round(2 * (W - 1.5) + 2 * (H - 1.5) - 8 * 22 + 2 * Math.PI * 22);
-      const drawn = isFrame() ? ease(prog(0.05, 1.3)) : 0;
-      const border = rectEl(
-        {
-          x: 0.75, y: 0.75, w: W - 1.5, h: H - 1.5, rx: 22, fill: T.card, stroke: T.hair, sw: 1.5,
-          extra: `stroke-dasharray="${per}" stroke-dashoffset="${isFrame() ? round(per * (1 - drawn)) : per}"`,
-        },
-        isFrame() ? '' : `<animate attributeName="stroke-dashoffset" from="${per}" to="0" begin="0.05s" dur="1.3s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="${per};0"/>`,
-      );
-      return `<g opacity="${isFrame() ? drawn : 0}">
-        ${isFrame() ? '' : fade(0.05, 0.6)}
-        ${border}
-      </g>`;
-    })(),
-    `<ellipse cx="${W / 2}" cy="4" rx="540" ry="250" fill="url(#cardGlow)" opacity="${isFrame() ? round(0.85 + 0.1 * Math.sin(FRAME)) : 0.9}">
-      ${isFrame() ? '' : '<animate attributeName="opacity" values="0.8;1;0.8" dur="12s" repeatCount="indefinite"/>'}
-    </ellipse>`,
-  ].join('\n');
+  /* the page-colour plate under everything */
+  parts.unshift(rect({ x: 0, y: 0, w: W, h: H, fill: theme.page }));
 
-  P.push(lgrad('hairGrad', [[0, T.accent, 0], [0.5, T.hair, 1], [1, T.accent, 0]]));
-  P.push(rgrad('cardGlow', [[0, T.accent, 0.07], [0.6, T.accent, 0.02], [1, T.accent, 0]]));
-  P.push(`<clipPath id="cardClip"><rect x="1" y="1" width="${W - 2}" height="${H - 2}" rx="21"/></clipPath>`);
+  defs.push(`<linearGradient id="panelSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="${theme.glass.sheen}"/>
+    <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>`);
 
-  const card = svg({
+  const canvas = svg({
     w: W, h: H,
-    title: `${name} — ${identity.role}`,
-    defs: P.join('\n'),
-    body: `<g clip-path="url(#cardClip)">${shell}\n${S.join('\n')}</g>`,
+    title: `${identity.name} — ${identity.role}`,
+    defs: defs.flat().join('\n'),
+    body: parts.join('\n'),
   });
 
-  return { card, total: t, W, H };
+  return { canvas, total, W, H };
 }
 
 /* ==================================================================
@@ -364,46 +556,67 @@ const OUT = (rel) => new URL(`../${rel}`, import.meta.url);
 mkdirSync(OUT('assets'), { recursive: true });
 mkdirSync(new URL('./.preview', import.meta.url), { recursive: true });
 
-const render = (t, zoom = 1) => {
-  FRAME = t;
-  const { card } = build();
-  FRAME = null;
-  const png = new Resvg(card, {
-    fitTo: { mode: 'zoom', value: zoom },
-    font: { loadSystemFonts: true, defaultFontFamily: 'monospace' },
-  }).render().asPng();
-  return { png, card };
-};
+/* one card, one theme — light mode was dropped on request */
+const wanted = ['dark'];
+const rendered = {};
 
-/* the animated file */
-FRAME = null;
-const { card, total, W, H } = build();
-const clean = card.replace(/\n{3,}/g, '\n\n');
-/* refuse to write a file GitHub would reject — this is what bit us before */
-const info = validateCard(clean);
-writeFileSync(OUT('assets/card.svg'), clean);
-console.log(`  ✓ assets/card.svg  ${W}×${H}, ${(info.bytes / 1024).toFixed(1)} KB, animation runs ${round(total)}s — XML valid (${info.groups} groups, ${info.defined} ids)`);
+for (const variant of wanted) {
+  const theme = THEMES[variant];
+  FRAME = null;
+  const { canvas, total, W, H } = buildCard(theme);
+  /* NBSP must survive this tidy-up: in JS \s matches U+00A0 too, and eating
+     it is exactly what once glued every word together on GitHub. */
+  const clean = scaleTimes(canvas.replace(/>[ \t\r\n]+</g, '><').replace(/\n{2,}/g, '\n'));
+  const missing = [...usedChars].filter((c) => c !== ' ' && !CHARSET.has(c));
+  if (missing.length) {
+    throw new Error(
+      `the card prints ${missing.length} character(s) missing from the embedded font: ` +
+      `${missing.map((c) => `U+${c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`).join(' ')} — ` +
+      'add them to tools/fonts/charset.txt and rebuild the subsets (see tools/fonts/README.md)',
+    );
+  }
+  usedChars.clear();
+  const info = validateCard(clean, `card-${variant}.svg`);
+  writeFileSync(OUT(`assets/card-${variant}.svg`), clean);
+  console.log(`  ✓ assets/card-${variant}.svg  ${W}×${H}, ${(info.bytes / 1024).toFixed(1)} KB, ${round(total * SLOW)}s — XML valid (${info.groups} groups)`);
+
+  const render = (time, zoom) => {
+    FRAME = time / SLOW;
+    const { canvas: frame } = buildCard(theme);
+    FRAME = null;
+    return new Resvg(frame, {
+      fitTo: { mode: 'zoom', value: zoom },
+      font: { fontFiles: FONT_FILES, loadSystemFonts: true, defaultFontFamily: 'Mona Sans' },
+    }).render().asPng();
+  };
+  rendered[variant] = { render, total, W, H, page: theme.page };
+}
 
 if (process.argv.includes('--png')) {
-  const { png } = render(1e6, 2);
-  writeFileSync(OUT('assets/card.png'), png);
-  console.log(`  ✓ assets/card.png  (settled frame @2×, ${(png.length / 1024).toFixed(0)} KB)`);
+  for (const variant of wanted) {
+    const png = rendered[variant].render(1e6, 2);
+    writeFileSync(OUT(`assets/card-${variant}.png`), png);
+    console.log(`  ✓ assets/card-${variant}.png  (settled frame @2×, ${(png.length / 1024).toFixed(0)} KB)`);
+  }
 }
 
 if (process.argv.includes('--gif')) {
-  const step = 0.3;
-  const frames = [];
-  for (let i = 0, t = 0; t <= total + 2.6; i++, t += step) {
-    const { png } = render(t, 1);
-    const file = new URL(`./.preview/frames/f${String(i).padStart(3, '0')}.png`, import.meta.url);
-    mkdirSync(new URL('./.preview/frames/', import.meta.url), { recursive: true });
-    writeFileSync(file, png);
-    frames.push(file.pathname);
+  for (const variant of wanted) {
+    const { render, total, W, H, page } = rendered[variant];
+    const dir = new URL(`./.preview/frames-${variant}/`, import.meta.url);
+    mkdirSync(dir, { recursive: true });
+    const step = 0.4;
+    const frames = [];
+    for (let i = 0, time = 0; time <= total * SLOW + 4; i++, time += step) {
+      const file = new URL(`f${String(i).padStart(3, '0')}.png`, dir);
+      writeFileSync(file, render(time, 1));
+      frames.push(file.pathname);
+    }
+    const gif = new URL(`./.preview/card-${variant}.gif`, import.meta.url);
+    execFileSync('convert', [
+      '-delay', String(Math.round(step * 100)), '-loop', '0',
+      ...frames, '-resize', '760x', '-colors', '96', '-layers', 'OptimizePlus', gif.pathname,
+    ]);
+    console.log(`  ✓ tools/.preview/card-${variant}.gif  (${frames.length} frames, ${W}×${H} on ${page})`);
   }
-  const gif = new URL('./.preview/card.gif', import.meta.url);
-  execFileSync('convert', [
-    '-delay', String(Math.round(step * 100)), '-loop', '0',
-    ...frames, '-resize', '760x', '-colors', '96', '-layers', 'OptimizePlus', gif.pathname,
-  ]);
-  console.log(`  ✓ tools/.preview/card.gif  (${frames.length} frames)`);
 }

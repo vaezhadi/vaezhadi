@@ -1,10 +1,11 @@
 /* ------------------------------------------------------------------
- *  validate-svg.mjs — sanity checks for the generated card:
- *    1. it must be well-formed XML (GitHub refuses anything else)
- *    2. every url(#id) must point at something that exists
+ *  validate-svg.mjs — sanity checks for the generated cards:
+ *    1. well-formed XML (GitHub refuses anything else)
+ *    2. every url(#id) points at something that exists
+ *    3. balanced <g> groups
  *  run:  node tools/validate-svg.mjs   (the build runs it too)
  * ------------------------------------------------------------------ */
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { XMLValidator } from 'fast-xml-parser';
 
 export function validateCard(svgText, label = 'card.svg') {
@@ -17,7 +18,7 @@ export function validateCard(svgText, label = 'card.svg') {
   const defined = new Set([...svgText.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
   const used = new Set([...svgText.matchAll(/url\(#([^)]+)\)/g)].map((m) => m[1]));
   const missing = [...used].filter((id) => !defined.has(id));
-  if (missing.length) throw new Error(`${label} references undefined gradient/mask/clip ids: ${missing.join(', ')}`);
+  if (missing.length) throw new Error(`${label} references undefined ids: ${missing.join(', ')}`);
 
   const opens = (svgText.match(/<g[\s>]/g) || []).length;
   const closes = (svgText.match(/<\/g>/g) || []).length;
@@ -27,7 +28,13 @@ export function validateCard(svgText, label = 'card.svg') {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const file = new URL('../assets/card.svg', import.meta.url);
-  const info = validateCard(readFileSync(file, 'utf8'));
-  console.log(`✓ ${'assets/card.svg'} is valid — ${info.groups} groups, ${info.defined} ids, ${(info.bytes / 1024).toFixed(1)} KB`);
+  const files = ['assets/card-dark.svg'];
+  let bad = 0;
+  for (const rel of files) {
+    const url = new URL(`../${rel}`, import.meta.url);
+    if (!existsSync(url)) { console.log(`· ${rel} — not built yet`); continue; }
+    const info = validateCard(readFileSync(url, 'utf8'), rel);
+    console.log(`✓ ${rel} — ${info.groups} groups, ${info.defined} ids, ${(info.bytes / 1024).toFixed(1)} KB`);
+  }
+  process.exit(bad);
 }
