@@ -1,0 +1,51 @@
+{
+  "identity": {
+    "handle": "vaezhadi",
+    "name": "Hadi Vaez",
+    "role": "Full-Stack Developer",
+    "tagline": "Student by day, full-stack developer by night, noob gamer at heart",
+    "location": "Raccoon City",
+    "timezone": "UTC+03:30",
+    "availableFor": "Freelance · Full-time",
+    "email": "hello@example.com",
+    "about": "Full-stack developer. Into small problem-solving projects and needlessly creative UI animations. Hates the terminal and servers — uses them anyway."
+  },
+  "socials": [],
+  "skills": [
+    {
+      "name": "Flutter"
+    },
+    {
+      "name": "Dart"
+    },
+    {
+      "name": "Python"
+    },
+    {
+      "name": "JavaScript"
+    },
+    {
+      "name": "Go"
+    },
+    {
+      "name": "C++"
+    }
+  ],
+  "stack": {
+    "primary": [
+      "Flutter",
+      "Dart",
+      "Python",
+      "JavaScript",
+      "Go",
+      "C++"
+    ],
+    "learning": [],
+    "tools": []
+  },
+  "projects": [],
+  "quote": "Talk is cheap. Show me the code.",
+  "footer": {
+    "headline": "Let’s build something."
+  }
+}

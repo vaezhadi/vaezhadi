@@ -1,16 +1,16 @@
-## Hi there 👋
+<!-- ─────────────────────────────────────────────────────────────────────────
+     Hadi Vaez · profile card
+     every word and pixel lives in assets/card-{dark,light}.svg, generated
+     from tools/profile.config.json — edit that file, then run:
+       cd tools && npm run build
+     ───────────────────────────────────────────────────────────────────────── -->
 
-<!--
-**vaezhadi/vaezhadi** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<div align="center">
 
-Here are some ideas to get you started:
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/card-dark.svg?v=4" />
+  <source media="(prefers-color-scheme: light)" srcset="./assets/card-light.svg?v=4" />
+  <img src="./assets/card-dark.svg?v=4" alt="Hadi Vaez — Full-Stack Developer. Student by day, full-stack developer by night, noob gamer at heart" width="100%" />
+</picture>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+</div>

@@ -1,0 +1,11 @@
+# node tooling
+tools/node_modules/
+tools/.preview/
+
+# local test renders
+tools/*.png
+tools/*.svg
+
+# OS noise
+.DS_Store
+Thumbs.db
