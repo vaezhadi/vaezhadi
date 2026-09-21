@@ -9,8 +9,8 @@
  *    · every line types itself out, character by character, with a caret
  *    · the caret disappears for good once its line is finished
  *    · a neutral wipe (the page colour, not a coloured light) travels across
- *      the name and the role on a slow loop
- *    · every heading rises into place as it is typed
+ *      the role on a slow loop — the name itself is left alone
+ *    · every heading rises into place as it is typed, one line at a time
  *
  *  Panels / icons
  *    · frosted glass panels: page-tinted fill, hairline border, top sheen
@@ -69,27 +69,12 @@ const THEMES = {
     fgMuted: '#8b949e',
     fgSubtle: '#6e7681',
     accent: '#3fb950',
+    gold: '#d29922',
     iconTint: 0.3,
     glass: {
       fill: '#ffffff', fillOpacity: 0.045,
       border: '#ffffff', borderOpacity: 0.12,
       sheen: 0.09,
-    },
-  },
-  light: {
-    name: 'light',
-    page: '#ffffff',
-    surface: '#f6f8fa',
-    border: '#d1d9e0',
-    fg: '#1f2328',
-    fgMuted: '#59636e',
-    fgSubtle: '#818b98',
-    accent: '#1a7f37',
-    iconTint: -0.22,
-    glass: {
-      fill: '#1f2328', fillOpacity: 0.03,
-      border: '#1f2328', borderOpacity: 0.09,
-      sheen: 0.85,
     },
   },
 };
@@ -121,7 +106,10 @@ const reveal = ({ begin, dur = 0.8, dy = 0, inner }) => {
 /* ==================================================================
  *  TEXT — proportional type revealed one <tspan> per character
  * ================================================================== */
-const nbsp = (str) => str.replace(/ /g, '\u00a0');
+const nbsp = (str) => {
+  usedChars.add('\u00a0'); /* the space substitute the typing engine emits */
+  return str.replace(/ /g, '\u00a0');
+};
 
 const typedText = ({ content, x, y, size, fill, begin, perChar = 0.03, weight = 400, italic = false, anchor = 'middle' }) => {
   const chars = [...content];
@@ -208,7 +196,12 @@ function glassPanel({ x, y, w, h, rx = 20, begin, theme }) {
 /* ==================================================================
  *  LANGUAGE TILE — glass tile with the brand glyph
  * ================================================================== */
+/* the two the user reaches for most: a gold collar and a touch more size */
+const FEATURED = new Set(['Python', 'JavaScript']);
+
 function languageTile({ item, x, y, w, h, begin, theme, index }) {
+  const featured = FEATURED.has(item);
+  if (featured) { x -= 4; y -= 4; w += 8; h += 8; }
   const slug = slugFor(item);
   const icon = slug ? brand(slug, { tint: theme.iconTint }) : null;
   const glyph = 34;
@@ -266,7 +259,9 @@ function languageTile({ item, x, y, w, h, begin, theme, index }) {
     ${isFrame() ? '' : `<animateTransform attributeName="transform" type="translate" values="0 0; 0 -2.2; 0 0" dur="4.4s" begin="${round(floatBegin)}s" repeatCount="indefinite"/>`}
     ${iconSvg}
   </g>
-  ${label.svg}`;
+  ${label.svg}
+  ${featured ? rect({ x: x + 0.75, y: y + 0.75, w: w - 1.5, h: h - 1.5, rx: 15.2, fill: 'none', extra: `stroke="${theme.gold}" stroke-opacity="0.6" stroke-width="1.5"` }) : ''}
+  ${featured ? rect({ x: round(x + w / 2 - 13), y: round(y + h - 9), w: 26, h: 3, rx: 1.5, fill: theme.gold, op: 0.85 }) : ''}`;
 
   return {
     svg: reveal({ begin, dur: 0.55, dy: 12, inner: body }),
@@ -300,7 +295,6 @@ function buildCard(theme) {
   const tagBits = identity.tagline.split(/,\s*/);
   const taglineLines = tagBits.map((b, i) => (i < tagBits.length - 1 ? `${b},` : b));
   const aboutLines = identity.about.split(/(?<=[.!?])\s+/).filter(Boolean);
-  const quoteLine = `“${quote}”`;
 
   let t = 0.5;
 
@@ -311,12 +305,6 @@ function buildCard(theme) {
     begin: t, perChar: 0.055, weight: 600,
   });
   parts.push(name.svg.replace('</text>', caretTail({ content: identity.name, begin: t, perChar: 0.055, color: theme.fgSubtle }) + '</text>'));
-  const nameWipe = textShine({
-    id: `wipe-${theme.name}-name`, content: identity.name, x: CX, y: nameY, size: 54,
-    weight: 600, width: identity.name.length * 30, begin: name.end + 0.5, theme, period: 7.5,
-  });
-  parts.push(nameWipe.svg);
-  defs.push(nameWipe.defs);
   t = name.end + 0.45;
 
   /* ── role: the second title line ─────────────────────────────────── */
@@ -337,9 +325,11 @@ function buildCard(theme) {
   /* ── the tagline, one clause per line ────────────────────────────── */
   const tagY = roleY + 94;
   const tagStep = 52;
-  let tagEnd = t;
+  let cursor = t;
   taglineLines.forEach((line, i) => {
-    const begin = t + i * 0.35;
+    /* strictly one after another: a line only starts once the one above it
+       has finished typing and had a beat to be read */
+    const begin = cursor;
     const ln = typedText({
       content: line, x: CX, y: tagY + i * tagStep, size: 27, fill: theme.fg,
       begin, perChar: 0.04, weight: 600,
@@ -348,16 +338,16 @@ function buildCard(theme) {
       begin, dur: 0.6, dy: 12,
       inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.04, color: theme.fgSubtle }) + '</text>'),
     }));
-    tagEnd = Math.max(tagEnd, ln.end);
+    cursor = ln.end + 2.2;
   });
-  t = tagEnd + 1.1;
+  t = cursor + 0.6;
 
   /* ── about: one sentence per line ────────────────────────────────── */
   const aboutY = tagY + (taglineLines.length - 1) * tagStep + 96;
   const aboutStep = 46;
-  let aboutEnd = t;
+  let cursor2 = t;
   aboutLines.forEach((line, i) => {
-    const begin = t + i * 0.4;
+    const begin = cursor2;
     const ln = typedText({
       content: line, x: CX, y: aboutY + i * aboutStep, size: 22.5, fill: theme.fgMuted,
       begin, perChar: 0.012, weight: 600,
@@ -366,21 +356,11 @@ function buildCard(theme) {
       begin, dur: 0.55, dy: 10,
       inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.012, color: theme.fgSubtle }) + '</text>'),
     }));
-    aboutEnd = Math.max(aboutEnd, ln.end);
+    cursor2 = ln.end + 1.7;
   });
-  t = aboutEnd + 1.1;
+  t = cursor2 + 0.4;
 
-  /* ── the quote ───────────────────────────────────────────────────── */
-  const quoteY = aboutY + (aboutLines.length - 1) * aboutStep + 92;
-  const quoteTyped = typedText({
-    content: quoteLine, x: CX, y: quoteY, size: 22.5, fill: theme.fgSubtle,
-    begin: t, perChar: 0.016, weight: 600,
-  });
-  parts.push(reveal({
-    begin: t, dur: 0.55, dy: 10,
-    inner: quoteTyped.svg.replace('</text>', caretTail({ content: quoteLine, begin: t, perChar: 0.016, color: theme.fgSubtle }) + '</text>'),
-  }));
-  t = quoteTyped.end + 1.1;
+  const quoteY = aboutY + (aboutLines.length - 1) * aboutStep + 48;
 
   /* ── one frosted panel holds the stack ───────────────────────────── */
   const innerPad = 30;
@@ -454,17 +434,25 @@ const OUT = (rel) => new URL(`../${rel}`, import.meta.url);
 mkdirSync(OUT('assets'), { recursive: true });
 mkdirSync(new URL('./.preview', import.meta.url), { recursive: true });
 
-const only = (process.argv.find((a) => a.startsWith('--only=')) || '').split('=')[1];
-const wanted = only ? [only] : ['dark', 'light'];
+/* one card, one theme — light mode was dropped on request */
+const wanted = ['dark'];
 const rendered = {};
 
 for (const variant of wanted) {
   const theme = THEMES[variant];
   FRAME = null;
   const { canvas, total, W, H } = buildCard(theme);
-  const clean = scaleTimes(canvas.replace(/>\s+</g, '><').replace(/\n{2,}/g, '\n'));
+  /* NBSP must survive this tidy-up: in JS \s matches U+00A0 too, and eating
+     it is exactly what once glued every word together on GitHub. */
+  const clean = scaleTimes(canvas.replace(/>[ \t\r\n]+</g, '><').replace(/\n{2,}/g, '\n'));
   const missing = [...usedChars].filter((c) => c !== ' ' && !CHARSET.has(c));
-  if (missing.length) console.log(`  ! not in tools/fonts/charset.txt: ${missing.join(' ')}`);
+  if (missing.length) {
+    throw new Error(
+      `the card prints ${missing.length} character(s) missing from the embedded font: ` +
+      `${missing.map((c) => `U+${c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}`).join(' ')} — ` +
+      'add them to tools/fonts/charset.txt and rebuild the subsets (see tools/fonts/README.md)',
+    );
+  }
   usedChars.clear();
   const info = validateCard(clean, `card-${variant}.svg`);
   writeFileSync(OUT(`assets/card-${variant}.svg`), clean);

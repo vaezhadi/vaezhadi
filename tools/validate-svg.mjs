@@ -28,7 +28,7 @@ export function validateCard(svgText, label = 'card.svg') {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const files = ['assets/card-dark.svg', 'assets/card-light.svg'];
+  const files = ['assets/card-dark.svg'];
   let bad = 0;
   for (const rel of files) {
     const url = new URL(`../${rel}`, import.meta.url);

@@ -30,8 +30,11 @@ python3 -m fontTools.subset MonaSans-Regular.ttf \
   --output-file=MonaSans-Regular.subset.ttf
 ```
 
-`tools/build-assets.mjs` warns at build time if the card ever prints a
-character that is missing from `charset.txt`, so a subset only needs a rebuild
-when the copy changes.
+`tools/build-assets.mjs` **fails the build** if the card prints a character the
+subset does not carry, so the typography can never silently fall back to
+another face. One character earns its keep: `charset.txt` holds a no-break
+space (U+00A0) because that is what the typing engine puts between words, and
+its advance width is matched to the regular space so the text measures the same
+either way.
 
 Mona Sans is licensed under the SIL Open Font License 1.1 — see `OFL.txt`.

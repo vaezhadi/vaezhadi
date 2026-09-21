@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------
  *  build-readme.mjs — the README is just the card.
- *  Everything visible lives inside the generated SVGs, and a <picture>
- *  element lets GitHub pick the variant that matches the reader's theme.
+ *  Everything visible lives inside assets/card-dark.svg; there is no light
+ *  variant any more, so a plain <img> is all this needs.
  *
  *  run:  node tools/build-readme.mjs   (or: npm run readme)
  * ------------------------------------------------------------------ */
@@ -9,22 +9,18 @@ import { writeFileSync, readFileSync } from 'node:fs';
 
 const cfg = JSON.parse(readFileSync(new URL('./profile.config.json', import.meta.url), 'utf8'));
 const { identity } = cfg;
-const V = '4';                     /* bump to bust GitHub's image cache */
+const V = '5';                     /* bump to bust GitHub's image cache */
 
 const md = `<!-- ─────────────────────────────────────────────────────────────────────────
      ${identity.name} · profile card
-     every word and pixel lives in assets/card-{dark,light}.svg, generated
+     every word and pixel lives in assets/card-dark.svg, generated
      from tools/profile.config.json — edit that file, then run:
        cd tools && npm run build
      ───────────────────────────────────────────────────────────────────────── -->
 
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/card-dark.svg?v=${V}" />
-  <source media="(prefers-color-scheme: light)" srcset="./assets/card-light.svg?v=${V}" />
-  <img src="./assets/card-dark.svg?v=${V}" alt="${identity.name} — ${identity.role}. ${identity.tagline}" width="100%" />
-</picture>
+<img src="./assets/card-dark.svg?v=${V}" alt="${identity.name} — ${identity.role}. ${identity.tagline}" width="100%" />
 
 </div>
 `;
