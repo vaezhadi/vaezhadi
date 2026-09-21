@@ -47,6 +47,44 @@ const fontCss =
   `@font-face{font-family:'Mona Sans';font-style:normal;font-weight:400;src:url(data:font/woff2;base64,${b64('MonaSans-Regular.subset.woff2')}) format('woff2')}` +
   `@font-face{font-family:'Mona Sans';font-style:normal;font-weight:600;src:url(data:font/woff2;base64,${b64('MonaSans-SemiBold.subset.woff2')}) format('woff2')}`;
 const CHARSET = new Set(readFileSync(new URL('./fonts/charset.txt', import.meta.url), 'utf8'));
+
+/* Advance widths straight out of the embedded face (tools/fonts/metrics.json,
+   exported by the subsetting script). The card can therefore measure a string
+   before it draws it, which is what lets the icon column below sit exactly
+   where it should instead of where a guess says it should. */
+const METRICS = JSON.parse(readFileSync(new URL('./fonts/metrics.json', import.meta.url), 'utf8'));
+const measure = (str, size, weight = 400) => {
+  const table = METRICS.weights[String(weight)] || METRICS.weights['400'];
+  let units = 0;
+  for (const ch of str) units += table[ch] ?? table[' '] ?? 0;
+  return (units / METRICS.unitsPerEm) * size;
+};
+
+/* The emoji is drawn, not typed: GitHub's SVG renderer has no emoji font, so
+   a real vector is the only way U+1F611 is guaranteed to show up. Path data
+   from Twemoji (CC-BY 4.0) — see tools/icons/README.md. */
+const EMOJI = {
+  '1f611': {
+    viewBox: 36,
+    paths: [
+      { fill: '#FFCC4D', d: 'M36 18c0 9.941-8.059 18-18 18-9.94 0-18-8.059-18-18C0 8.06 8.06 0 18 0c9.941 0 18 8.06 18 18' },
+      { fill: '#664500', d: 'M25 26H11c-.552 0-1-.447-1-1s.448-1 1-1h14c.553 0 1 .447 1 1s-.447 1-1 1zm-10-8H8c-.552 0-1-.448-1-1s.448-1 1-1h7c.552 0 1 .448 1 1s-.448 1-1 1zm13 0h-7c-.553 0-1-.448-1-1s.447-1 1-1h7c.553 0 1 .448 1 1s-.447 1-1 1z' },
+    ],
+  },
+};
+
+/* the two line icons are drawn on a 24 grid in the accent colour */
+const LINE_ICONS = {
+  sparkle: {
+    fill: 'M12 2.6l1.9 6 6 1.9-6 1.9-1.9 6-1.9-6-6-1.9 6-1.9z',
+    extra: 'M18.6 3.2l.75 1.95 1.95.75-1.95.75-.75 1.95-.75-1.95L15.9 5.9l1.95-.75z',
+  },
+  terminal: {
+    stroke: 'M3.2 5.4h17.6a1.6 1.6 0 0 1 1.6 1.6v10a1.6 1.6 0 0 1-1.6 1.6H3.2A1.6 1.6 0 0 1 1.6 17V7a1.6 1.6 0 0 1 1.6-1.6z',
+    extra: 'M6.6 9.4l2.7 2.6-2.7 2.6',
+    extra2: 'M12.4 15h4.6',
+  },
+};
 const usedChars = new Set();
 
 /* ── pacing ─────────────────────────────────────────────────────────────
@@ -305,7 +343,7 @@ function buildCard(theme) {
     begin: t, perChar: 0.055, weight: 600,
   });
   parts.push(name.svg.replace('</text>', caretTail({ content: identity.name, begin: t, perChar: 0.055, color: theme.fgSubtle }) + '</text>'));
-  t = name.end + 0.45;
+  t = name.end + 0.3;
 
   /* ── role: the second title line ─────────────────────────────────── */
   const roleY = nameY + 54;
@@ -316,11 +354,11 @@ function buildCard(theme) {
   parts.push(role.svg.replace('</text>', caretTail({ content: identity.role, begin: t, perChar: 0.04, color: theme.fgSubtle }) + '</text>'));
   const roleWipe = textShine({
     id: `wipe-${theme.name}-role`, content: identity.role, x: CX, y: roleY, size: 26,
-    weight: 600, width: identity.role.length * 15, begin: role.end + 1.4, theme, period: 9.5,
+    weight: 600, width: measure(identity.role, 26, 600), begin: role.end + 0.8, theme, period: 9.5,
   });
   parts.push(roleWipe.svg);
   defs.push(roleWipe.defs);
-  t = role.end + 1.2;
+  t = role.end + 0.6;
 
   /* ── the tagline, one clause per line ────────────────────────────── */
   const tagY = roleY + 94;
@@ -338,29 +376,103 @@ function buildCard(theme) {
       begin, dur: 0.6, dy: 12,
       inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.04, color: theme.fgSubtle }) + '</text>'),
     }));
-    cursor = ln.end + 2.2;
+    cursor = ln.end + 0.85;
   });
-  t = cursor + 0.6;
+  t = cursor + 0.3;
 
-  /* ── about: one sentence per line ────────────────────────────────── */
-  const aboutY = tagY + (taglineLines.length - 1) * tagStep + 96;
-  const aboutStep = 46;
-  let cursor2 = t;
-  aboutLines.forEach((line, i) => {
+  /* ── about: a feature list — one line per row, each with its own mark ── */
+  const rows = identity.aboutRows || aboutLines.map((line) => ({ icon: null, text: line }));
+  const rowSize = 21.5;
+  const badge = 42;
+  const rowGap = 18;
+  const rowStep = 60;
+  const padX = 34;
+  const padY = 28;
+
+  /* full width, matching the stack panel below it — two panels of different
+     widths read as an accident, the same width reads as a system */
+  const aboutPanelW = CW;
+  const aboutPanelX = PAD;
+  const aboutPanelY = tagY + (taglineLines.length - 1) * tagStep + 78;
+  const aboutH = padY * 2 + (rows.length - 1) * rowStep + badge;
+
+  parts.push(glassPanel({ x: aboutPanelX, y: aboutPanelY, w: aboutPanelW, h: aboutH, begin: t, theme }));
+
+  const rowsX = round(aboutPanelX + padX);
+  const rowsTop = round(aboutPanelY + padY);
+
+  /* a hairline rail behind the marks: it turns three rows into one story and
+     draws itself downward as they appear */
+  const railX = round(rowsX + badge / 2 - 0.5);
+  const railY1 = round(rowsTop + badge / 2);
+  const railY2 = round(rowsTop + (rows.length - 1) * rowStep + badge / 2);
+  const railLen = round(railY2 - railY1);
+  const railBegin = t + 0.45;
+  parts.push(
+    isFrame()
+      ? rect({ x: railX, y: railY1, w: 1, h: round(railLen * ease(prog(railBegin, 1.1))), fill: theme.glass.border, op: round(theme.glass.borderOpacity * 1.4, 3) })
+      : rectEl(
+          { x: railX, y: railY1, w: 1, h: 0, fill: theme.glass.border, op: round(theme.glass.borderOpacity * 1.4, 3) },
+          `<animate attributeName="height" from="0" to="${railLen}" begin="${round(railBegin)}s" dur="1.1s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.25 0.6 0.2 1" values="0;${railLen}"/>`,
+        ),
+  );
+  let cursor2 = t + 0.4;
+
+  rows.forEach((row, i) => {
+    const top = rowsTop + i * rowStep;
+    const cy = round(top + badge / 2);
+    const textX = round(rowsX + badge + rowGap);
     const begin = cursor2;
+
+    /* the mark: a glass badge holding a drawn icon (or the emoji) */
+    /* an accent ring settles onto the badge a beat after the row lands */
+    const ringBegin = begin + 0.55;
+    const ring = isFrame()
+      ? rect({ x: rowsX + 0.5, y: top + 0.5, w: badge - 1, h: badge - 1, rx: 12, fill: 'none', extra: `stroke="${theme.accent}" stroke-opacity="${round(0.32 * ease(prog(ringBegin, 0.6)), 3)}" stroke-width="1.25"` })
+      : rectEl(
+          { x: rowsX + 0.5, y: top + 0.5, w: badge - 1, h: badge - 1, rx: 12, fill: 'none', extra: `stroke="${theme.accent}" stroke-width="1.25"`, op: 0 },
+          `<animate attributeName="opacity" from="0" to="0.32" begin="${round(ringBegin)}s" dur="0.6s" fill="freeze" values="0;0.32"/>`,
+        );
+
+    const mark = (() => {
+      if (row.icon && row.icon.startsWith('emoji:')) {
+        const e = EMOJI[row.icon.slice(6)];
+        const k = round(26 / e.viewBox);
+        return `<g transform="translate(${round(rowsX + (badge - 26) / 2)} ${round(top + (badge - 26) / 2)}) scale(${k})">${e.paths
+          .map((p) => `<path d="${p.d}" fill="${p.fill}"/>`)
+          .join('')}</g>`;
+      }
+      const icon = LINE_ICONS[row.icon] || LINE_ICONS.sparkle;
+      const k = round(21 / 24);
+      const inner = icon.stroke
+        ? `<path d="${icon.stroke}" fill="none" stroke="${theme.fgMuted}" stroke-width="1.7" stroke-linejoin="round"/>
+           <path d="${icon.extra}" fill="none" stroke="${theme.accent}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+           ${icon.extra2 ? `<path d="${icon.extra2}" fill="none" stroke="${theme.accent}" stroke-width="1.9" stroke-linecap="round"/>` : ''}`
+        : `<path d="${icon.fill}" fill="${theme.accent}"/>${icon.extra ? `<path d="${icon.extra}" fill="${theme.accent}" opacity="0.75"/>` : ''}`;
+      return `<g transform="translate(${round(rowsX + (badge - 21) / 2)} ${round(top + (badge - 21) / 2)}) scale(${k})">${inner}</g>`;
+    })();
+
+    parts.push(reveal({
+      begin, dur: 0.5, dy: 8,
+      inner: `
+      ${rect({ x: rowsX, y: top, w: badge, h: badge, rx: 12, fill: theme.glass.fill, extra: `fill-opacity="${theme.glass.fillOpacity}"` })}
+      ${rect({ x: rowsX + 0.5, y: top + 0.5, w: badge - 1, h: badge - 1, rx: 12, fill: 'none', extra: `stroke="${theme.glass.border}" stroke-opacity="${theme.glass.borderOpacity}" stroke-width="1"` })}
+      ${ring}
+      ${mark}`,
+    }));
+
     const ln = typedText({
-      content: line, x: CX, y: aboutY + i * aboutStep, size: 22.5, fill: theme.fgMuted,
-      begin, perChar: 0.012, weight: 600,
+      content: row.text, x: textX, y: round(cy + 8), size: rowSize, fill: theme.fg,
+      begin: begin + 0.12, perChar: 0.012, weight: 600, anchor: 'start',
     });
     parts.push(reveal({
-      begin, dur: 0.55, dy: 10,
-      inner: ln.svg.replace('</text>', caretTail({ content: line, begin, perChar: 0.012, color: theme.fgSubtle }) + '</text>'),
+      begin: begin + 0.12, dur: 0.5, dy: 8,
+      inner: ln.svg.replace('</text>', caretTail({ content: row.text, begin: begin + 0.12, perChar: 0.012, color: theme.fgSubtle }) + '</text>'),
     }));
-    cursor2 = ln.end + 1.7;
+    cursor2 = ln.end + 0.85;
   });
-  t = cursor2 + 0.4;
 
-  const quoteY = aboutY + (aboutLines.length - 1) * aboutStep + 48;
+  t = cursor2 + 0.45;
 
   /* ── one frosted panel holds the stack ───────────────────────────── */
   const innerPad = 30;
@@ -368,7 +480,7 @@ function buildCard(theme) {
   const tileH = 110;
   const tileW = Math.floor((CW - innerPad * 2 - tileGap * (langs.length - 1)) / langs.length);
   const rowW = tileW * langs.length + tileGap * (langs.length - 1);
-  const panelY = quoteY + 74;
+  const panelY = aboutPanelY + aboutH + 44;
   const panelH = innerPad * 2 + tileH;
 
   parts.push(glassPanel({ x: PAD, y: panelY, w: CW, h: panelH, begin: t, theme }));
@@ -379,13 +491,13 @@ function buildCard(theme) {
   langs.forEach((item, i) => {
     const built = languageTile({
       item, x: tilesX + i * (tileW + tileGap), y: tilesY, w: tileW, h: tileH,
-      begin: t + 0.55 + i * 0.16, theme, index: i,
+      begin: t + 0.3 + i * 0.12, theme, index: i,
     });
     parts.push(built.svg);
     defs.push(built.defs);
     tileEnd = Math.max(tileEnd, built.end);
   });
-  t = tileEnd + 0.8;
+  t = tileEnd + 0.5;
 
   /* ── footer ──────────────────────────────────────────────────────── */
   const footY = panelY + panelH + 64;

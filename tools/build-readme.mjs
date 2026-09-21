@@ -9,7 +9,7 @@ import { writeFileSync, readFileSync } from 'node:fs';
 
 const cfg = JSON.parse(readFileSync(new URL('./profile.config.json', import.meta.url), 'utf8'));
 const { identity } = cfg;
-const V = '5';                     /* bump to bust GitHub's image cache */
+const V = '6';                     /* bump to bust GitHub's image cache */
 
 const md = `<!-- ─────────────────────────────────────────────────────────────────────────
      ${identity.name} · profile card

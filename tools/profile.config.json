@@ -8,7 +8,21 @@
     "timezone": "UTC+03:30",
     "availableFor": "Freelance · Full-time",
     "email": "hello@example.com",
-    "about": "Into small problem-solving projects and needlessly creative UI animations. Hates the terminal and servers — uses them anyway."
+    "about": "Into small problem-solving projects and needlessly creative UI animations. Hates the terminal and servers — uses them anyway.",
+    "aboutRows": [
+      {
+        "icon": "sparkle",
+        "text": "Into small problem-solving projects and needlessly creative UI animations."
+      },
+      {
+        "icon": "terminal",
+        "text": "Hates the terminal and servers"
+      },
+      {
+        "icon": "emoji:1f611",
+        "text": "uses them anyway"
+      }
+    ]
   },
   "socials": [],
   "skills": [

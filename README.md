@@ -7,6 +7,6 @@
 
 <div align="center">
 
-<img src="./assets/card-dark.svg?v=5" alt="Hadi Vaez — Full-Stack Developer. Student by day, developer by night, noob gamer at heart" width="100%" />
+<img src="./assets/card-dark.svg?v=6" alt="Hadi Vaez — Full-Stack Developer. Student by day, developer by night, noob gamer at heart" width="100%" />
 
 </div>
