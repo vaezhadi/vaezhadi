@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------
  *  build-readme.mjs — the README is just the card.
- *  Everything visible lives inside assets/card.svg, so the profile is
- *  one framed, animated surface instead of a stack of loose sections.
+ *  Everything visible lives inside assets/card-dark.svg; there is no light
+ *  variant any more, so a plain <img> is all this needs.
  *
  *  run:  node tools/build-readme.mjs   (or: npm run readme)
  * ------------------------------------------------------------------ */
@@ -9,17 +9,18 @@ import { writeFileSync, readFileSync } from 'node:fs';
 
 const cfg = JSON.parse(readFileSync(new URL('./profile.config.json', import.meta.url), 'utf8'));
 const { identity } = cfg;
+const V = '7';                     /* bump to bust GitHub's image cache */
 
 const md = `<!-- ─────────────────────────────────────────────────────────────────────────
      ${identity.name} · profile card
-     every word and pixel lives in assets/card.svg, generated from
-     tools/profile.config.json — edit that file, then run:
+     every word and pixel lives in assets/card-dark.svg, generated
+     from tools/profile.config.json — edit that file, then run:
        cd tools && npm run build
      ───────────────────────────────────────────────────────────────────────── -->
 
 <div align="center">
 
-<img src="./assets/card.svg?v=2" alt="${identity.name} — ${identity.role}" width="100%" />
+<img src="./assets/card-dark.svg?v=${V}" alt="${identity.name} — ${identity.role}. ${identity.tagline}" width="100%" />
 
 </div>
 `;

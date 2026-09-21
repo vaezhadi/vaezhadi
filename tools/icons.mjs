@@ -4,14 +4,19 @@
  * ------------------------------------------------------------------ */
 import * as si from 'simple-icons';
 
-/* how far to push a brand colour towards white so it stays readable
-   on a near-black background */
-const lighten = (hex, amount = 0.32) => {
+/* nudge a brand colour towards white (amount > 0) or black (amount < 0)
+   so it keeps contrast on the theme's background */
+const adjust = (hex, amount = 0.32) => {
   const n = hex.replace('#', '');
   const [r, g, b] = [0, 2, 4].map((i) => parseInt(n.slice(i, i + 2), 16));
-  const mix = (c) => Math.round(c + (255 - c) * amount);
+  const target = amount >= 0 ? 255 : 0;
+  const k = Math.abs(amount);
+  const mix = (c) => Math.round(c + (target - c) * k);
   return `#${[mix(r), mix(g), mix(b)].map((c) => c.toString(16).padStart(2, '0')).join('')}`;
 };
+
+/* kept for backwards compatibility with earlier call sites */
+const lighten = (hex, amount = 0.32) => adjust(hex, amount);
 
 /* simple-icons does not export the raw paths as named exports, so read
    the module table and index it by slug */
@@ -27,7 +32,7 @@ export function brand(slug, { tint = 0.32 } = {}) {
     title: icon.title,
     path: icon.path,
     hex: `#${icon.hex}`,
-    color: lighten(`#${icon.hex}`, tint),
+    color: adjust(`#${icon.hex}`, tint),
   };
 }
 
